@@ -6,6 +6,7 @@ class Employee_model extends MY_Model{
 	public $primary_key = "employee_id"; // Table primary key
 
 	public $before_create = array( "timestamp", "hashpassword" ); // observer before create row
+	public $before_update = array( "timestampUpdate" ); // observer before update row
 
 	private $salt = "*&^%$#@456789876543$%^&$#";
 
@@ -17,6 +18,12 @@ class Employee_model extends MY_Model{
 
 	protected function hashpassword($data){
 		$data['password'] = md5($data["password"] . $this->salt . $data["password"]);
+
+		return $data;
+	}
+
+	protected function timestampUpdate($data){
+		$data["date_modified"] = time();
 
 		return $data;
 	}
