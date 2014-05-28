@@ -9,6 +9,8 @@ class Form_details_model extends MY_Model{
 
 	protected function timestamp($data){
 		$data["date_added"] = $data["date_modified"] = time();
+
+		return $data;
 	}
 }
 
