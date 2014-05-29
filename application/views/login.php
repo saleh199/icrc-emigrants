@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>برنامج تسجيل اللاجئين</title>
+    <title>برنامج تسجيل الوافدين</title>
 
     <!-- Bootstrap core CSS -->
     <link href="<?php echo base_url('assets/css/bootstrap.min.css');?>" rel="stylesheet">
@@ -21,15 +21,15 @@
 
     <div class="container">
 
-      <form class="form-signin">
+      <?php echo $form_open;?>
         <div class="text-center">
           <img src="<?php echo base_url('assets/image/logo.png');?>" width="150px" width="150px">
-          <h2>برنامج تسجيل اللاجئين</h2><br>
+          <h2>برنامج تسجيل الوافدين</h2><br>
         </div>
-        <?php //if(validation_errors()) { ?>
-        <!-- <div class="alert alert-danger"><?php //echo validation_errors('<li>', '</li>'); ?></div> -->
-        <?php //} ?>
-        <input type="text" name="username" value="<?php //echo set_value('username'); ?>" class="form-control" placeholder="اسم المستخدم"  required autofocus>
+        <?php if(validation_errors()) { ?>
+         <div class="alert alert-info"><?php echo validation_errors('<li>', '</li>'); ?></div>
+        <?php } ?>
+        <input type="text" name="username" value="<?php echo set_value('username'); ?>" class="form-control" placeholder="اسم المستخدم"  required autofocus>
         <br>
         <input type="password" name="password" class="form-control" placeholder="كلمة المرور" required>
         <button class="btn btn-lg btn-danger btn-block" type="submit">تسجيل الدخول</button>

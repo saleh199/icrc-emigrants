@@ -10,6 +10,21 @@ class Employee_model extends MY_Model{
 
 	private $salt = "*&^%$#@456789876543$%^&$#";
 
+
+	public function login($username, $password){
+		$row = $this->get_by(array(
+					'user_name' => $username));
+
+		if($row){
+			if($row->password == $this->getPasswordHash($password)){
+				return TRUE;
+			}
+		}
+
+		return FALSE;
+	}
+
+
 	protected function timestamp($data){
 		$data["date_added"] = $data["date_modified"] = time();
 
@@ -17,7 +32,7 @@ class Employee_model extends MY_Model{
 	}
 
 	protected function hashpassword($data){
-		$data['password'] = md5($data["password"] . $this->salt . $data["password"]);
+		$data['password'] = $this->getPasswordHash($data['password']);
 
 		return $data;
 	}
@@ -26,6 +41,10 @@ class Employee_model extends MY_Model{
 		$data["date_modified"] = time();
 
 		return $data;
+	}
+
+	private function getPasswordHash($password){
+		return md5($password . $this->salt . $password);
 	}
 }
 
