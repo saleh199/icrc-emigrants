@@ -37,6 +37,10 @@ class Login extends CI_Controller {
 			return FALSE;
 		}
 	}
+
+	public function dashboard(){
+		$this->load->view('dashboard');
+	}
 }
 
 /* End of file login.php */
