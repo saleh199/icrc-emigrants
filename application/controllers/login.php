@@ -17,7 +17,7 @@ class Login extends CI_Controller {
 
 		$this->load->model("employee_model");
 
-		$data["form_open"] = form_open(base_url("login"), array("id" => "login-form", "class" => "form-signin", "role" => "form"));
+		$data["form_open"] = form_open(site_url("login"), array("id" => "login-form", "class" => "form-signin", "role" => "form"));
 
 		$this->load->view("login", $data);
 	}
