@@ -39,7 +39,7 @@ class Login extends CI_Controller {
 	}
 
 	public function dashboard(){
-		$this->load->view('dashboard');
+		$this->load->view('family/family_form');
 	}
 }
 

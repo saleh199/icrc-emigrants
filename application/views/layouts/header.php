@@ -10,11 +10,11 @@
     <title>برنامج تسجيل الوافدين</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="<?php echo base_url('assets/css/bootstrap.min.css');?>" rel="stylesheet">
-    
+    <link rel="stylesheet" href="<?php echo base_url('assets/css/bootstrap.min.css');?>">
+    <!-- <link href="<?php echo base_url('assets/css/bootstrap-theme.min.css');?>" rel="stylesheet"> -->
+    <link href="<?php echo base_url('assets/css/bootstrap-rtl.min.css')?>" rel="stylesheet">
+
     <!-- Custom styles for this template -->
-    <link href="<?php echo base_url('assets/css/bootstrap-theme.min.css');?>" rel="stylesheet">
-    <link href="<?php echo base_url('assets/css/bootstrap-rtl.css')?>" rel="stylesheet">
     <link href="<?php echo base_url('assets/css/main.css');?>" rel="stylesheet">
   </head>
 

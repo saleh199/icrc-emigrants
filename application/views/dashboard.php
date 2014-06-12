@@ -6,6 +6,7 @@
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
           <h3 class="sub-header">الوافدين</h3>
+          <p><a href="#" class="btn btn-sm btn-success" role="button">إضافة استمارة</a></p>
           <table class="table table-striped">
             <tr>
               <th style="width:100px">ID</th>
@@ -33,7 +34,11 @@
               <td><input type="text" class="form-control"></td>
               <td><input type="text" class="form-control"></td>
               <td><input type="text" class="form-control"></td>
-              <td></td>
+              <td class="text-center" id="clear-search">
+                <button type="button" class="btn btn-sm btn-link">
+                  <span class="text-danger glyphicon glyphicon-remove-circle"></span>
+                </button>
+              </td>
             </tr>
             <tr>
               <td class="text-center">1234</td>
@@ -91,6 +96,17 @@
               <td><button type="button" class="btn btn-info btn-xs">التفاصيل</button></td>
             </tr>
           </table>
+          <div>
+            <ul class="pagination">
+              <li class="disabled"><a href="#">&laquo;</a></li>
+              <li class="active"><a href="#">1</a></li>
+              <li><a href="#">2</a></li>
+              <li><a href="#">3</a></li>
+              <li><a href="#">4</a></li>
+              <li><a href="#">5</a></li>
+              <li><a href="#">&raquo;</a></li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
