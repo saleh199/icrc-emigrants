@@ -7,7 +7,13 @@
 
           <h3 class="sub-header">تسجيل استمارة</h3>
 
+          <ul class="nav nav-tabs">
+            <li class="active"><a href="#mainDetails" data-toggle="tab">معلومات العائلة</a></li>
+            <li><a href="#familyMembers" data-toggle="tab">أفراد الأسرة</a></li>
+          </ul>
+          <div class="tab-content">
           <!-- Main Details -->
+          <div class="tab-pane fade active in" id="mainDetails">
           <div class="row">
           <div class="form-group col-md-12">
             <div class="col-md-6">
@@ -49,6 +55,11 @@
                 <input type="text" class="form-control" placeholder="الموبايل" dir="ltr">
                 <span class="input-group-addon">09</span>
               </div>
+              <br>
+              <div class="input-group">
+                <input type="text" class="form-control" placeholder="الموبايل" dir="ltr">
+                <span class="input-group-addon">09</span>
+              </div>…
             </div>
             <div class="col-md-3">
               <div class="input-group">
@@ -97,10 +108,72 @@
               <div class="col-md-6"><textarea class="form-control" placeholder="تفاصيل" rows="3"></textarea></div>
             </div>
             <div class="col-md-12 form-group">
-              <div class="col-md-6"><input type="date" class="form-control"></div>
+              <div class="col-md-3"><label class="control-label">تاريخ الانتقال</label><input type="date" class="form-control"></div>
             </div>
           </div>
+          </div>
           <!-- Main Details -->
+
+            <div class="tab-pane fade" id="familyMembers">
+            <br>
+              <table class="table table-hover">
+                <tr>
+                  <th>#</th>
+                  <th>الاسم الثلاثي</th>
+                  <th>اسم الأم</th>
+                  <th>الرقم الوطني</th>
+                  <th>تاريخ الميلاد</th>
+                  <th>الجنس</th>
+                  <th>الصفة في العائلة</th>
+                  <th>الوضع العائلي</th>
+                  <th>العمل</th>
+                  <th>الحالة الدراسية</th>
+                  <th>الحالة الصحية</th>
+                </tr>
+                <tr>
+                  <td>#</td>
+                  <td>الاسم الثلاثي</td>
+                  <td>اسم الأم</td>
+                  <td>الرقم الوطني</td>
+                  <td>تاريخ الميلاد</td>
+                  <td>الجنس</td>
+                  <td>الصفة في العائلة</td>
+                  <td>الوضع العائلي</td>
+                  <td>العمل</td>
+                  <td>الحالة الدراسية</td>
+                  <td>الحالة الصحية</td>
+                </tr>
+                <tr>
+                  <td>#</td>
+                  <td>الاسم الثلاثي</td>
+                  <td>اسم الأم</td>
+                  <td>الرقم الوطني</td>
+                  <td>تاريخ الميلاد</td>
+                  <td>الجنس</td>
+                  <td>الصفة في العائلة</td>
+                  <td>الوضع العائلي</td>
+                  <td>العمل</td>
+                  <td>الحالة الدراسية</td>
+                  <td>الحالة الصحية</td>
+                </tr>
+                <tr>
+                  <td>#</td>
+                  <td>الاسم الثلاثي</td>
+                  <td>اسم الأم</td>
+                  <td>الرقم الوطني</td>
+                  <td>تاريخ الميلاد</td>
+                  <td>الجنس</td>
+                  <td>الصفة في العائلة</td>
+                  <td>الوضع العائلي</td>
+                  <td>العمل</td>
+                  <td>الحالة الدراسية</td>
+                  <td>الحالة الصحية</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+
+
         </div>
       </div>
     </div>
