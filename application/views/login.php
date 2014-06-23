@@ -26,12 +26,12 @@
           <img src="<?php echo base_url('assets/image/logo.png');?>" width="150px" width="150px">
           <h2>برنامج تسجيل الوافدين</h2><br>
         </div>
-        <?php if(validation_errors()) { ?>
-         <div class="alert alert-info"><?php echo validation_errors('<li>', '</li>'); ?></div>
+        <?php if($message) { ?>
+         <div class="alert alert-info"><?php echo $message; ?></div>
         <?php } ?>
-        <input type="text" name="username" value="<?php echo set_value('username'); ?>" class="form-control" placeholder="اسم المستخدم"  required autofocus>
+        <?php echo form_input($username); ?>
         <br>
-        <input type="password" name="password" class="form-control" placeholder="كلمة المرور" required>
+        <?php echo form_input($password); ?>
         <button class="btn btn-lg btn-danger btn-block" type="submit">تسجيل الدخول</button>
       </form>
 

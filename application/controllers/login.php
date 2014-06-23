@@ -8,33 +8,42 @@ class Login extends CI_Controller {
 		$this->load->library('form_validation');
 		$this->form_validation->set_rules("username", "اسم المستخدم", "trim|required");
 		$this->form_validation->set_rules("password", "كلمة المرور", "trim|required");
-		$this->form_validation->set_rules("validateLogin", "خطأ", "callback_validateLogin");
 
 
 		if($this->form_validation->run() == TRUE){
-
-		}
-
-		$this->load->model("employee_model");
-
-		$data["form_open"] = form_open(site_url("login"), array("id" => "login-form", "class" => "form-signin", "role" => "form"));
-
-		$this->load->view("login", $data);
-	}
-
-
-	public function validateLogin()
-	{
-		$username = $this->input->post("username", TRUE);
-		$password = $this->input->post("password", TRUE);
-
-		$this->load->model("employee_model");
-
-		if($this->employee_model->login($username, $password)){
-			return TRUE;
+			$remember = FALSE;
+			if($this->ion_auth->login($this->input->post('username'), $this->input->post('password'), $remember)){
+				redirect('login/dashboard', 'refresh');
+			}else{
+				$this->session->set_flashdata('message', $this->ion_auth->errors());
+				redirect('login', 'refresh');
+			}
 		}else{
-			$this->form_validation->set_message('validateLogin', 'خطأ في اسم المستخدم / كلمة المرور');
-			return FALSE;
+			$data["message"] = (validation_errors()) ? validation_errors('<li>', '</li>') : $this->ion_auth->errors();
+
+			$data["form_open"] = form_open(site_url("login"), array("id" => "login-form", "class" => "form-signin", "role" => "form"));
+
+			$data["username"] = array(
+				"name"	=> "username",
+				"id"	=> "username",
+				"type"	=> "text",
+				"value"	=> $this->form_validation->set_value('username'),
+				"class"	=> "form-control",
+				"placeholder"	=> "اسم المستخدم",
+				"required"	=> TRUE,
+				"autofocus"	=> TRUE
+			);
+
+			$data["password"] = array(
+				"name"	=> "password",
+				"id"	=> "password",
+				"type"	=> "password",
+				"class" => "form-control",
+				"placeholder"	=> "كلمة المرور",
+				"required"	=> TRUE
+			);
+
+			$this->load->view("login", $data);
 		}
 	}
 
