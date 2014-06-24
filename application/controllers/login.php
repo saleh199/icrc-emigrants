@@ -47,7 +47,10 @@ class Login extends CI_Controller {
 	}
 
 	public function dashboard(){
-		$this->load->view('family/family_form');
+		$this->load->model("Form_details_model", 'form_details');
+		$results = $this->form_details->with("family_member")->get_all();
+		print "<pre>";var_dump($results);die;
+		$this->load->view('dashboard');
 	}
 }
 
