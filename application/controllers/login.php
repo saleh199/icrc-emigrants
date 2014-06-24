@@ -2,10 +2,9 @@
 
 class Login extends CI_Controller {
 
-	
 	public function index()
 	{
-		$this->load->library('form_validation');
+		$this->load->library("form_validation");
 		$this->form_validation->set_rules("username", "اسم المستخدم", "trim|required");
 		$this->form_validation->set_rules("password", "كلمة المرور", "trim|required");
 
@@ -15,13 +14,13 @@ class Login extends CI_Controller {
 			if($this->ion_auth->login($this->input->post('username'), $this->input->post('password'), $remember)){
 				redirect('login/dashboard', 'refresh');
 			}else{
-				$this->session->set_flashdata('message', $this->ion_auth->errors());
-				redirect('login', 'refresh');
+				$this->session->set_userdata('message', $this->ion_auth->errors());
 			}
-		}else{
-			$data["message"] = (validation_errors()) ? validation_errors('<li>', '</li>') : $this->ion_auth->errors();
+		}
 
-			$data["form_open"] = form_open(site_url("login"), array("id" => "login-form", "class" => "form-signin", "role" => "form"));
+		$data["message"] = (validation_errors()) ? validation_errors('<li>', '</li>') : $this->session->userdata("message");
+
+		$data["form_open"] = form_open(site_url("login"), array("id" => "login-form", "class" => "form-signin", "role" => "form"));
 
 			$data["username"] = array(
 				"name"	=> "username",
@@ -44,7 +43,7 @@ class Login extends CI_Controller {
 			);
 
 			$this->load->view("login", $data);
-		}
+		
 	}
 
 	public function dashboard(){
