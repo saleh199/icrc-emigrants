@@ -43,19 +43,27 @@ class Form_details_model extends MY_Model{
 		}
 
 		if(isset($filter["document_type"]) && !empty($filter["document_type"])){
-			$sql .=" AND fd.document_type = " . $this->db->escape($filter["document_type"]);
+			$sql .= " AND fd.document_type = " . $this->db->escape($filter["document_type"]);
 		}
 
 		if(isset($filter["document_no"]) && !empty($filter["document_no"])){
-			$sql .=" AND fd.document_no = " . $this->db->escape($filter["document_no"]);
+			$sql .= " AND fd.document_no = " . $this->db->escape($filter["document_no"]);
 		}
 
 		if(isset($filter["phone"]) && !empty($filter["phone"])){
-			$sql .=" AND fd.phone = " . $this->db->escape($filter["phone"]);
+			$sql .= " AND fd.phone = " . $this->db->escape($filter["phone"]);
 		}
 
 		if(isset($filter["mobile"]) && !empty($filter["mobile"])){
-			$sql .=" AND (fd.mobile_1 = " . $this->db->escape($filter["mobile"]) . " OR fd.mobile_2 = " . $this->db->escape($filter["mobile"]) . ")";
+			$sql .= " AND (fd.mobile_1 = " . $this->db->escape($filter["mobile"]) . " OR fd.mobile_2 = " . $this->db->escape($filter["mobile"]) . ")";
+		}
+
+		if(isset($filter["limit"]) && (int)$filter["limit"] > 0){
+			$sql .= " LIMIT " . intval($filter["limit"]);
+		}
+
+		if(isset($filter["offset"]) && (int)$filter["offset"] > 0){
+			$sql .= " OFFSET " . intval($filter["offset"]);
 		}
 
 		$return = array();
