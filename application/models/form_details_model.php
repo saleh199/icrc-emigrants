@@ -83,6 +83,12 @@ class Form_details_model extends MY_Model{
 	public function getFamily($form_details_id){
 		$result = $this->with("family_members")->get($form_details_id);
 
+		$this->load->model('property_model');
+		$property_name = $this->property_model->getPropertyName($result->document_type, 'document_type');
+
+		$result->document_type_name = $property_name;
+		$result->registered_date_full = date('Y-m-d', $result->registered_date);
+
 		return $result;
 	}
 
