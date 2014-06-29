@@ -14,56 +14,49 @@
           <div class="tab-content">
           <!-- Main Details -->
           <div class="tab-pane fade active in" id="mainDetails">
+          <?php echo $family_form;?>
           <div class="row">
           <div class="form-group col-md-12">
-            <div class="col-md-6">
+            <div class="col-md-4">
               <label class="control-label">وضع العائلة</label>
-              <label class="radio-inline"><input type="radio" name="family_status" value="a"> نازحة </label>
-              <label class="radio-inline"><input type="radio" name="family_status" value="b"> متضررة </label>
-              <label class="radio-inline"><input type="radio" name="family_status" value="c"> فقيرة </label>
+              <?php echo $family_status_dropdown;?>
             </div>
           </div>
           <div class="form-group col-md-12">
-            <div class="col-md-4"><input type="text" class="form-control" name="nationality" placeholder="الجنسية"></div>
-            <div class="col-md-4"><input type="text" class="form-control" name="nmbr_registration" placeholder="رقم و مكان القيد"></div>
+            <div class="col-md-4"><?php echo $nationality;?></div>
+            <div class="col-md-4"><?php echo $nmbr_registration;?></div>
           </div>
           <div class="form-group col-md-12">
             <div class="col-md-4">
-              <select class="form-control" name="document_type">
-                <option value="a">نوع الوثيقة العائلية</option>
-                <option value="b">دفتر عائلة حديث</option>
-                <option value="c">دفتر عائلة قديم</option>
-                <option value="d">إخراج قيد عائلي</option>
-                <option value="e">لا يوجد حالياً</option>
-              </select>
+              <?php echo $document_type_dropdown;?>
             </div>
-            <div class="col-md-4"><input type="text" class="form-control" name="document_no" placeholder="رقم الوثيقة العائلية"></div>
+            <div class="col-md-4"><?php echo $document_no;?></div>
           </div>
           <div class="form-group col-md-12">
             <div class="col-md-8">
-              <textarea class="form-control" name="notes" rows="4" placeholder="ملاحظات"></textarea>
+              <?php echo $notes;?>
             </div>
           </div>
           <div class="form-group col-md-12">
             <div class="col-md-6">
-              <input type="text" class="form-control" name="breadwinner_name" placeholder="اسم معيل الأسرة الثلاثي">
+              <?php echo $breadwinner_name;?>
             </div>
           </div>
           <div class="form-group col-md-12">
             <div class="col-md-3">
               <div class="input-group">
-                <input type="text" class="form-control" name="mobile_1" placeholder="الموبايل" dir="ltr">
+                <?php echo $mobile_1;?>
                 <span class="input-group-addon">09</span>
               </div>
               <br>
               <div class="input-group">
-                <input type="text" class="form-control" name="mobile_2" placeholder="الموبايل" dir="ltr">
+                <?php echo $mobile_2;?>
                 <span class="input-group-addon">09</span>
-              </div>…
+              </div>
             </div>
             <div class="col-md-3">
               <div class="input-group">
-                <input type="text" class="form-control" name="phone" placeholder="الهاتف" dir="ltr">
+                <?php echo $phone;?>
                 <span class="input-group-addon">016</span>
               </div>
             </div>
@@ -101,16 +94,19 @@
           <div class="row">
             <h4>مكان الإقامة الأصلي</h4>
             <div class="col-md-12 form-group">
-              <div class="col-md-3"><input type="text" class="form-control" placeholder="المحافظة"></div>
-              <div class="col-md-3"><input type="text" class="form-control" placeholder="المنطقة"></div>
+              <div class="col-md-3">
+                <?php echo $city_dropdown;?>
+              </div>
+              <div class="col-md-3"><?php echo $zone;?></div>
             </div>
             <div class="col-md-12 form-group">
-              <div class="col-md-6"><textarea class="form-control" placeholder="تفاصيل" rows="3"></textarea></div>
+              <div class="col-md-6"><?php echo $address;?></div>
             </div>
             <div class="col-md-12 form-group">
-              <div class="col-md-3"><label class="control-label">تاريخ الانتقال</label><input type="date" class="form-control"></div>
+              <div class="col-md-3"><label class="control-label">تاريخ الانتقال</label><?php echo $jump_date;?></div>
             </div>
           </div>
+          <?php form_close();?>
           </div>
           <!-- Main Details -->
 

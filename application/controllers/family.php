@@ -57,8 +57,97 @@ class Family extends CI_Controller {
 		$this->load->view("family/family_list", $data);
 	}
 
-	public function getForm(){
-		$data = array();
+	public function insert(){
+		$this->getForm();
+	}
+
+	private function getForm(){
+		$this->load->model("property_model");
+		$this->load->model("city_model");
+
+		$data["family_form"] = form_open(current_url());
+		
+		$family_status = $this->property_model->dropdown('family_status');
+		$data["family_status_dropdown"] = form_dropdown("family_status", $family_status, '', 'class="form-control"');
+		
+		$data["nationality"] = form_input(array(
+			"name" => "nationality",
+			"class" => "form-control", 
+			"placeholder" => "الجنسية")
+		);
+		
+		$data["nmbr_registration"] = form_input(array(
+			"name" => "nmbr_registration", 
+			"class" => "form-control", 
+			"placeholder" => "رقم و مكان القيد")
+		);
+		
+		$document_types = $this->property_model->dropdown('document_type');
+		$data["document_type_dropdown"] = form_dropdown("document_type", $document_types, '', 'class="form-control"');
+		
+		$data["document_no"] = form_input(array(
+			"name" => "document_no", 
+			"class" => "form-control", 
+			"placeholder" => "رقم الوثيقة")
+		);
+		
+		$data["notes"] = form_textarea(array(
+			"name" => "notes", 
+			"class" => "form-control", 
+			"rows" => 4, 
+			"placeholder" => "ملاحظات")
+		);
+		
+		$data["breadwinner_name"] = form_input(array(
+			"name" => "breadwinner_name", 
+			"class" => "form-control", 
+			"placeholder" => "اسم معيل الأسرة الثلاثي")
+		);
+		
+		$data["mobile_1"] = form_input(array(
+			"name" => "mobile_1", 
+			"class" => "form-control", 
+			"placeholder" => "الموبايل", 
+			"dir" => "ltr")
+		);
+		
+		$data["mobile_2"] = form_input(array(
+			"name" => "mobile_2", 
+			"class" => "form-control", 
+			"placeholder" => "الموبايل", 
+			"dir" => "ltr")
+		);
+		
+		$data["phone"] = form_input(array(
+			"name" => "phone", 
+			"class" => "form-control", 
+			"placeholder" => "الهاتف", 
+			"dir" => "ltr")
+		);
+		
+		$cities = $this->city_model->dropdown();
+		$data["city_dropdown"] = form_dropdown("city_id", $cities, '', 'class="form-control"');
+		
+		$data["zone"] = form_input(array(
+			"name" => "zone", 
+			"class" => "form-control", 
+			"placeholder" => "المنطقة")
+		);
+		
+		$data["address"] = form_textarea(array(
+			"name" => "address_1", 
+			"class" => "form-control", 
+			"rows" => 3, 
+			"placeholder" => "تفاصيل")
+		);
+		
+		$data["jump_date"] = form_input(array(
+			"type" => "date", 
+			"name" => "jump_date", 
+			"class" => "form-control")
+		);
+
+
 		$this->load->view("family/family_form", $data);
 	}
 }

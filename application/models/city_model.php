@@ -6,7 +6,10 @@ class city_model extends MY_Model{
 	public $primary_key = "city_id"; // Table primary key
 
 	public function dropdown(){
-		return parent::dropdown($this->primary_key, "city_name");
+		$list = parent::dropdown($this->primary_key, "city_name");
+		$blank = array('' => '');
+		
+		return array_merge($blank, $list);
 	}
 
 	public function getCityName($city_id){

@@ -11,7 +11,10 @@ class property_model extends MY_Model{
 
 	public function dropdown($group){
 		$this->_database->where('group', $group);
-		return parent::dropdown("value", "property_name");
+		$list = parent::dropdown("value", "property_name");
+		$blank = array('' => '');
+
+		return array_merge($blank, $list);
 	}
 
 	public function getPropertyName($value, $group){
