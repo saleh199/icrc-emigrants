@@ -18,52 +18,52 @@
           <div class="form-group col-md-12">
             <div class="col-md-6">
               <label class="control-label">وضع العائلة</label>
-              <label class="radio-inline"><input type="radio" name="z" value="1"> نازحة </label>
-              <label class="radio-inline"><input type="radio" name="z" value="2"> متضررة </label>
-              <label class="radio-inline"><input type="radio" name="z" value="3"> فقيرة </label>
+              <label class="radio-inline"><input type="radio" name="family_status" value="a"> نازحة </label>
+              <label class="radio-inline"><input type="radio" name="family_status" value="b"> متضررة </label>
+              <label class="radio-inline"><input type="radio" name="family_status" value="c"> فقيرة </label>
             </div>
           </div>
           <div class="form-group col-md-12">
-            <div class="col-md-4"><input type="text" class="form-control" placeholder="الجنسية"></div>
-            <div class="col-md-4"><input type="text" class="form-control" placeholder="رقم و مكان القيد"></div>
+            <div class="col-md-4"><input type="text" class="form-control" name="nationality" placeholder="الجنسية"></div>
+            <div class="col-md-4"><input type="text" class="form-control" name="nmbr_registration" placeholder="رقم و مكان القيد"></div>
           </div>
           <div class="form-group col-md-12">
             <div class="col-md-4">
-              <select class="form-control">
-                <option>نوع الوثيقة العائلية</option>
-                <option>دفتر عائلة حديث</option>
-                <option>دفتر عائلة قديم</option>
-                <option>إخراج قيد عائلي</option>
-                <option>لا يوجد حالياً</option>
+              <select class="form-control" name="document_type">
+                <option value="a">نوع الوثيقة العائلية</option>
+                <option value="b">دفتر عائلة حديث</option>
+                <option value="c">دفتر عائلة قديم</option>
+                <option value="d">إخراج قيد عائلي</option>
+                <option value="e">لا يوجد حالياً</option>
               </select>
             </div>
-            <div class="col-md-4"><input type="text" class="form-control" placeholder="رقم الوثيقة العائلية"></div>
+            <div class="col-md-4"><input type="text" class="form-control" name="document_no" placeholder="رقم الوثيقة العائلية"></div>
           </div>
           <div class="form-group col-md-12">
             <div class="col-md-8">
-              <textarea class="form-control" rows="4" placeholder="ملاحظات"></textarea>
+              <textarea class="form-control" name="notes" rows="4" placeholder="ملاحظات"></textarea>
             </div>
           </div>
           <div class="form-group col-md-12">
             <div class="col-md-6">
-              <input type="text" class="form-control" placeholder="اسم معيل الأسرة الثلاثي">
+              <input type="text" class="form-control" name="breadwinner_name" placeholder="اسم معيل الأسرة الثلاثي">
             </div>
           </div>
           <div class="form-group col-md-12">
             <div class="col-md-3">
               <div class="input-group">
-                <input type="text" class="form-control" placeholder="الموبايل" dir="ltr">
+                <input type="text" class="form-control" name="mobile_1" placeholder="الموبايل" dir="ltr">
                 <span class="input-group-addon">09</span>
               </div>
               <br>
               <div class="input-group">
-                <input type="text" class="form-control" placeholder="الموبايل" dir="ltr">
+                <input type="text" class="form-control" name="mobile_2" placeholder="الموبايل" dir="ltr">
                 <span class="input-group-addon">09</span>
               </div>…
             </div>
             <div class="col-md-3">
               <div class="input-group">
-                <input type="text" class="form-control" placeholder="الهاتف" dir="ltr">
+                <input type="text" class="form-control" name="phone" placeholder="الهاتف" dir="ltr">
                 <span class="input-group-addon">016</span>
               </div>
             </div>
