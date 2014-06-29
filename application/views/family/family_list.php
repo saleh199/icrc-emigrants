@@ -23,10 +23,6 @@
               </div>
               <br><br>
               <div class="col-md-4">
-                <label class="col-md-5">عدد الأفراد</label>
-                <?php echo $form_familymembers;?>
-              </div>
-              <div class="col-md-4">
                 <label class="col-md-5">نوع الوثيقة</label>
                 <?php echo $document_type_dropdown;?>
               </div>
@@ -34,14 +30,18 @@
                 <label class="col-md-5">رقم الوثيقة</label>
                 <?php echo $form_documentno;?>
               </div>
-              <br><br>
               <div class="col-md-4">
                 <label class="col-md-5">رقم الهاتف</label>
                 <?php echo $form_phone;?>
               </div>
+              <br><br>
               <div class="col-md-4">
                 <label class="col-md-5">الموبايل</label>
                 <?php echo $form_mobile;?>
+              </div>
+              <div class="col-md-4">
+                <label class="col-md-5">الرقم الوطني</label>
+                <?php echo $form_nationalnumber;?>
               </div>
               <div class="col-md-4">
                 <button type="submit" class="btn btn-info">بحث</button>
@@ -51,7 +51,8 @@
 
           <table class="table table-striped" style="margin-top:20px;">
             <tr>
-              <th style="width:100px">ID</th>
+              <!-- <th style="width:100px">ID</th> -->
+              <th style="width:100px">رقم الاستمارة</th>
               <th>رب الأسرة</th>
               <th>ربة الأسرة</th>
               <th style="width:60px">الأفراد</th>
@@ -63,10 +64,11 @@
             </tr>
             <?php foreach($results as $family_form) { ?>
             <tr>
-              <td class="text-center"><?php echo $family_form->form_details_id; ?></td>
+              <!-- <td class="text-center"><?php echo $family_form->form_details_id; ?></td> -->
+              <td class="text-center"><?php echo $family_form->tmp_ref; ?></td>
               <td><?php echo $family_form->father_name; ?></td>
               <td><?php echo $family_form->mother_name; ?></td>
-              <td class="text-center"><?php echo $family_form->form_details_id; ?></td>
+              <td class="text-center"><?php echo count($family_form->family_members); ?></td>
               <td><?php echo $family_form->document_type_name; ?></td>
               <td><?php echo $family_form->document_no; ?></td>
               <td><?php echo $family_form->phone . ', ' . $family_form->mobile_1; ?></td>

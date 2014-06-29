@@ -9,7 +9,9 @@ class Form_details_model extends MY_Model{
 	public $before_update = array( "timestampUpdate" ); // observer before update row
 	public $after_get = array("afterGetTrigger");
 
-	public $has_many = array("family_members" => array("model" => "Form_family_model"));
+	public $has_many = array(
+		"family_members" => array("model" => "Form_family_model")
+	);
 
 	protected function timestamp($data){
 		$data["date_added"] = $data["date_modified"] = time();
@@ -30,7 +32,7 @@ class Form_details_model extends MY_Model{
 				WHERE deleted = 0 ";
 
 		if(isset($filter["id"]) && !empty($filter["id"])){
-			$sql .= " AND fd.form_details_id = " . intval($filter["id"]);
+			$sql .= " AND fd.tmp_ref = " . intval($filter["id"]);
 		}
 
 		if(isset($filter["father_name"]) && !empty($filter["father_name"])){
@@ -58,6 +60,10 @@ class Form_details_model extends MY_Model{
 			$sql .= " AND (fd.mobile_1 = " . $this->db->escape($filter["mobile"]) . " OR fd.mobile_2 = " . $this->db->escape($filter["mobile"]) . ")";
 		}
 
+		if(isset($filter["national_number"]) && !empty($filter["national_number"])){
+			$sql .= " AND fm.national_number = " . $this->db->escape($filter["national_number"]);
+		}
+
 		if(isset($filter["limit"]) && (int)$filter["limit"] > 0){
 			$sql .= " LIMIT " . intval($filter["limit"]);
 		}
@@ -83,16 +89,12 @@ class Form_details_model extends MY_Model{
 	public function getFamily($form_details_id){
 		$result = $this->with("family_members")->get($form_details_id);
 
-		$this->load->model('property_model');
-		$property_name = $this->property_model->getPropertyName($result->document_type, 'document_type');
-
-		$result->document_type_name = $property_name;
-		$result->registered_date_full = date('Y-m-d', $result->registered_date);
-
 		return $result;
 	}
 
 	public function afterGetTrigger($data){
+		$this->load->model('property_model');
+
 		$data->father_name = '';
 		$data->mother_name = '';
 		
@@ -107,6 +109,11 @@ class Form_details_model extends MY_Model{
 				}
 			}
 		}
+
+		$property_name = $this->property_model->getPropertyName($data->document_type, 'document_type');
+
+		$data->document_type_name = $property_name;
+		$data->registered_date_full = date('Y-m-d', $data->registered_date);
 
 		return $data;
 	}
