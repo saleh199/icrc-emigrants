@@ -37,6 +37,10 @@ class Family extends CI_Controller {
 		if($this->input->get("mobile")){
 			$filter["mobile"] = $this->input->get("mobile");
 		}
+
+		if($this->input->get("national_number")){
+			$filter["national_number"] = $this->input->get("national_number");
+		}
 		
 		$data["results"] = $this->form_details->getFamilies($filter);
 
@@ -51,6 +55,7 @@ class Family extends CI_Controller {
 		$data["form_mobile"] = form_input(array("name" => "mobile", "id" => "mobile", "class" => "form-control"));
 		$document_types = $this->property_model->dropdown('document_type');
 		$data["document_type_dropdown"] = form_dropdown("document_type", $document_types, '', 'class="form-control"');
+		$data["form_nationalnumber"] = form_input(array("name" => "national_number", "id" => "national_number", "class" => "form-control"));
 		/************* Search Form *************/
 
 
