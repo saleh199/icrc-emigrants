@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 26, 2014 at 02:38 PM
+-- Generation Time: Jun 30, 2014 at 05:27 PM
 -- Server version: 5.5.37-0ubuntu0.14.04.1
--- PHP Version: 5.5.13-2+deb.sury.org~trusty+1
+-- PHP Version: 5.5.14-1+deb.sury.org~trusty+1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -19,6 +19,28 @@ SET time_zone = "+00:00";
 --
 -- Database: `icrc`
 --
+CREATE DATABASE IF NOT EXISTS `icrc` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `icrc`;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `city`
+--
+
+DROP TABLE IF EXISTS `city`;
+CREATE TABLE IF NOT EXISTS `city` (
+  `city_id` int(11) NOT NULL AUTO_INCREMENT,
+  `city_name` varchar(100) CHARACTER SET utf8 NOT NULL,
+  PRIMARY KEY (`city_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `city`
+--
+
+INSERT INTO `city` (`city_id`, `city_name`) VALUES
+(1, 'السويداء');
 
 -- --------------------------------------------------------
 
@@ -56,6 +78,7 @@ CREATE TABLE IF NOT EXISTS `form_address` (
   `date_added` int(10) unsigned NOT NULL,
   `date_modified` int(10) unsigned NOT NULL,
   `address_type` char(1) DEFAULT NULL,
+  `jump_date` int(10) unsigned NOT NULL,
   `host_name` varchar(100) NOT NULL,
   `host_phone` varchar(45) NOT NULL,
   `host_modile` varchar(45) NOT NULL,
@@ -76,11 +99,14 @@ CREATE TABLE IF NOT EXISTS `form_details` (
   `ref_id` varchar(45) DEFAULT NULL,
   `date_added` int(10) unsigned NOT NULL,
   `date_modified` int(10) unsigned NOT NULL,
+  `registered_date` int(10) NOT NULL,
   `register_center` varchar(45) DEFAULT NULL,
   `family_status` char(1) DEFAULT NULL,
   `nationality` varchar(45) DEFAULT NULL,
+  `nmbr_registration` varchar(100) NOT NULL,
   `document_type` char(1) DEFAULT NULL,
   `document_no` varchar(45) DEFAULT NULL,
+  `breadwinner_name` varchar(100) NOT NULL,
   `family_members` int(11) DEFAULT NULL,
   `notes` varchar(45) DEFAULT NULL,
   `phone` varchar(45) DEFAULT NULL,
@@ -97,8 +123,8 @@ CREATE TABLE IF NOT EXISTS `form_details` (
 -- Dumping data for table `form_details`
 --
 
-INSERT INTO `form_details` (`form_details_id`, `tmp_ref`, `ref_id`, `date_added`, `date_modified`, `register_center`, `family_status`, `nationality`, `document_type`, `document_no`, `family_members`, `notes`, `phone`, `mobile_1`, `mobile_2`, `registrar`, `deleted`) VALUES
-(1, '12345', 'wwe', 2014, 2014, 'ss', 'a', 'asd', 'a', 'asd', 2, 'sdf', '1234567', '234234', '0', 'asdsad', 0);
+INSERT INTO `form_details` (`form_details_id`, `tmp_ref`, `ref_id`, `date_added`, `date_modified`, `registered_date`, `register_center`, `family_status`, `nationality`, `nmbr_registration`, `document_type`, `document_no`, `breadwinner_name`, `family_members`, `notes`, `phone`, `mobile_1`, `mobile_2`, `registrar`, `deleted`) VALUES
+(1, '12345', 'wwe', 2014, 2014, 0, 'ss', 'a', 'asd', '', 'a', 'asd', '', 2, 'sdf', '1234567', '234234', '0', 'asdsad', 0);
 
 -- --------------------------------------------------------
 
@@ -254,7 +280,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`id`, `ip_address`, `username`, `password`, `salt`, `email`, `activation_code`, `forgotten_password_code`, `forgotten_password_time`, `remember_code`, `created_on`, `last_login`, `active`, `first_name`, `last_name`, `company`, `phone`) VALUES
-(1, '127.0.0.1', 'administrator', '$2a$07$SeBknntpZror9uyftVopmu61qg0ms8Qv1yV6FG.kQOSM.9QhmTo36', '', 'admin@admin.com', '', NULL, NULL, NULL, 1268889823, 1403694871, 1, 'Admin', 'istrator', 'ADMIN', '0');
+(1, '127.0.0.1', 'administrator', '$2a$07$SeBknntpZror9uyftVopmu61qg0ms8Qv1yV6FG.kQOSM.9QhmTo36', '', 'admin@admin.com', '', NULL, NULL, NULL, 1268889823, 1404119707, 1, 'Admin', 'istrator', 'ADMIN', '0');
 
 -- --------------------------------------------------------
 
