@@ -9,10 +9,10 @@ class property_model extends MY_Model{
 		parent::__construct();
 	}
 
-	public function dropdown($group){
+	public function dropdown($group, $blank_text = ''){
 		$this->_database->where('group', $group);
 		$list = parent::dropdown("value", "property_name");
-		$blank = array('' => '');
+		$blank = array('' => $blank_text);
 
 		return array_merge($blank, $list);
 	}

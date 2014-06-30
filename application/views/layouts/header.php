@@ -16,6 +16,10 @@
 
     <!-- Custom styles for this template -->
     <link href="<?php echo base_url('assets/css/main.css');?>" rel="stylesheet">
+    <script type="text/javascript">
+    var appConfig = {};
+    appConfig.familyQueryURL = '<?php echo site_url("family/familyQuery");?>';
+    </script>
   </head>
 
   <body>

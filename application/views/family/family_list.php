@@ -5,7 +5,7 @@
         <?php echo $this->view('layouts/sidebar'); ?>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
-          <h3 class="sub-header">الوافدين <a href="#" class="btn btn-sm btn-success" role="button">إضافة استمارة</a></h3>
+          <h3 class="sub-header">الوافدين <a href="#" class="btn btn-sm btn-success" role="button" data-toggle="modal" data-target="#familyQueryModal">إضافة استمارة</a></h3>
           <p></p>
           <?php echo $search_form;?>
             <div class="form-group col-md-12" style="margin-bottom: 20px;">
@@ -91,4 +91,52 @@
         </div>
       </div>
     </div>
+    <div class="modal fade" id="familyQueryModal" role="dialog" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title">إضافة استمارة</h4>
+          </div>
+          <div class="modal-body">
+            <form id="familyQueryfrm" role="form">
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group"><?php echo $family_status_dropdown;?></div>
+                  <div class="form-group"><?php echo $nmbr_registration;?></div>
+                  <div class="form-group"><?php echo $document_type_dropdown;?></div>
+                  <div class="form-group" id="document_no_container"><?php echo $document_no;?></div>
+                </div>
+                <div class="col-md-8" style="border-right: 1px solid #ccc;">
+                  <div class="col-md-12" style="padding:0;">
+                    <div><label class="control-label">اسم الأب</label></div>
+                    <div class="form-group col-md-4"><?php echo $father_firstname;?></div>
+                    <div class="form-group col-md-4"><?php echo $father_middlename;?></div>
+                    <div class="form-group col-md-4"><?php echo $father_lastname;?></div>
+                    <div class="form-group col-md-6" id="father_nationalnumber_container"><?php echo $father_nationalnumber;?></div>
+                    <div class="form-group col-md-6"><?php echo $father_with_family_dropdown;?></div>
+                    <div class="form-group col-md-6"><?php echo $father_situation_in_family_dropdown;?></div>
+                    <?php echo $father_level_input;?>
+                  </div>
+                  <div class="col-md-12" style="padding:0;">
+                    <div><label class="control-label">اسم الأم</label></div>
+                    <div class="form-group col-md-4"><?php echo $mother_firstname;?></div>
+                    <div class="form-group col-md-4"><?php echo $mother_middlename;?></div>
+                    <div class="form-group col-md-4"><?php echo $mother_lastname;?></div>
+                    <div class="form-group col-md-6" id="mother_nationalnumber_container"><?php echo $mother_nationalnumber;?></div>
+                    <div class="form-group col-md-6"><?php echo $mother_with_family_dropdown;?></div>
+                    <div class="form-group col-md-6"><?php echo $mother_situation_in_family_dropdown;?></div>
+                    <?php echo $mother_level_input;?>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">إغلاق</button>
+            <button type="button" id="familyQuerybtn" class="btn btn-primary">حفظ</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
 <?php $this->view('layouts/footer');?>

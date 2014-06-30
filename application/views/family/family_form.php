@@ -23,14 +23,14 @@
             </div>
           </div>
           <div class="form-group col-md-12">
-            <div class="col-md-4"><?php echo $nationality;?></div>
-            <div class="col-md-4"><?php echo $nmbr_registration;?></div>
-          </div>
-          <div class="form-group col-md-12">
             <div class="col-md-4">
               <?php echo $document_type_dropdown;?>
             </div>
             <div class="col-md-4"><?php echo $document_no;?></div>
+          </div>
+          <div class="form-group col-md-12">
+            <div class="col-md-4"><?php echo $nationality;?></div>
+            <div class="col-md-4"><?php echo $nmbr_registration;?></div>
           </div>
           <div class="form-group col-md-12">
             <div class="col-md-8">
