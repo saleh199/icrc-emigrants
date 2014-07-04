@@ -59,6 +59,27 @@ $(function(){
 	});
 
 	$('#formSubmitbtn').click(function(){
-		
+		$.ajax({
+			url : appConfig.formAction,
+			data: $("#familyfrm").serialize(),
+			dataType: "JSON",
+			type: 'POST',
+			context: $(this),
+			complete : function(xhr){
+				json = xhr.responseJSON;
+				if(json.success){
+					html = 		  '<div class="alert alert-success" role="alert">';
+					html = html + 'تمت إضافة الاستمارة بنجاح';
+					html = html + '</div>';
+					$('#alertHolder').html(html);
+					appConfig.form_details_id = parseInt(json.id);
+				}else{
+					html = 		  '<div class="alert alert-danger" role="alert">';
+					html = html + json.errors;
+					html = html + '</div>';
+					$('#alertHolder').html(html);
+				}
+			}
+		});
 	});
 });

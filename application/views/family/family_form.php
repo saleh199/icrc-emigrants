@@ -19,6 +19,7 @@
           <div class="tab-pane fade active in" id="mainDetails">
           <?php echo $family_form;?>
           <div class="row">
+          <div id="alertHolder" class="col-md-6" style="padding:10px 0;"></div>
           <div class="form-group col-md-12">
             <div class="col-md-4">
               <label class="control-label">وضع العائلة</label>

@@ -196,6 +196,27 @@ class Form_details_model extends MY_Model{
 
 		return $data;
 	}
+
+	public function insertValidate(){
+		$this->load->library("form_validation");
+
+		$return = array();
+
+		$this->form_validation->set_rules("family_status", "وضع العائلة", "trim|required");
+		$this->form_validation->set_rules("document_type", "نوع الوثيقة", "trim|required");
+		$this->form_validation->set_rules("document_no", "رقم الوثيقة", "trim|required");
+		$this->form_validation->set_rules("nmbr_registration", "رقم و مكان القيد", "trim|required");
+
+		if($this->form_validation->run() == TRUE){
+			$return["success"] = TRUE;
+		}else{
+			$errors = validation_errors('<li>', '</li>');
+			$return["success"] = FALSE;
+			$return["errors"] = $errors;
+		}
+
+		return $return;
+	}
 }
 
 ?>

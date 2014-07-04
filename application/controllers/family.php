@@ -89,15 +89,31 @@ class Family extends CI_Controller {
 	}
 
 	public function insert(){
+		$this->load->model('Form_details_model', 'details_model');
+
 		$formAction = site_url("family/insert");
 
 		if($this->input->is_ajax_request()){
-			$this->load->library("form_validation");
+			$json = array();
+			$result = $this->details_model->insertValidate();
+			if($result["success"]){
+				$inputData = $this->input->post(NULL, TRUE);
+				unset($inputData["city_id"], $inputData["zone"], $inputData["address_1"], $inputData["jump_date"]);
 
-			$this->form_validation->set_rules("family_status", ",ضع العائلة", "trim|required");
-			$this->form_validation->set_rules("document_type", "نوع الوثيقة", "trim|required");
-			$this->form_validation->set_rules("document_no", "رقم الوثيقة", "trim|required");
-			$this->form_validation->set_rules("nmbr_registration", "رقم و مكان القيد", "trim|required");
+				if($inserted_id = $this->details_model->insert($inputData)){
+					$json["success"] = TRUE;
+					$json["id"] = $inserted_id;
+				}else{
+					$json["success"] = FALSE;
+					$json["errors"] = "حدث خطأ الرجاء المحالة من جديد";
+				}
+			}else{
+				$json["success"] = FALSE;
+				$json["errors"] = $result["errors"];
+			}
+
+			print json_encode($json);
+			exit;
 		}
 
 		$this->getForm($formAction);
@@ -230,7 +246,7 @@ class Family extends CI_Controller {
 		}
 
 		$data["formAction"] = $formAction;
-		$data["family_form"] = form_open(current_url());
+		$data["family_form"] = form_open($formAction, array("id" => "familyfrm"));
 		
 		$family_status = $this->property_model->dropdown('family_status');
 		$data["family_status_dropdown"] = form_dropdown("family_status", $family_status, ($queryData) ? $queryData["family_status"] : '', 'class="form-control" required');
