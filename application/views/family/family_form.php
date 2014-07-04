@@ -1,5 +1,7 @@
 <?php $this->view('layouts/header'); ?>
-
+<script type="text/javascript">
+  appConfig.formAction = '<?php echo $formAction;?>';
+</script>
 <div class="container-fluid">
       <div class="row">
         <?php echo $this->view('layouts/sidebar'); ?>
@@ -9,6 +11,7 @@
 
           <ul class="nav nav-tabs">
             <li class="active"><a href="#mainDetails" data-toggle="tab">معلومات العائلة</a></li>
+            <li><a href="#familyAddress" data-toggle="tab">عناوين الإقامة</a></li>
             <li><a href="#familyMembers" data-toggle="tab">أفراد الأسرة</a></li>
           </ul>
           <div class="tab-content">
@@ -24,13 +27,23 @@
           </div>
           <div class="form-group col-md-12">
             <div class="col-md-4">
+              <label class="control-label">نوع الوثيقة</label>
               <?php echo $document_type_dropdown;?>
             </div>
-            <div class="col-md-4"><?php echo $document_no;?></div>
+            <div class="col-md-4">
+              <label class="control-label">رقم الوثيقة</label>
+              <?php echo $document_no;?>
+            </div>
           </div>
           <div class="form-group col-md-12">
-            <div class="col-md-4"><?php echo $nationality;?></div>
-            <div class="col-md-4"><?php echo $nmbr_registration;?></div>
+            <div class="col-md-4">
+              <label class="control-label">الجنسية</label>
+              <?php echo $nationality;?>
+            </div>
+            <div class="col-md-4">
+              <label class="control-label">رقم و مكان القيد</label>
+              <?php echo $nmbr_registration;?>
+            </div>
           </div>
           <div class="form-group col-md-12">
             <div class="col-md-8">
@@ -39,6 +52,7 @@
           </div>
           <div class="form-group col-md-12">
             <div class="col-md-6">
+              <label class="control-label">اسم معيل الأسرة</label>
               <?php echo $breadwinner_name;?>
             </div>
           </div>
@@ -62,7 +76,31 @@
             </div>
           </div>
           </div>
+
           <div class="row">
+            <h4>مكان الإقامة الأصلي</h4>
+            <div class="col-md-12 form-group">
+              <div class="col-md-3">
+                <?php echo $city_dropdown;?>
+              </div>
+              <div class="col-md-3"><?php echo $zone;?></div>
+            </div>
+            <div class="col-md-12 form-group">
+              <div class="col-md-6"><?php echo $address;?></div>
+            </div>
+            <div class="col-md-12 form-group">
+              <div class="col-md-3"><label class="control-label">تاريخ الانتقال</label><?php echo $jump_date;?></div>
+            </div>
+
+            <div class="col-md-12 form-group">
+              <div class="col-md-6"><button type="button" id="formSubmitbtn" class="btn btn-success">حفظ</button></div>
+            </div>
+          </div>
+          <?php form_close();?>
+          </div>
+          <!-- Main Details -->
+            <div class="tab-pane fade" id="familyAddress">
+              <div class="row">
             <h4>عناوين الإقامة <small><button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#addressModel">إضافة عنوان</button></small></h4>
             <div class="col-md-8">
               <table class="table table-hover">
@@ -90,26 +128,7 @@
               </table>
             </div>
           </div>
-
-          <div class="row">
-            <h4>مكان الإقامة الأصلي</h4>
-            <div class="col-md-12 form-group">
-              <div class="col-md-3">
-                <?php echo $city_dropdown;?>
-              </div>
-              <div class="col-md-3"><?php echo $zone;?></div>
             </div>
-            <div class="col-md-12 form-group">
-              <div class="col-md-6"><?php echo $address;?></div>
-            </div>
-            <div class="col-md-12 form-group">
-              <div class="col-md-3"><label class="control-label">تاريخ الانتقال</label><?php echo $jump_date;?></div>
-            </div>
-          </div>
-          <?php form_close();?>
-          </div>
-          <!-- Main Details -->
-
             <div class="tab-pane fade" id="familyMembers">
             <br>
               <table class="table table-hover">

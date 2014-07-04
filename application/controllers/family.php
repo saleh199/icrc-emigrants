@@ -89,7 +89,18 @@ class Family extends CI_Controller {
 	}
 
 	public function insert(){
-		$this->getForm();
+		$formAction = site_url("family/insert");
+
+		if($this->input->is_ajax_request()){
+			$this->load->library("form_validation");
+
+			$this->form_validation->set_rules("family_status", ",ضع العائلة", "trim|required");
+			$this->form_validation->set_rules("document_type", "نوع الوثيقة", "trim|required");
+			$this->form_validation->set_rules("document_no", "رقم الوثيقة", "trim|required");
+			$this->form_validation->set_rules("nmbr_registration", "رقم و مكان القيد", "trim|required");
+		}
+
+		$this->getForm($formAction);
 	}
 
 	public function familyQuery(){
@@ -117,6 +128,14 @@ class Family extends CI_Controller {
 			if($family = $this->form_details->getByDocument($data["document_type"], $data["document_no"])){
 				$json["errors"]['document'] = "هذه الوثيقة مسجلة تحت الاستمارة " . $family->tmp_ref . " / " . $family->form_details_id;
 			}
+		}
+
+		if($this->input->post('family_status', TRUE)){
+			$data["family_status"] = $this->input->post("family_status", TRUE);
+		}
+
+		if($this->input->post('nmbr_registration', TRUE)){
+			$data["nmbr_registration"] = $this->input->post("nmbr_registration", TRUE);
 		}
 
 		if($this->input->post('father_firstname', TRUE)){
@@ -188,42 +207,57 @@ class Family extends CI_Controller {
 		}
 
 		if($this->input->post('mother_level', TRUE)){
-			$filter["mother_level"] = $this->input->post("mother_level", TRUE);
+			$data["mother_level"] = $this->input->post("mother_level", TRUE);
+		}
+
+		if(!isset($json["errors"])){
+			$this->session->set_flashdata("query_data", $data);
+			$json["status"] = "success";
 		}
 
 		header("Content-Type: text/json");
 		print json_encode($json);
 	}
 
-	private function getForm(){
+	private function getForm($formAction){
 		$this->load->model("property_model");
 		$this->load->model("city_model");
 
+		$queryData = $this->session->flashdata("query_data");
+
+		if($queryData){
+
+		}
+
+		$data["formAction"] = $formAction;
 		$data["family_form"] = form_open(current_url());
 		
 		$family_status = $this->property_model->dropdown('family_status');
-		$data["family_status_dropdown"] = form_dropdown("family_status", $family_status, '', 'class="form-control" required');
+		$data["family_status_dropdown"] = form_dropdown("family_status", $family_status, ($queryData) ? $queryData["family_status"] : '', 'class="form-control" required');
 		
 		$data["nationality"] = form_input(array(
 			"name" => "nationality",
 			"class" => "form-control", 
-			"placeholder" => "الجنسية")
+			"placeholder" => "الجنسية",
+			"value" => "سوري")
 		);
 		
 		$data["nmbr_registration"] = form_input(array(
 			"name" => "nmbr_registration", 
 			"class" => "form-control", 
-			"placeholder" => "رقم و مكان القيد")
+			"placeholder" => "رقم و مكان القيد",
+			"value" => ($queryData) ? $queryData["nmbr_registration"] : "")
 		);
 		
 		$document_types = $this->property_model->dropdown('document_type');
-		$data["document_type_dropdown"] = form_dropdown("document_type", $document_types, '', 'class="form-control" required');
+		$data["document_type_dropdown"] = form_dropdown("document_type", $document_types, ($queryData) ? $queryData["document_type"] : '', 'class="form-control" required');
 		
 		$data["document_no"] = form_input(array(
 			"name" => "document_no", 
 			"class" => "form-control", 
 			"required" => TRUE,
-			"placeholder" => "رقم الوثيقة")
+			"placeholder" => "رقم الوثيقة",
+			"value" => ($queryData) ? $queryData["document_no"] : "")
 		);
 		
 		$data["notes"] = form_textarea(array(

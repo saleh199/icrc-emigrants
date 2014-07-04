@@ -13,10 +13,6 @@ function requestJSON(url, callback) {
 }
 
 $(function(){
-	function errorTemplate(msg){
-		return '<label class="control-label error-label">' + msg + '</label>';
-	}
-
 	$("#familyQueryfrm").submit(function( event ) {
 		$.ajax({
 			url : appConfig.familyQueryURL,
@@ -48,8 +44,8 @@ $(function(){
 						}).tooltip('show');
 						$('#mother_nationalnumber_container').addClass('has-error');
 					}
-				}else{
-
+				}else if(json.status == "success"){
+					location.href = appConfig.successQuery;
 				}
 			}
 		});
@@ -60,5 +56,9 @@ $(function(){
 		$("#familyQueryfrm .has-error").removeClass('has-error');
 		$("#familyQueryfrm *").tooltip('destroy');
 		$("#familyQueryfrm").submit();
+	});
+
+	$('#formSubmitbtn').click(function(){
+		
 	});
 });

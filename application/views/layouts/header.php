@@ -19,6 +19,7 @@
     <script type="text/javascript">
     var appConfig = {};
     appConfig.familyQueryURL = '<?php echo site_url("family/familyQuery");?>';
+    appConfig.successQuery = '<?php echo site_url("family/insert");?>';
     </script>
   </head>
 
