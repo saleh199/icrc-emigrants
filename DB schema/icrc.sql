@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jul 04, 2014 at 05:06 PM
+-- Generation Time: Jul 05, 2014 at 06:31 PM
 -- Server version: 5.5.37-0ubuntu0.14.04.1
 -- PHP Version: 5.5.14-2+deb.sury.org~trusty+1
 
@@ -64,7 +64,9 @@ CREATE TABLE IF NOT EXISTS `ci_sessions` (
 --
 
 INSERT INTO `ci_sessions` (`session_id`, `ip_address`, `user_agent`, `last_activity`, `user_data`) VALUES
-('002ce607f4b679013550331b1986ca31', '127.0.0.1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/34.0.1847.132 Safari/537.36', 1404477581, 'a:1:{s:9:"user_data";s:0:"";}');
+('68ad373e427bccb98a1c6de8a0dd28db', '127.0.0.1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/34.0.1847.132 Safari/537.36', 1404493774, 'a:1:{s:9:"user_data";s:0:"";}'),
+('f8b95d14ad9a6ee318ea15636b859437', '127.0.0.1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/34.0.1847.132 Safari/537.36', 1404569288, 'a:1:{s:20:"flash:new:query_data";a:6:{s:13:"document_type";s:1:"a";s:11:"document_no";s:11:"65465465431";s:21:"father_nationalnumber";s:11:"65465465431";s:21:"mother_nationalnumber";s:11:"65465465431";s:12:"father_level";s:1:"a";s:12:"mother_level";s:1:"b";}}'),
+('facc409affdda40855dfe448acf478b7', '127.0.0.1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/34.0.1847.132 Safari/537.36', 1404573241, 'a:1:{s:20:"flash:old:query_data";a:8:{s:13:"document_type";s:1:"b";s:11:"document_no";s:4:"9798";s:13:"family_status";s:1:"a";s:17:"nmbr_registration";s:5:"98798";s:21:"father_nationalnumber";s:9:"798798798";s:21:"mother_nationalnumber";s:11:"98798765465";s:12:"father_level";s:1:"a";s:12:"mother_level";s:1:"b";}}');
 
 -- --------------------------------------------------------
 
@@ -96,19 +98,38 @@ CREATE TABLE IF NOT EXISTS `form_address` (
   `form_address_id` int(11) NOT NULL AUTO_INCREMENT,
   `city_id` int(11) DEFAULT NULL,
   `zone` varchar(45) DEFAULT NULL,
-  `address_1` varchar(45) DEFAULT NULL,
-  `address_2` varchar(45) DEFAULT NULL,
+  `address` text,
   `form_details_id` int(11) DEFAULT NULL,
   `date_added` int(10) unsigned NOT NULL,
   `date_modified` int(10) unsigned NOT NULL,
-  `address_type` char(1) DEFAULT NULL,
-  `jump_date` int(10) unsigned NOT NULL,
   `host_name` varchar(100) NOT NULL,
   `host_phone` varchar(45) NOT NULL,
-  `host_modile` varchar(45) NOT NULL,
+  `host_mobile` varchar(45) NOT NULL,
+  `housing_desc` char(1) NOT NULL,
+  `proof_of_residence` char(1) NOT NULL,
   PRIMARY KEY (`form_address_id`),
   KEY `fk_form_address_1` (`form_details_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=17 ;
+
+--
+-- Dumping data for table `form_address`
+--
+
+INSERT INTO `form_address` (`form_address_id`, `city_id`, `zone`, `address`, `form_details_id`, `date_added`, `date_modified`, `host_name`, `host_phone`, `host_mobile`, `housing_desc`, `proof_of_residence`) VALUES
+(3, 0, 'قنوات', 'شسييشسيشسي', 0, 1404561761, 1404561761, '', '', '', 'c', 'b'),
+(4, 0, 'قنوات', 'شسييشسيشسي', 0, 1404561777, 1404561777, '', '', '', 'c', 'b'),
+(5, 0, 'asd', 'asdas', 0, 1404561825, 1404561825, '', '', '', 'c', 'a'),
+(6, 0, 'asd', 'asdas', 0, 1404561834, 1404561834, '', '', '', 'c', 'a'),
+(7, 0, 'asdas', 'asdasd', 0, 1404561871, 1404561871, '', '', '', 'c', 'b'),
+(8, 0, 'asdas', 'asdas', 0, 1404561896, 1404561896, '', '', '', 'c', 'a'),
+(9, 0, 'asdas das', 'asdas das', 0, 1404562002, 1404562002, '', '', '', 'a', 'b'),
+(10, 0, 'asdas', 'ي ليبل يبل بيل يب يبل', 0, 1404562092, 1404562092, '', '', '', 'b', 'a'),
+(11, 0, 'سيب سيب س', 'سي بسي بسي بسي بسي بل بلا', 0, 1404562116, 1404562116, '', '', '', 'a', 'e'),
+(12, 0, 'شسيشسي', 'يبل يبل بلا لبا لب الب ابل', 0, 1404562191, 1404562191, '', '', '', 'b', 'a'),
+(13, 0, 'سيبسي بسي', 'سي بسي ب', 0, 1404562214, 1404562214, '', '', '', 'd', 'b'),
+(14, 0, 'asdasd', 'asdasdas', 0, 1404563084, 1404563084, '', '', '', 'a', 'e'),
+(15, 0, 'الرحى', 'جانب موقف الرحى', 4, 1404567571, 1404567571, '', '', '', 'a', 'a'),
+(16, 0, 'عرى', 'بل بل بلبل', 5, 1404571017, 1404571017, '', '', '', 'b', 'd');
 
 -- --------------------------------------------------------
 
@@ -136,19 +157,27 @@ CREATE TABLE IF NOT EXISTS `form_details` (
   `phone` varchar(45) DEFAULT NULL,
   `mobile_1` varchar(45) DEFAULT NULL,
   `mobile_2` varchar(45) NOT NULL,
+  `come_city_id` int(11) NOT NULL,
+  `come_zone` varchar(50) NOT NULL,
+  `come_address` text NOT NULL,
+  `jump_date` int(10) NOT NULL,
   `registrar` varchar(45) DEFAULT NULL,
   `deleted` tinyint(1) NOT NULL,
   PRIMARY KEY (`form_details_id`),
   UNIQUE KEY `tmp_ref_UNIQUE` (`tmp_ref`),
   UNIQUE KEY `ref_id_UNIQUE` (`ref_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `form_details`
 --
 
-INSERT INTO `form_details` (`form_details_id`, `tmp_ref`, `ref_id`, `date_added`, `date_modified`, `registered_date`, `register_center`, `family_status`, `nationality`, `nmbr_registration`, `document_type`, `document_no`, `breadwinner_name`, `family_members`, `notes`, `phone`, `mobile_1`, `mobile_2`, `registrar`, `deleted`) VALUES
-(1, '12345', 'wwe', 2014, 2014, 0, 'ss', 'a', 'asd', '', 'a', 'asd', '', 2, 'sdf', '1234567', '234234', '0', 'asdsad', 0);
+INSERT INTO `form_details` (`form_details_id`, `tmp_ref`, `ref_id`, `date_added`, `date_modified`, `registered_date`, `register_center`, `family_status`, `nationality`, `nmbr_registration`, `document_type`, `document_no`, `breadwinner_name`, `family_members`, `notes`, `phone`, `mobile_1`, `mobile_2`, `come_city_id`, `come_zone`, `come_address`, `jump_date`, `registrar`, `deleted`) VALUES
+(1, '12345', 'wwe', 2014, 2014, 0, 'ss', 'a', 'asd', '', 'a', 'asd', '', 2, 'sdf', '1234567', '234234', '0', 0, '', '', 0, 'asdsad', 0),
+(2, NULL, NULL, 1404488780, 1404488780, 1404488780, NULL, 'a', 'سوري', 'السويداء 1303', 'a', '987987', 'صالح علي سعيد', NULL, '', '310634', '33067744', '', 0, '', '', 0, NULL, 0),
+(3, NULL, NULL, 1404557829, 1404557829, 1404557829, NULL, 'a', 'سوري', 'asdd', 'a', 'asdfشسيشسي', 'fg hfg', NULL, 'asd afg hgf h', '310634', '33067744', '', 0, 'الرحى', 'سيب سيب ', 0, NULL, 0),
+(4, 'a12345', NULL, 1404567391, 1404567391, 1404567391, NULL, 'a', 'سوري', 'عرى 1303', 'a', '987654', '', NULL, '', '', '', '', 0, '', '', 0, NULL, 0),
+(5, 'a789456', NULL, 1404570963, 1404570963, 1404570963, NULL, 'a', 'سوري', 'الرحى', 'a', '98765463', '', NULL, '', '310568', '3306474', '', 0, '', '', 0, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -162,9 +191,10 @@ CREATE TABLE IF NOT EXISTS `form_family` (
   `firstname` varchar(45) DEFAULT NULL,
   `middlename` varchar(45) DEFAULT NULL,
   `lastname` varchar(45) DEFAULT NULL,
+  `mothername` varchar(45) NOT NULL,
   `national_number` varchar(15) DEFAULT NULL,
   `birthdate` int(10) DEFAULT NULL,
-  `gender` varchar(45) DEFAULT NULL,
+  `gender` char(1) DEFAULT NULL,
   `study_status` char(1) DEFAULT NULL,
   `health_status` char(1) DEFAULT NULL,
   `with_family` char(1) DEFAULT NULL,
@@ -175,14 +205,18 @@ CREATE TABLE IF NOT EXISTS `form_family` (
   `form_details_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`form_family_id`),
   KEY `fk_form_family_details_1` (`form_details_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
 
 --
 -- Dumping data for table `form_family`
 --
 
-INSERT INTO `form_family` (`form_family_id`, `firstname`, `middlename`, `lastname`, `national_number`, `birthdate`, `gender`, `study_status`, `health_status`, `with_family`, `situation_in_family`, `level_in_family`, `date_added`, `date_modified`, `form_details_id`) VALUES
-(1, 'saleh', 'ali', 'saiid', 'dasdas', 234234, '1', 'a', 'a', 'a', 'a', 'a', 2014, 2014, 1);
+INSERT INTO `form_family` (`form_family_id`, `firstname`, `middlename`, `lastname`, `mothername`, `national_number`, `birthdate`, `gender`, `study_status`, `health_status`, `with_family`, `situation_in_family`, `level_in_family`, `date_added`, `date_modified`, `form_details_id`) VALUES
+(1, 'saleh', 'ali', 'saiid', '', 'dasdas', 234234, '1', 'a', 'a', 'a', 'a', 'a', 2014, 2014, 1),
+(4, 'عمار', 'ياسر', 'عبد الدين', 'كميلة القطيني', '3216549870', 324654654, 'a', 'a', '', 'a', 'a', 'c', 1404565504, 1404565504, 0),
+(5, 'عمار', 'ياسر', 'عبد الدين', 'كميلة القطيني', '3216549870', 324654654, 'a', 'a', 'a', 'a', 'a', 'c', 1404565997, 1404565997, 0),
+(6, 'عمار', 'ياسر', 'عبد الدين', 'كميلة', '65465465431', 654000, 'a', 'a', 'f', 'a', 'b', 'a', 1404566049, 1404566049, 0),
+(7, 'سسس', 'لبلبن كت', 'ما نتما', 'نت اتنا', 'نتا نتا', 20, 'a', 'b', 'a', 'b', 'b', 'b', 1404571283, 1404571283, 5);
 
 -- --------------------------------------------------------
 
@@ -234,7 +268,7 @@ CREATE TABLE IF NOT EXISTS `property` (
   `value` varchar(45) NOT NULL,
   `group` varchar(45) CHARACTER SET utf8 NOT NULL,
   PRIMARY KEY (`property_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=ucs2 AUTO_INCREMENT=30 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=ucs2 AUTO_INCREMENT=44 ;
 
 --
 -- Dumping data for table `property`
@@ -269,7 +303,21 @@ INSERT INTO `property` (`property_id`, `property_name`, `value`, `group`) VALUES
 (26, 'لا يوجد', 'd', 'document_type'),
 (27, 'نازحة', 'a', 'family_status'),
 (28, 'متضررة', 'b', 'family_status'),
-(29, 'فقيرة', 'c', 'family_status');
+(29, 'فقيرة', 'c', 'family_status'),
+(30, 'ملك', 'a', 'housing_desc'),
+(31, 'إيجار', 'b', 'housing_desc'),
+(32, 'هبة', 'c', 'housing_desc'),
+(33, 'ملك عام', 'd', 'housing_desc'),
+(34, 'استضافة لدى عائلة نازحة', 'e', 'housing_desc'),
+(35, 'استضافة لدى عائلة مقيمة', 'f', 'housing_desc'),
+(36, 'أخرى', 'e', 'proof_of_residence'),
+(37, 'عقد إيجار', 'a', 'proof_of_residence'),
+(38, 'سند ملكية', 'b', 'proof_of_residence'),
+(39, 'لا يوجد', 'c', 'proof_of_residence'),
+(40, 'سند إقامة', 'd', 'proof_of_residence'),
+(41, 'ذكر', 'a', 'gender'),
+(42, 'أنثى', 'b', 'gender'),
+(43, 'لا بوجد', 'f', 'health_status');
 
 -- --------------------------------------------------------
 
@@ -334,18 +382,6 @@ INSERT INTO `users_groups` (`id`, `user_id`, `group_id`) VALUES
 --
 -- Constraints for dumped tables
 --
-
---
--- Constraints for table `form_address`
---
-ALTER TABLE `form_address`
-  ADD CONSTRAINT `fk_form_address_1` FOREIGN KEY (`form_details_id`) REFERENCES `form_details` (`form_details_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Constraints for table `form_family`
---
-ALTER TABLE `form_family`
-  ADD CONSTRAINT `fk_form_family_details_1` FOREIGN KEY (`form_details_id`) REFERENCES `form_details` (`form_details_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `users_groups`
