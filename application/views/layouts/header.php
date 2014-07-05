@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="<?php echo base_url('assets/css/bootstrap.min.css');?>">
     <!-- <link href="<?php echo base_url('assets/css/bootstrap-theme.min.css');?>" rel="stylesheet"> -->
     <link href="<?php echo base_url('assets/css/bootstrap-rtl.min.css')?>" rel="stylesheet">
+    <link href="<?php echo base_url('assets/css/jquery-ui.css');?>" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="<?php echo base_url('assets/css/main.css');?>" rel="stylesheet">
@@ -20,6 +21,8 @@
     var appConfig = {};
     appConfig.familyQueryURL = '<?php echo site_url("family/familyQuery");?>';
     appConfig.successQuery = '<?php echo site_url("family/insert");?>';
+    appConfig.insertAddressURL = "<?php echo site_url('family/insertAddress');?>";
+    appConfig.insertFamilyURL = "<?php echo site_url('family/insertFamily');?>";
     </script>
   </head>
 

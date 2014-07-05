@@ -1,4 +1,5 @@
 <?php $this->view('layouts/header'); ?>
+
 <script type="text/javascript">
   appConfig.formAction = '<?php echo $formAction;?>';
 </script>
@@ -21,6 +22,10 @@
           <div class="row">
           <div id="alertHolder" class="col-md-6" style="padding:10px 0;"></div>
           <div class="form-group col-md-12">
+            <div class="col-md-4">
+              <label class="control-label">رقم استمارة مؤقت</label>
+              <?php echo $tmp_ref;?>
+            </div>
             <div class="col-md-4">
               <label class="control-label">وضع العائلة</label>
               <?php echo $family_status_dropdown;?>
@@ -84,10 +89,10 @@
               <div class="col-md-3">
                 <?php echo $city_dropdown;?>
               </div>
-              <div class="col-md-3"><?php echo $zone;?></div>
+              <div class="col-md-3"><?php echo $come_zone;?></div>
             </div>
             <div class="col-md-12 form-group">
-              <div class="col-md-6"><?php echo $address;?></div>
+              <div class="col-md-6"><?php echo $come_address;?></div>
             </div>
             <div class="col-md-12 form-group">
               <div class="col-md-3"><label class="control-label">تاريخ الانتقال</label><?php echo $jump_date;?></div>
@@ -97,14 +102,14 @@
               <div class="col-md-6"><button type="button" id="formSubmitbtn" class="btn btn-success">حفظ</button></div>
             </div>
           </div>
-          <?php form_close();?>
+          <?php echo form_close();?>
           </div>
           <!-- Main Details -->
             <div class="tab-pane fade" id="familyAddress">
               <div class="row">
             <h4>عناوين الإقامة <small><button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#addressModel">إضافة عنوان</button></small></h4>
             <div class="col-md-8">
-              <table class="table table-hover">
+              <table class="table table-hover" id="addressTable">
                 <tr>
                   <th>#</th>
                   <th>المحافطة</th>
@@ -112,27 +117,15 @@
                   <th>العنوان التفصيلي</th>
                   <th></th>
                 </tr>
-                <tr class="success">
-                  <th>2</th>
-                  <td>السويداء</td>
-                  <td>قنوات</td>
-                  <td>بجانب دوار السبع على اليمين أول بناي الطابق الرابع</td>
-                  <td><button type="button" class="btn btn-link">تعديل</button>  <button type="button" class="btn btn-link">عرض</button></td>
-                </tr>
-                <tr>
-                  <th>1</th>
-                  <td>السويداء</td>
-                  <td>قنوات</td>
-                  <td>بجانب دوار السبع على اليمين أول بناي الطابق الرابع</td>
-                  <td></td>
-                </tr>
               </table>
             </div>
           </div>
             </div>
             <div class="tab-pane fade" id="familyMembers">
             <br>
-              <table class="table table-hover">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#familyModal">إضافة شخص</button>
+            <br><br>
+              <table class="table table-hover" id="familyMemeberstbl">
                 <tr>
                   <th>#</th>
                   <th>الاسم الثلاثي</th>
@@ -142,48 +135,9 @@
                   <th>الجنس</th>
                   <th>الصفة في العائلة</th>
                   <th>الوضع العائلي</th>
-                  <th>العمل</th>
+                  <th>التواجد</th>
                   <th>الحالة الدراسية</th>
                   <th>الحالة الصحية</th>
-                </tr>
-                <tr>
-                  <td>#</td>
-                  <td>الاسم الثلاثي</td>
-                  <td>اسم الأم</td>
-                  <td>الرقم الوطني</td>
-                  <td>تاريخ الميلاد</td>
-                  <td>الجنس</td>
-                  <td>الصفة في العائلة</td>
-                  <td>الوضع العائلي</td>
-                  <td>العمل</td>
-                  <td>الحالة الدراسية</td>
-                  <td>الحالة الصحية</td>
-                </tr>
-                <tr>
-                  <td>#</td>
-                  <td>الاسم الثلاثي</td>
-                  <td>اسم الأم</td>
-                  <td>الرقم الوطني</td>
-                  <td>تاريخ الميلاد</td>
-                  <td>الجنس</td>
-                  <td>الصفة في العائلة</td>
-                  <td>الوضع العائلي</td>
-                  <td>العمل</td>
-                  <td>الحالة الدراسية</td>
-                  <td>الحالة الصحية</td>
-                </tr>
-                <tr>
-                  <td>#</td>
-                  <td>الاسم الثلاثي</td>
-                  <td>اسم الأم</td>
-                  <td>الرقم الوطني</td>
-                  <td>تاريخ الميلاد</td>
-                  <td>الجنس</td>
-                  <td>الصفة في العائلة</td>
-                  <td>الوضع العائلي</td>
-                  <td>العمل</td>
-                  <td>الحالة الدراسية</td>
-                  <td>الحالة الصحية</td>
                 </tr>
               </table>
             </div>
@@ -201,55 +155,81 @@
             <h4 class="modal-title">إدخال عنوان</h4>
           </div>
           <div class="modal-body">
-            <form role="form">
-              <div class="row">
+            <div class="row">
+              <form action="<?php echo site_url('family/insertAddress');?>" method="post" id="addressfrm" role="form">
+                <div class="col-md-12" id="alertHolder"></div>
                 <div class="col-md-6" style="border-left: 1px solid #ccc;">
-                  <div class="form-group"><input type="text" class="form-control" placeholder="المحافظة"></div>
-                  <div class="form-group"><input type="text" class="form-control" placeholder="المنطقة"></div>
-                  <div class="form-group"><textarea class="form-control" rows="3" placeholder="العنوان التفصيلي"></textarea></div>
+                  <div class="form-group"><?php echo $address_city_dropdown;?></div>
+                  <div class="form-group"><?php echo $zone;?></div>
+                  <div class="form-group"><?php echo $address;?></div>
                   <div class="form-group">
-                    <select class="form-control">
-                      <option>توصيف السكن</option>
-                      <option>ملك</option>
-                      <option>إيجار</option>
-                      <option>هبة</option>
-                      <option>ملك عام</option>
-                      <option>استضافة لدى عائلة نازحة</option>
-                      <option>استضافة لدى عائلة مقيمة</option>
-                    </select>
+                    <?php echo $housing_desc_dropdown;?>
                   </div>
                   <div class="form-group">
-                    <select class="form-control">
-                      <option>ثبوتيات السكن</option>
-                      <option>عقد إيجار</option>
-                      <option>سند ملكية</option>
-                      <option>لا يوجد</option>
-                      <option>سند إقامة</option>
-                      <option>أخرى</option>
-                    </select>
+                    <?php echo $proof_of_residence_dropdown;?>
                   </div>
                 </div>
                 <div class="col-md-6">
-                  <div class="form-group"><input type="text" class="form-control" placeholder="اسم المضيف"></div>
+                  <div class="form-group"><?php echo $host_name;?></div>
                   <div class="form-group">
                     <div class="input-group">
-                      <input type="text" class="form-control" placeholder="موبايل المضيف" dir="ltr">
+                      <?php echo $host_mobile;?>
                       <span class="input-group-addon">09</span>
                     </div>
                   </div>
                   <div class="form-group">
                     <div class="input-group">
-                      <input type="text" class="form-control" placeholder="هاتف المضيف" dir="ltr">
+                      <?php echo $host_phone;?>
                       <span class="input-group-addon">016</span>
                     </div>
                   </div>
                 </div>
-              </div>
-            </form>
+              </form>
+            </div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">إغلاق</button>
-            <button type="button" class="btn btn-primary">حفظ</button>
+            <button type="button" class="btn btn-primary" id="insertAddressbtn">حفظ</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+
+
+    <div class="modal fade" id="familyModal" role="dialog" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title">إضافة شخص</h4>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <form action="<?php echo site_url('family/insertFamily');?>" method="post" id="addressfrm" role="form">
+                <div class="col-md-12" id="alertHolder"></div>
+                <div class="col-md-6" style="border-left: 1px solid #ccc;">
+                  <div class="form-group"><?php echo $firstname;?></div>
+                  <div class="form-group"><?php echo $middlename;?></div>
+                  <div class="form-group"><?php echo $lastname;?></div>
+                  <div class="form-group"><?php echo $mothername;?></div>
+                  <div class="form-group"><?php echo $national_number;?></div>
+                  <div class="form-group"><?php echo $birthdate;?></div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group"><?php echo $gender_dropdown;?></div>
+                  <div class="form-group"><?php echo $level_in_family_dropdown;?></div>
+                  <div class="form-group"><?php echo $situation_in_family_dropdown;?></div>
+                  <div class="form-group"><?php echo $with_family_dropdown;?></div>
+                  <div class="form-group"><?php echo $study_status_dropdown;?></div>
+                  <div class="form-group"><?php echo $health_status_dropdown;?></div>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">إغلاق</button>
+            <button type="button" class="btn btn-primary" id="insertFamilybtn">حفظ</button>
           </div>
         </div><!-- /.modal-content -->
       </div><!-- /.modal-dialog -->

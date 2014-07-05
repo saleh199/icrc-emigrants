@@ -5,7 +5,7 @@ class Form_details_model extends MY_Model{
 	public $_table = "form_details"; // Table name
 	public $primary_key = "form_details_id"; // Table primary key
 
-	public $before_create = array( "timestamp" ); // observer before create row
+	public $before_create = array( "timestamp", "beforeInsertTrigger" ); // observer before create row
 	public $before_update = array( "timestampUpdate" ); // observer before update row
 	public $after_get = array("afterGetTrigger");
 
@@ -22,6 +22,10 @@ class Form_details_model extends MY_Model{
 	protected function timestampUpdate($data){
 		$data["date_modified"] = time();
 
+		return $data;
+	}
+
+	protected function beforeInsertTrigger($data){
 		return $data;
 	}
 
@@ -202,6 +206,7 @@ class Form_details_model extends MY_Model{
 
 		$return = array();
 
+		$this->form_validation->set_rules("tmp_ref", "رقم استمارة مؤقت", "trim|required");
 		$this->form_validation->set_rules("family_status", "وضع العائلة", "trim|required");
 		$this->form_validation->set_rules("document_type", "نوع الوثيقة", "trim|required");
 		$this->form_validation->set_rules("document_no", "رقم الوثيقة", "trim|required");
@@ -209,6 +214,10 @@ class Form_details_model extends MY_Model{
 
 		if($this->form_validation->run() == TRUE){
 			$return["success"] = TRUE;
+			if($this->getByDocument($this->input->post("document_type"), $this->input->post("document_no"))){
+				$return["success"] = FALSE;
+				$return["errors"] = "<li>" . "رقم الوثيقة العائلية مسجل مسبقاً" . "</li>";
+			}
 		}else{
 			$errors = validation_errors('<li>', '</li>');
 			$return["success"] = FALSE;
