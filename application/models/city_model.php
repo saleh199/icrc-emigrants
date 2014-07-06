@@ -7,13 +7,14 @@ class city_model extends MY_Model{
 
 	public function dropdown(){
 		$list = parent::dropdown($this->primary_key, "city_name");
-		$blank = array('' => '');
-		
-		return array_merge($blank, $list);
+
+		array_unshift($list, "المحافظة");
+
+		return $list;
 	}
 
 	public function getCityName($city_id){
-		$result = $this->get($city_id);
+		$result = $this->as_object()->get($city_id);
 		
 		return $result->city_name;
 	}

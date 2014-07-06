@@ -58,6 +58,51 @@ $(function(){
 		$("#familyQueryfrm").submit();
 	});
 
+
+	$("#addAddressBtn").click(function(){
+		if(appConfig.form_details_id != 0){
+			alert("لا يمكن إضافة عنوان قبل حفظ معلومات العائلة الأساسية");
+		}else{
+			$('#modal').modal({
+				backdrop : false,
+				remote : appConfig.addressModalURL + '?form_details_id=' + appConfig.form_details_id
+			});
+		}
+	});
+
+	$( document ).delegate("#addressEditBtn", "click", function(){
+		id = $(this).attr('data-addressid');
+		$('#modal').modal({
+			backdrop : false,
+			remote : appConfig.addressModalURL + '?form_details_id=' + appConfig.form_details_id + '&form_address_id=' + id
+		});
+	});
+
+	$( document ).delegate("#addressFromBtn", "click", function(){
+		$('#modal #alertHolder').html(' ');
+		$.ajax({
+			url : $("#addressfrm").attr('action'),
+			data: $("#addressfrm").serialize() + '&form_details_id='+appConfig.form_details_id,
+			dataType: "JSON",
+			type: 'POST',
+			context: $(this),
+			complete : function(xhr){
+				json = xhr.responseJSON;
+				if(json.errors){
+					html = 		  '<div class="alert alert-danger" role="alert">';
+					html = html + json.errors;
+					html = html + '</div>';
+					$('#modal #alertHolder').html(html);
+				}else if(json.result == "success"){
+					$("#addresseslist").load(appConfig.addressesListURL + '?form_details_id=' + appConfig.form_details_id);
+					$('#modal').modal('hide');
+				}
+			}
+		});
+
+		return false;
+	});
+
 	$('#formSubmitbtn').click(function(){
 		$.ajax({
 			url : appConfig.formAction,
@@ -85,11 +130,32 @@ $(function(){
 	});
 
 
-	$('#insertAddressbtn').click(function(){
-		$('#addressModel #alertHolder').html(' ');
+
+	$("#addFamilyMemberBtn").click(function(){
+		if(appConfig.form_details_id != 0){
+			alert("لا يمكن إضافة عنوان قبل حفظ معلومات العائلة الأساسية");
+		}else{
+			$('#modal').modal({
+				backdrop : false,
+				remote : appConfig.familyMembersModalURL + '?form_details_id=' + appConfig.form_details_id
+			});
+		}
+	});
+
+	$( document ).delegate("#familymembersEditBtn", "click", function(){
+		id = $(this).attr('data-familyid');
+		$('#modal').modal({
+			backdrop : false,
+			remote : appConfig.familyMembersModalURL + '?form_details_id=' + appConfig.form_details_id + '&form_family_id=' + id
+		});
+	});
+
+
+	$( document ).delegate("#familymembersFormBtn", "click", function(){
+		$('#modal #alertHolder').html(' ');
 		$.ajax({
-			url : appConfig.insertAddressURL,
-			data: $("#addressModel input, #addressModel textarea, #addressModel select").serialize() + '&form_details_id='+appConfig.form_details_id,
+			url : $("#familymembersfrm").attr('action'),
+			data: $("#familymembersfrm").serialize() + '&form_details_id='+appConfig.form_details_id,
 			dataType: "JSON",
 			type: 'POST',
 			context: $(this),
@@ -99,57 +165,16 @@ $(function(){
 					html = 		  '<div class="alert alert-danger" role="alert">';
 					html = html + json.errors;
 					html = html + '</div>';
-					$('#addressModel #alertHolder').html(html);
+					$('#modal #alertHolder').html(html);
 				}else if(json.result == "success"){
-					$('#addressTable tr').removeClass('success');
-					html = '<tr class="success">';
-                  	html = html + '<th></th>';
-                  	html = html + '<td>'+$("#addressModel option[value=" + $("#addressModel #city_id").val() + "]").text()+'</td>';
-                  	html = html + '<td>'+$("#addressModel #zone").val()+'</td>';
-                  	html = html + '<td>'+$("#addressModel #address").val()+'</td>';
-                  	html = html + '<td></td>';
-                	html = html + '</tr>';
-                	$('#addressTable').append(html);
-					$('#addressModel').modal('hide');
+					$("#familymemberslist").load(appConfig.familyMembersListURL + '?form_details_id=' + appConfig.form_details_id);
+					$('#modal').modal('hide');
 				}
 			}
 		});
 	});
 
-
-	$('#insertFamilybtn').click(function(){
-		$('#familyModal #alertHolder').html(' ');
-		$.ajax({
-			url : appConfig.insertFamilyURL,
-			data: $("#familyModal input, #familyModal textarea, #familyModal select").serialize() + '&form_details_id='+appConfig.form_details_id,
-			dataType: "JSON",
-			type: 'POST',
-			context: $(this),
-			complete : function(xhr){
-				json = xhr.responseJSON;
-				if(json.errors){
-					html = 		  '<div class="alert alert-danger" role="alert">';
-					html = html + json.errors;
-					html = html + '</div>';
-					$('#familyModal #alertHolder').html(html);
-				}else if(json.result == "success"){
-					html = '<tr>';
-                  	html = html + '<th>#</th>';
-                  	html = html + '<td>'+$("#familyModal #firstname").val()+'</td>';
-                  	html = html + '<td>'+$("#familyModal #mothername").val()+'</td>';
-                  	html = html + '<td>'+$("#familyModal #national_number").val()+'</td>';
-                  	html = html + '<td>'+$("#familyModal #birthdate").val()+'</td>';
-                  	html = html + '<td>'+$("#familyModal #gender option[value=" + $("#familyModal #gender").val() + "]").text()+'</td>';
-                  	html = html + '<td>'+$("#familyModal #level_in_family option[value=" + $("#familyModal #level_in_family").val() + "]").text()+'</td>';
-                  	html = html + '<td>'+$("#familyModal #situation_in_family option[value=" + $("#familyModal #situation_in_family").val() + "]").text()+'</td>';
-                  	html = html + '<td>'+$("#familyModal #with_family option[value=" + $("#familyModal #with_family").val() + "]").text()+'</td>';
-                  	html = html + '<td>'+$("#familyModal #study_status option[value=" + $("#familyModal #study_status").val() + "]").text()+'</td>';
-                  	html = html + '<td>'+$("#familyModal #health_status option[value=" + $("#familyModal #health_status").val() + "]").text()+'</td>';
-                	html = html + '</tr>';
-                	$('#familyMemeberstbl').append(html);
-					$('#familyModal').modal('hide');
-				}
-			}
-		});
-	});
+	$('#modal').on('hidden.bs.modal', function () {
+        $(this).removeData('bs.modal');
+    });
 });

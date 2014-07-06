@@ -1,6 +1,7 @@
 <?php $this->view('layouts/header'); ?>
 
 <script type="text/javascript">
+  appConfig.form_details_id = 0;
   appConfig.formAction = '<?php echo $formAction;?>';
 </script>
 <div class="container-fluid">
@@ -106,9 +107,11 @@
           </div>
           <!-- Main Details -->
             <div class="tab-pane fade" id="familyAddress">
-              <div class="row">
-            <h4>عناوين الإقامة <small><button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#addressModel">إضافة عنوان</button></small></h4>
+            <br>
+            <button id="addAddressBtn" type="button" class="btn btn-primary">إضافة عنوان</button>
+            <br><br>
             <div class="col-md-8">
+            <div id="addresseslist">
               <table class="table table-hover" id="addressTable">
                 <tr>
                   <th>#</th>
@@ -118,13 +121,14 @@
                   <th></th>
                 </tr>
               </table>
+              </div>
             </div>
-          </div>
             </div>
             <div class="tab-pane fade" id="familyMembers">
             <br>
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#familyModal">إضافة شخص</button>
+            <button id="addFamilyMemberBtn" type="button" class="btn btn-primary">إضافة شخص</button>
             <br><br>
+              <div id="familymemberslist">
               <table class="table table-hover" id="familyMemeberstbl">
                 <tr>
                   <th>#</th>
@@ -138,8 +142,10 @@
                   <th>التواجد</th>
                   <th>الحالة الدراسية</th>
                   <th>الحالة الصحية</th>
+                  <th></th>
                 </tr>
               </table>
+              <div>
             </div>
           </div>
 
@@ -147,91 +153,19 @@
         </div>
       </div>
     </div>
-    <div class="modal fade" id="addressModel" role="dialog" tabindex="-1" aria-hidden="true">
+    <div class="modal fade" id="modal" role="dialog" tabindex="-1" aria-hidden="true" data-backdrop="false">
       <div class="modal-dialog">
         <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="modal-title">إدخال عنوان</h4>
-          </div>
-          <div class="modal-body">
-            <div class="row">
-              <form action="<?php echo site_url('family/insertAddress');?>" method="post" id="addressfrm" role="form">
-                <div class="col-md-12" id="alertHolder"></div>
-                <div class="col-md-6" style="border-left: 1px solid #ccc;">
-                  <div class="form-group"><?php echo $address_city_dropdown;?></div>
-                  <div class="form-group"><?php echo $zone;?></div>
-                  <div class="form-group"><?php echo $address;?></div>
-                  <div class="form-group">
-                    <?php echo $housing_desc_dropdown;?>
-                  </div>
-                  <div class="form-group">
-                    <?php echo $proof_of_residence_dropdown;?>
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="form-group"><?php echo $host_name;?></div>
-                  <div class="form-group">
-                    <div class="input-group">
-                      <?php echo $host_mobile;?>
-                      <span class="input-group-addon">09</span>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <div class="input-group">
-                      <?php echo $host_phone;?>
-                      <span class="input-group-addon">016</span>
-                    </div>
-                  </div>
-                </div>
-              </form>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">إغلاق</button>
-            <button type="button" class="btn btn-primary" id="insertAddressbtn">حفظ</button>
-          </div>
+          
+          
+          
         </div><!-- /.modal-content -->
       </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
-
-
-
-    <div class="modal fade" id="familyModal" role="dialog" tabindex="-1" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="modal-title">إضافة شخص</h4>
-          </div>
-          <div class="modal-body">
-            <div class="row">
-              <form action="<?php echo site_url('family/insertFamily');?>" method="post" id="addressfrm" role="form">
-                <div class="col-md-12" id="alertHolder"></div>
-                <div class="col-md-6" style="border-left: 1px solid #ccc;">
-                  <div class="form-group"><?php echo $firstname;?></div>
-                  <div class="form-group"><?php echo $middlename;?></div>
-                  <div class="form-group"><?php echo $lastname;?></div>
-                  <div class="form-group"><?php echo $mothername;?></div>
-                  <div class="form-group"><?php echo $national_number;?></div>
-                  <div class="form-group"><?php echo $birthdate;?></div>
-                </div>
-                <div class="col-md-6">
-                  <div class="form-group"><?php echo $gender_dropdown;?></div>
-                  <div class="form-group"><?php echo $level_in_family_dropdown;?></div>
-                  <div class="form-group"><?php echo $situation_in_family_dropdown;?></div>
-                  <div class="form-group"><?php echo $with_family_dropdown;?></div>
-                  <div class="form-group"><?php echo $study_status_dropdown;?></div>
-                  <div class="form-group"><?php echo $health_status_dropdown;?></div>
-                </div>
-              </form>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">إغلاق</button>
-            <button type="button" class="btn btn-primary" id="insertFamilybtn">حفظ</button>
-          </div>
-        </div><!-- /.modal-content -->
-      </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
+    <script type="text/javascript">
+    $(function(){
+      $("#familymemberslist").load(appConfig.familyMembersListURL + '?form_details_id=' + appConfig.form_details_id);
+      $("#addresseslist").load(appConfig.addressesListURL + '?form_details_id=' + appConfig.form_details_id);
+    });
+    </script>
 <?php $this->view('layouts/footer');?>

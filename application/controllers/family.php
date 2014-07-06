@@ -61,27 +61,11 @@ class Family extends CI_Controller {
 
 		/************* Add Form *************/
 		$family_status = $this->property_model->dropdown('family_status', 'حالة العائلة');
-		$data["family_status_dropdown"] = form_dropdown("family_status", $family_status, '', 'class="form-control" required');
-		$data["nmbr_registration"] = form_input(array("name" => "nmbr_registration", "class" => "form-control", "placeholder" => "رقم و مكان القيد"));
+		$data["add_family_status_dropdown"] = form_dropdown("family_status", $family_status, '', 'class="form-control" required');
+		$data["add_nmbr_registration"] = form_input(array("name" => "nmbr_registration", "class" => "form-control", "placeholder" => "رقم و مكان القيد"));
 		$document_types = $this->property_model->dropdown('document_type', 'نوع الوثيقة');
-		$data["document_type_dropdown"] = form_dropdown("document_type", $document_types, '', 'class="form-control" required');
-		$data["document_no"] = form_input(array("name" => "document_no", "class" => "form-control", "required" => TRUE,"placeholder" => "رقم الوثيقة"));
-		$data["father_firstname"] = form_input(array("name" => "father_firstname","class" => "form-control","required" => TRUE,"placeholder" => "الاسم الأول"));
-		$data["father_middlename"] = form_input(array("name" => "father_middlename","class" => "form-control","required" => TRUE,"placeholder" => "اسم الأب"));
-		$data["father_lastname"] = form_input(array("name" => "father_lastname","class" => "form-control","required" => TRUE,"placeholder" => "الكنية"));
-		$data["father_nationalnumber"] = form_input(array("name" => "father_nationalnumber","class" => "form-control","required" => TRUE,"placeholder" => "الرقم الوطني"));
-		$data["mother_firstname"] = form_input(array("name" => "mother_firstname","class" => "form-control","required" => TRUE,"placeholder" => "الاسم الأول"));
-		$data["mother_middlename"] = form_input(array("name" => "mother_middlename","class" => "form-control","required" => TRUE,"placeholder" => "اسم الأب"));
-		$data["mother_lastname"] = form_input(array("name" => "mother_lastname","class" => "form-control","required" => TRUE,"placeholder" => "الكنية"));
-		$data["mother_nationalnumber"] = form_input(array("name" => "mother_nationalnumber","class" => "form-control","required" => TRUE,"placeholder" => "الرقم الوطني"));
-		$situation_in_family = $this->property_model->dropdown('situation_in_family', 'الوضع العائلي');
-		$data["father_situation_in_family_dropdown"] = form_dropdown("father_situation_in_family", $situation_in_family, '', 'class="form-control" required');
-		$data["mother_situation_in_family_dropdown"] = form_dropdown("mother_situation_in_family", $situation_in_family, '', 'class="form-control" required');
-		$with_family = $this->property_model->dropdown('with_family', 'التواجد مع الأسرة');
-		$data["father_with_family_dropdown"] = form_dropdown("father_with_family", $with_family, '', 'class="form-control" required');
-		$data["mother_with_family_dropdown"] = form_dropdown("mother_with_family", $with_family, '', 'class="form-control" required');
-		$data["father_level_input"] = form_hidden("father_level", 'a');
-		$data["mother_level_input"] = form_hidden("mother_level", 'b');
+		$data["add_document_type_dropdown"] = form_dropdown("document_type", $document_types, '', 'class="form-control" required');
+		$data["add_document_no"] = form_input(array("name" => "document_no", "class" => "form-control", "required" => TRUE,"placeholder" => "رقم الوثيقة"));
 		/************* Add Form *************/		
 
 
@@ -152,78 +136,6 @@ class Family extends CI_Controller {
 
 		if($this->input->post('nmbr_registration', TRUE)){
 			$data["nmbr_registration"] = $this->input->post("nmbr_registration", TRUE);
-		}
-
-		if($this->input->post('father_firstname', TRUE)){
-			$data["father_firstname"] = $this->input->post("father_firstname", TRUE);
-		}
-
-		if($this->input->post('father_middlename', TRUE)){
-			$data["father_middlename"] = $this->input->post("father_middlename", TRUE);
-		}
-
-		if($this->input->post('father_lastname', TRUE)){
-			$data["father_lastname"] = $this->input->post("father_lastname", TRUE);
-		}
-
-		if($this->input->post('father_nationalnumber', TRUE)){
-			$data["father_nationalnumber"] = $this->input->post("father_nationalnumber", TRUE);
-		}
-
-		if(empty($data["father_nationalnumber"])){
-			$json["errors"]["father_nationalnumber"] = "الرجاء إدخال الرقم الوطني للأب";
-		}else{
-			if($family = $this->form_details->getByNationalNumber($data["father_nationalnumber"])){
-				$json["errors"]['father_nationalnumber'] = "الرقم الوطني للأب مسجل تحت الاستمارة " . $family->tmp_ref . " / " . $family->form_details_id;
-			}
-		}
-
-		if($this->input->post('mother_firstname', TRUE)){
-			$data["mother_firstname"] = $this->input->post("mother_firstname", TRUE);
-		}
-
-		if($this->input->post('mother_middlename', TRUE)){
-			$data["mother_middlename"] = $this->input->post("mother_middlename", TRUE);
-		}
-
-		if($this->input->post('mother_lastname', TRUE)){
-			$data["mother_lastname"] = $this->input->post("mother_lastname", TRUE);
-		}
-
-		if($this->input->post('mother_nationalnumber', TRUE)){
-			$data["mother_nationalnumber"] = $this->input->post("mother_nationalnumber", TRUE);
-		}
-
-		if(empty($data["mother_nationalnumber"])){
-			$json["errors"]["mother_nationalnumber"] = "الرجاء إدخال الرقم الوطني للأم";
-		}else{
-			if($family = $this->form_details->getByNationalNumber($data["mother_nationalnumber"])){
-				$json["errors"]['mother_nationalnumber'] = "الرقم الوطني للأم مسجل تحت الاستمارة " . $family->tmp_ref . " / " . $family->form_details_id;
-			}
-		}
-
-		if($this->input->post('father_situation_in_family', TRUE)){
-			$data["father_situation_in_family"] = $this->input->post("father_situation_in_family", TRUE);
-		}
-
-		if($this->input->post('mother_situation_in_family', TRUE)){
-			$data["mother_situation_in_family"] = $this->input->post("mother_situation_in_family", TRUE);
-		}
-
-		if($this->input->post('father_with_family', TRUE)){
-			$data["father_with_family"] = $this->input->post("father_with_family", TRUE);
-		}
-
-		if($this->input->post('mother_with_family', TRUE)){
-			$data["mother_with_family"] = $this->input->post("mother_with_family", TRUE);
-		}
-
-		if($this->input->post('father_level', TRUE)){
-			$data["father_level"] = $this->input->post("father_level", TRUE);
-		}
-
-		if($this->input->post('mother_level', TRUE)){
-			$data["mother_level"] = $this->input->post("mother_level", TRUE);
 		}
 
 		if(!isset($json["errors"])){
@@ -336,93 +248,10 @@ class Family extends CI_Controller {
 			"id" => "jumpdate")
 		);
 
-
-		// Address modal
-		$data["addressAction"] = form_open(site_url("family/insertAddress"), array("id" => "addressfrm"));
-		$data["address_city_dropdown"] = form_dropdown("city_id", $cities, '', 'class="form-control" id="city_id"');
-		$data["zone"] = form_input(array("type" => "text", "name" => "zone", "class" => "form-control", "placeholder" => "المنطقة", "id" => "zone"));
-		$data["address"] = form_textarea(array("name" => "address", "class" => "form-control", "placeholder" => "العنوان التفصيلي", "rows" => 3, "id" => "address"));
-		$housing_desc = $this->property_model->dropdown('housing_desc', "توصيف السكن");
-		$data["housing_desc_dropdown"] = form_dropdown("housing_desc", $housing_desc, '', 'class="form-control" id="housing_desc"');
-		$proof_of_residence = $this->property_model->dropdown('proof_of_residence', "ثبوتيات السكن");
-		$data["proof_of_residence_dropdown"] = form_dropdown("proof_of_residence", $proof_of_residence, '', 'class="form-control" id="proof_of_residence"');
-		$data["host_name"] = form_input(array("type" => "text", "name" => "host_name", "class" => "form-control", "placeholder" => "اسم المضيف", "id" => "host_name"));
-		$data["host_phone"] = form_input(array("type" => "text", "name" => "host_phone", "class" => "form-control", "placeholder" => "هاتف المضيف", "dir" => "ltr", "id" => "host_phone"));
-		$data["host_mobile"] = form_input(array("type" => "text", "name" => "host_mobile", "class" => "form-control", "placeholder" => "موبايل المضيف", "dir" => "ltr", "id" => "host_mobile"));
-
-
-		// Family modal
-		$data["firstname"] = form_input(array("type" => "text", "name" => "firstname", "class" => "form-control", "placeholder" => "الاسم الأول", "id" => "firstname"));
-		$data["middlename"] = form_input(array("type" => "text", "name" => "middlename", "class" => "form-control", "placeholder" => "اسم الأب", "id" => "middlename"));
-		$data["lastname"] = form_input(array("type" => "text", "name" => "lastname", "class" => "form-control", "placeholder" => "الكنية", "id" => "lastname"));
-		$data["mothername"] = form_input(array("type" => "text", "name" => "mothername", "class" => "form-control", "placeholder" => "اسم الأم", "id" => "mothername"));
-		$data["national_number"] = form_input(array("type" => "text", "name" => "national_number", "class" => "form-control", "placeholder" => "الرقم الوطني", "id" => "national_number"));
-		$data["birthdate"] = form_input(array("type" => "text", "name" => "birthdate", "class" => "form-control", "placeholder" => "تاريخ الميلاد", "id" => "birthdate"));
-		$gender = $this->property_model->dropdown('gender', "الجنس");
-		$data["gender_dropdown"] = form_dropdown("gender", $gender, '', 'class="form-control" id="gender"');
-		$study_status = $this->property_model->dropdown('study_status', "الحالة الدراسية");
-		$data["study_status_dropdown"] = form_dropdown("study_status", $study_status, '', 'class="form-control" id="study_status"');
-		$health_status = $this->property_model->dropdown('health_status', "الحالة الصحية");
-		$data["health_status_dropdown"] = form_dropdown("health_status", $health_status, '', 'class="form-control" id="health_status"');
-		$with_family = $this->property_model->dropdown('with_family', "التواجد مع العائلة");
-		$data["with_family_dropdown"] = form_dropdown("with_family", $with_family, '', 'class="form-control" id="with_family"');
-		$situation_in_family = $this->property_model->dropdown('situation_in_family', "الوضع العائلي");
-		$data["situation_in_family_dropdown"] = form_dropdown("situation_in_family", $situation_in_family, '', 'class="form-control" id="situation_in_family"');
-		$level_in_family = $this->property_model->dropdown('level_in_family', "الصفة في العائلة");
-		$data["level_in_family_dropdown"] = form_dropdown("level_in_family", $level_in_family, '', 'class="form-control" id="level_in_family"');
+		$data["insertAddressHref"] = site_url("address/addressFrom");
 
 
 		$this->load->view("family/family_form", $data);
-	}
-
-	public function insertAddress(){
-		if(!$this->input->is_ajax_request()){
-			show_404();
-		}
-
-		$this->load->model('Form_address_model', 'family_address');
-
-		$json = array();
-		$result = $this->family_address->insertValidate();
-
-		if($result["success"]){
-			$data = $this->input->post(NULL, TRUE);
-			if($this->family_address->insert($data)){
-				$json['result'] = 'success';
-			}else{
-				$json["errors"] = "<li>هناك خطأ أثناء الإدخال الراجء المحاولة مرة أخرى</li>";
-			}
-		}else{
-			$json["errors"] = $result["errors"];
-		}
-
-		header("Content-Type: text/json");
-		print json_encode($json);
-	}
-
-	public function insertFamily(){
-		if(!$this->input->is_ajax_request()){
-			show_404();
-		}
-
-		$this->load->model('Form_family_model', 'family_model');
-
-		$json = array();
-		$result = $this->family_model->insertValidate();
-
-		if($result["success"]){
-			$data = $this->input->post(NULL, TRUE);
-			if($this->family_model->insert($data)){
-				$json['result'] = 'success';
-			}else{
-				$json["errors"] = "<li>هناك خطأ أثناء الإدخال الراجء المحاولة مرة أخرى</li>";
-			}
-		}else{
-			$json["errors"] = $result["errors"];
-		}
-
-		header("Content-Type: text/json");
-		print json_encode($json);
 	}
 }
 

@@ -9,6 +9,8 @@
 
     <title>برنامج تسجيل الوافدين</title>
 
+    <script src="<?php echo base_url('assets/js/jquery-1.11.1.min.js');?>" type="text/JavaScript" language="javascript"></script>
+
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="<?php echo base_url('assets/css/bootstrap.min.css');?>">
     <!-- <link href="<?php echo base_url('assets/css/bootstrap-theme.min.css');?>" rel="stylesheet"> -->
@@ -21,8 +23,11 @@
     var appConfig = {};
     appConfig.familyQueryURL = '<?php echo site_url("family/familyQuery");?>';
     appConfig.successQuery = '<?php echo site_url("family/insert");?>';
-    appConfig.insertAddressURL = "<?php echo site_url('family/insertAddress');?>";
-    appConfig.insertFamilyURL = "<?php echo site_url('family/insertFamily');?>";
+    appConfig.insertAddressURL = "<?php echo site_url('address/insert');?>";
+    appConfig.addressModalURL = "<?php echo site_url('address/addressFrom');?>"
+    appConfig.familyMembersModalURL = "<?php echo site_url('familymembers/familymembersFrom');?>"
+    appConfig.familyMembersListURL = "<?php echo site_url('familymembers/family_list');?>";
+    appConfig.addressesListURL = "<?php echo site_url('address/address_list');?>";
     </script>
   </head>
 

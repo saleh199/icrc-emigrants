@@ -92,7 +92,7 @@
       </div>
     </div>
     <div class="modal fade" id="familyQueryModal" role="dialog" tabindex="-1" aria-hidden="true">
-      <div class="modal-dialog">
+      <div class="modal-dialog modal-sm">
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -101,33 +101,11 @@
           <div class="modal-body">
             <form id="familyQueryfrm" role="form">
               <div class="row">
-                <div class="col-md-4">
-                  <div class="form-group"><?php echo $family_status_dropdown;?></div>
-                  <div class="form-group"><?php echo $nmbr_registration;?></div>
-                  <div class="form-group"><?php echo $document_type_dropdown;?></div>
-                  <div class="form-group" id="document_no_container"><?php echo $document_no;?></div>
-                </div>
-                <div class="col-md-8" style="border-right: 1px solid #ccc;">
-                  <div class="col-md-12" style="padding:0;">
-                    <div><label class="control-label">اسم الأب</label></div>
-                    <div class="form-group col-md-4"><?php echo $father_firstname;?></div>
-                    <div class="form-group col-md-4"><?php echo $father_middlename;?></div>
-                    <div class="form-group col-md-4"><?php echo $father_lastname;?></div>
-                    <div class="form-group col-md-6" id="father_nationalnumber_container"><?php echo $father_nationalnumber;?></div>
-                    <div class="form-group col-md-6"><?php echo $father_with_family_dropdown;?></div>
-                    <div class="form-group col-md-6"><?php echo $father_situation_in_family_dropdown;?></div>
-                    <?php echo $father_level_input;?>
-                  </div>
-                  <div class="col-md-12" style="padding:0;">
-                    <div><label class="control-label">اسم الأم</label></div>
-                    <div class="form-group col-md-4"><?php echo $mother_firstname;?></div>
-                    <div class="form-group col-md-4"><?php echo $mother_middlename;?></div>
-                    <div class="form-group col-md-4"><?php echo $mother_lastname;?></div>
-                    <div class="form-group col-md-6" id="mother_nationalnumber_container"><?php echo $mother_nationalnumber;?></div>
-                    <div class="form-group col-md-6"><?php echo $mother_with_family_dropdown;?></div>
-                    <div class="form-group col-md-6"><?php echo $mother_situation_in_family_dropdown;?></div>
-                    <?php echo $mother_level_input;?>
-                  </div>
+                <div class="col-md-12">
+                  <div class="form-group"><?php echo $add_family_status_dropdown;?></div>
+                  <div class="form-group"><?php echo $add_nmbr_registration;?></div>
+                  <div class="form-group"><?php echo $add_document_type_dropdown;?></div>
+                  <div class="form-group" id="document_no_container"><?php echo $add_document_no;?></div>
                 </div>
               </div>
             </form>

@@ -19,8 +19,11 @@ class property_model extends MY_Model{
 
 	public function getPropertyName($value, $group){
 		$result = $this->get_by(array("value" => $value, "group" => $group));
-		
-		return $result->property_name;
+		if($result){
+			return $result->property_name;
+		}else{
+			return '';
+		}
 	}
 }
 
