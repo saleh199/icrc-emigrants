@@ -9,6 +9,8 @@ class Form_details_model extends MY_Model{
 	public $before_update = array( "timestampUpdate" ); // observer before update row
 	public $after_get = array("afterGetTrigger");
 
+	protected $protected_attributes = array( "form_details_id" );
+
 	public $has_many = array(
 		"family_members" => array("model" => "Form_family_model")
 	);
@@ -67,6 +69,8 @@ class Form_details_model extends MY_Model{
 		if(isset($filter["national_number"]) && !empty($filter["national_number"])){
 			$sql .= " AND fm.national_number = " . $this->db->escape($filter["national_number"]);
 		}
+
+		$sql .= " GROUP BY fd.form_details_id";
 
 		if(isset($filter["limit"]) && (int)$filter["limit"] > 0){
 			$limit = intval($filter["limit"]);
@@ -178,10 +182,14 @@ class Form_details_model extends MY_Model{
 	public function afterGetTrigger($data){
 		$this->load->model('property_model');
 
+		if(!$data){
+			return $data;
+		}
+
 		$data->father_name = '';
 		$data->mother_name = '';
 		
-		if(count($data->family_members) > 0){
+		if(is_array($data->family_members) && count($data->family_members) > 0){
 			foreach ($data->family_members as $member) {
 				if($member->level_in_family == 'a'){
 					$data->father_name = $member->firstname . ' ' . $member->middlename . ' ' . $member->lastname;
@@ -197,11 +205,12 @@ class Form_details_model extends MY_Model{
 
 		$data->document_type_name = $property_name;
 		$data->registered_date_full = date('Y-m-d', $data->registered_date);
+		$data->family_details_href = site_url("family/update") . "?form_details_id=" . $data->form_details_id;
 
 		return $data;
 	}
 
-	public function insertValidate(){
+	public function validateData($insert = TRUE){
 		$this->load->library("form_validation");
 
 		$return = array();
@@ -210,13 +219,15 @@ class Form_details_model extends MY_Model{
 		$this->form_validation->set_rules("family_status", "وضع العائلة", "trim|required");
 		$this->form_validation->set_rules("document_type", "نوع الوثيقة", "trim|required");
 		$this->form_validation->set_rules("document_no", "رقم الوثيقة", "trim|required");
-		$this->form_validation->set_rules("nmbr_registration", "رقم و مكان القيد", "trim|required");
+		//$this->form_validation->set_rules("nmbr_registration", "رقم و مكان القيد", "trim|required");
 
 		if($this->form_validation->run() == TRUE){
 			$return["success"] = TRUE;
-			if($this->getByDocument($this->input->post("document_type"), $this->input->post("document_no"))){
-				$return["success"] = FALSE;
-				$return["errors"] = "<li>" . "رقم الوثيقة العائلية مسجل مسبقاً" . "</li>";
+			if($insert){
+				if($this->getByDocument($this->input->post("document_type"), $this->input->post("document_no"))){
+					$return["success"] = FALSE;
+					$return["errors"] = "<li>" . "رقم الوثيقة العائلية مسجل مسبقاً" . "</li>";
+				}
 			}
 		}else{
 			$errors = validation_errors('<li>', '</li>');

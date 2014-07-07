@@ -60,7 +60,7 @@ $(function(){
 
 
 	$("#addAddressBtn").click(function(){
-		if(appConfig.form_details_id != 0){
+		if(parseInt(appConfig.form_details_id) == 0){
 			alert("لا يمكن إضافة عنوان قبل حفظ معلومات العائلة الأساسية");
 		}else{
 			$('#modal').modal({
@@ -105,8 +105,8 @@ $(function(){
 
 	$('#formSubmitbtn').click(function(){
 		$.ajax({
-			url : appConfig.formAction,
-			data: $("#mainDetails #familyfrm").serialize(),
+			url : $("#familyfrm").attr("action"),
+			data: $("#familyfrm").serialize(),
 			dataType: "JSON",
 			type: 'POST',
 			context: $(this),
@@ -114,11 +114,12 @@ $(function(){
 				json = xhr.responseJSON;
 				if(json.success){
 					html = 		  '<div class="alert alert-success" role="alert">';
-					html = html + 'تمت إضافة الاستمارة بنجاح';
+					html = html + 'تمت حفظ الاستمارة بنجاح';
 					html = html + '</div>';
 					$('#alertHolder').html(html);
 					appConfig.form_details_id = parseInt(json.id);
-					$('#formSubmitbtn').attr('disabled', 'disabled');
+					//$('#formSubmitbtn').attr('disabled', 'disabled');
+					$('#familyfrm input[name="tmp_ref"]').attr('disabled', 'disabled');
 				}else{
 					html = 		  '<div class="alert alert-danger" role="alert">';
 					html = html + json.errors;
@@ -132,7 +133,7 @@ $(function(){
 
 
 	$("#addFamilyMemberBtn").click(function(){
-		if(appConfig.form_details_id != 0){
+		if(parseInt(appConfig.form_details_id) == 0){
 			alert("لا يمكن إضافة عنوان قبل حفظ معلومات العائلة الأساسية");
 		}else{
 			$('#modal').modal({

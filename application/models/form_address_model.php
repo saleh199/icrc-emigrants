@@ -25,14 +25,17 @@ class Form_address_model extends MY_Model{
 
 	public function afterGetTrigger($data){
 		$this->load->model("city_model");
+		$this->load->model("zone_model");
 		$this->load->model("property_model");
 
 		if(is_object($data)){
 			$data->city = $this->city_model->getCityName($data->city_id);
+			$data->zone = $this->zone_model->getZoneName($data->zone_id);
 			$data->housing_desc_text = $this->property_model->getPropertyName($data->housing_desc, 'housing_desc');
 			$data->proof_of_residence_text = $this->property_model->getPropertyName($data->proof_of_residence, 'proof_of_residence');
 		}else{
 			$data["city"] = $this->city_model->getCityName($data["city_id"]);
+			$data["zone"] = $this->zone_model->getZoneName($data["zone_id"]);
 			$data["housing_desc_text"] = $this->property_model->getPropertyName($data["housing_desc"], 'housing_desc');
 			$data["proof_of_residence_text"] = $this->property_model->getPropertyName($data["proof_of_residence"], 'proof_of_residence');
 		}
@@ -46,7 +49,7 @@ class Form_address_model extends MY_Model{
 		$return = array();
 
 		$this->form_validation->set_rules("city_id", "المحافظة", "trim|required");
-		$this->form_validation->set_rules("zone", "المنطقة", "trim|required");
+		$this->form_validation->set_rules("zone_id", "المنطقة", "trim|required");
 		$this->form_validation->set_rules("address", "العنوان التفصيلي", "trim|required");
 		$this->form_validation->set_rules("housing_desc", "توصيف السكن", "trim|required");
 		$this->form_validation->set_rules("proof_of_residence", "ثبوتيات السكن", "trim|required");

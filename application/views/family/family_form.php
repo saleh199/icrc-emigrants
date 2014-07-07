@@ -1,8 +1,9 @@
 <?php $this->view('layouts/header'); ?>
 
 <script type="text/javascript">
-  appConfig.form_details_id = 0;
-  appConfig.formAction = '<?php echo $formAction;?>';
+  <?php if(isset($form_details_id)){ ?>
+    appConfig.form_details_id = <?php echo $form_details_id;?>;
+  <?php } ?>
 </script>
 <div class="container-fluid">
       <div class="row">
@@ -164,8 +165,10 @@
     </div><!-- /.modal -->
     <script type="text/javascript">
     $(function(){
-      $("#familymemberslist").load(appConfig.familyMembersListURL + '?form_details_id=' + appConfig.form_details_id);
-      $("#addresseslist").load(appConfig.addressesListURL + '?form_details_id=' + appConfig.form_details_id);
+      if(appConfig.form_details_id > 0){
+        $("#familymemberslist").load(appConfig.familyMembersListURL + '?form_details_id=' + appConfig.form_details_id);
+        $("#addresseslist").load(appConfig.addressesListURL + '?form_details_id=' + appConfig.form_details_id);
+      }
     });
     </script>
 <?php $this->view('layouts/footer');?>

@@ -7,7 +7,7 @@
           <th></th>
         </tr>
         <?php foreach ($results as $item) { ?>
-        <tr>
+        <tr <?php echo ($item->current_address  == 1) ? 'class="success"' : '';?>>
           <td><?php echo $item->form_address_id; ?></td>
           <td><?php echo $item->city; ?></td>
           <td><?php echo $item->zone; ?></td>

@@ -6,6 +6,7 @@ class Address extends CI_Controller {
 		$this->load->model('Form_address_model', 'family_address');
 		$this->load->model("property_model");
 		$this->load->model("city_model");
+		$this->load->model("zone_model");
 
 		// Address modal
 		$hidden = array("form_details_id" => intval($this->input->get_post("form_details_id")));
@@ -21,16 +22,10 @@ class Address extends CI_Controller {
 		$data["addressAction"] = form_open($formAction, array("id" => "addressfrm", "role" => "form"), $hidden);
 		
 		$cities = $this->city_model->dropdown();
-		$data["address_city_dropdown"] = form_dropdown("city_id", $cities, (isset($addressData['city_id'])) ? $addressData['city_id'] : '', 'class="form-control" id="city_id"');
+		$data["address_city_dropdown"] = form_dropdown("city_id", $cities, 1, 'class="form-control" id="city_id"');
 
-		$data["zone"] = form_input(array(
-			"type" => "text", 
-			"name" => "zone", 
-			"class" => "form-control", 
-			"placeholder" => "المنطقة", 
-			"id" => "zone",
-			"value" => (isset($addressData['zone'])) ? $addressData['zone'] : ''
-		));
+		$zones = $this->zone_model->dropdown();
+		$data["address_zone_dropdown"] = form_dropdown("zone_id", $zones, (isset($addressData['zone_id'])) ? $addressData['zone_id'] : '', 'class="form-control" id="zone_id"');
 
 		$data["address"] = form_textarea(array(
 			"name" => "address", 
@@ -74,6 +69,22 @@ class Address extends CI_Controller {
 			"dir" => "ltr", 
 			"id" => "host_mobile",
 			"value" => (isset($addressData['host_mobile'])) ? $addressData['host_mobile'] : ''
+		));
+
+		$data["current_address_yes"] = form_radio(array(
+			"name" => "current_address", 
+			"class" => "form-radio", 
+			"id" => "current_address",
+			"checked" => (isset($addressData['current_address']) && $addressData['current_address'] == 1) ? TRUE : FALSE,
+			"value" => 1
+		));
+
+		$data["current_address_no"] = form_radio(array(
+			"name" => "current_address", 
+			"class" => "form-radio", 
+			"id" => "current_address",
+			"checked" => (isset($addressData['current_address']) && $addressData['current_address'] == 0) ? TRUE : FALSE,
+			"value" => 0
 		));
 
 		$this->load->view("address/form", $data);
@@ -125,8 +136,22 @@ class Address extends CI_Controller {
 		if($result["success"]){
 			$data = $this->input->post(NULL, TRUE);
 			$form_address_id = $data["form_address_id"];
+			$form_details_id = $data["form_details_id"];
+			unset($data["form_details_id"]);
 
 			if($this->family_address->update($form_address_id, $data)){
+				if($data["current_address"] == 1){
+					$this->family_address->update_by(
+						array("form_details_id" => $form_details_id),
+						array("current_address" => 0)
+					);
+					
+					$this->family_address->update_by(
+						array("form_address_id" => $form_address_id, "form_details_id" => $form_details_id),
+						array("current_address" => 1)
+					);
+				}
+
 				$json['result'] = 'success';
 			}else{
 				$json["errors"] = "<li>هناك خطأ أثناء الإدخال الراجء المحاولة مرة أخرى</li>";

@@ -26,6 +26,6 @@
             </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">إغلاق</button>
+            <!--<button type="button" class="btn btn-default" data-dismiss="modal">إغلاق</button>-->
             <button type="button" class="btn btn-primary" id="familymembersFormBtn">حفظ</button>
           </div>

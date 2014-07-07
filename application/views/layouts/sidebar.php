@@ -3,7 +3,7 @@
     <img src="<?php echo base_url('assets/image/logo.png');?>" width="100px" width="100px"><br><br>
   </div>
   <ul class="nav nav-sidebar">
-    <li class="active"><a href="#">الصفحة الرئيسية</a></li>
+    <li class="active"><a href="<?php echo site_url('family');?>">الصفحة الرئيسية</a></li>
 
   </ul>
 </div>

@@ -13,7 +13,7 @@
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="<?php echo base_url('assets/css/bootstrap.min.css');?>">
-    <!-- <link href="<?php echo base_url('assets/css/bootstrap-theme.min.css');?>" rel="stylesheet"> -->
+    <link href="<?php echo base_url('assets/css/bootstrap-theme.min.css');?>" rel="stylesheet">
     <link href="<?php echo base_url('assets/css/bootstrap-rtl.min.css')?>" rel="stylesheet">
     <link href="<?php echo base_url('assets/css/jquery-ui.css');?>" rel="stylesheet">
 
@@ -21,6 +21,8 @@
     <link href="<?php echo base_url('assets/css/main.css');?>" rel="stylesheet">
     <script type="text/javascript">
     var appConfig = {};
+    appConfig.form_details_id = 0;
+    
     appConfig.familyQueryURL = '<?php echo site_url("family/familyQuery");?>';
     appConfig.successQuery = '<?php echo site_url("family/insert");?>';
     appConfig.insertAddressURL = "<?php echo site_url('address/insert');?>";

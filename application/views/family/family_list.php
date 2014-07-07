@@ -32,12 +32,18 @@
               </div>
               <div class="col-md-4">
                 <label class="col-md-5">رقم الهاتف</label>
-                <?php echo $form_phone;?>
+                <div class="input-group">
+                  <?php echo $form_phone;?>
+                  <span class="input-group-addon">016</span>
+                </div>
               </div>
               <br><br>
               <div class="col-md-4">
-                <label class="col-md-5">الموبايل</label>
-                <?php echo $form_mobile;?>
+                <label class="col-md-5">رقم الموبايل</label>
+                <div class="input-group">
+                  <?php echo $form_mobile;?>
+                  <span class="input-group-addon">09</span>
+                </div>
               </div>
               <div class="col-md-4">
                 <label class="col-md-5">الرقم الوطني</label>
@@ -71,13 +77,13 @@
               <td class="text-center"><?php echo count($family_form->family_members); ?></td>
               <td><?php echo $family_form->document_type_name; ?></td>
               <td><?php echo $family_form->document_no; ?></td>
-              <td><?php echo $family_form->phone . ', ' . $family_form->mobile_1; ?></td>
+              <td><?php echo $family_form->phone . ', 09' . $family_form->mobile_1; ?></td>
               <td><?php echo $family_form->registered_date_full; ?></td>
-              <td><button type="button" class="btn btn-info btn-xs">التفاصيل</button></td>
+              <td><a class="btn btn-info btn-xs" href="<?php echo $family_form->family_details_href;?>">التفاصيل</a></td>
             </tr>
             <?php } ?>
           </table>
-          <div>
+          <!-- <div>
             <ul class="pagination">
               <li class="disabled"><a href="#">&laquo;</a></li>
               <li class="active"><a href="#">1</a></li>
@@ -88,6 +94,7 @@
               <li><a href="#">&raquo;</a></li>
             </ul>
           </div>
+          -->
         </div>
       </div>
     </div>

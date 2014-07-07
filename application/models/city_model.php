@@ -8,7 +8,7 @@ class city_model extends MY_Model{
 	public function dropdown(){
 		$list = parent::dropdown($this->primary_key, "city_name");
 
-		array_unshift($list, "المحافظة");
+		//array_unshift($list, "المحافظة");
 
 		return $list;
 	}
