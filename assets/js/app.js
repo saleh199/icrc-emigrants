@@ -55,6 +55,10 @@ $(function(){
 	$('#familyQuerybtn').click(function(){
 		$("#familyQueryfrm .has-error").removeClass('has-error');
 		$("#familyQueryfrm *").tooltip('destroy');
+
+		if($("#familyQueryfrm input[name=document_type]").val() == 'b'){
+
+		}
 		$("#familyQueryfrm").submit();
 	});
 
@@ -119,7 +123,9 @@ $(function(){
 					$('#alertHolder').html(html);
 					appConfig.form_details_id = parseInt(json.id);
 					//$('#formSubmitbtn').attr('disabled', 'disabled');
-					$('#familyfrm input[name="tmp_ref"]').attr('disabled', 'disabled');
+					//$('#familyfrm input[name="tmp_ref"]').attr('disabled', 'disabled');
+					$("#familyfrm").attr("action", appConfig.updateFormURL);
+					$("#familyfrm").append('<input type="hidden" name="form_details_id" value="'+appConfig.form_details_id+'" >');
 				}else{
 					html = 		  '<div class="alert alert-danger" role="alert">';
 					html = html + json.errors;

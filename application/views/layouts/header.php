@@ -30,6 +30,7 @@
     appConfig.familyMembersModalURL = "<?php echo site_url('familymembers/familymembersFrom');?>"
     appConfig.familyMembersListURL = "<?php echo site_url('familymembers/family_list');?>";
     appConfig.addressesListURL = "<?php echo site_url('address/address_list');?>";
+    appConfig.updateFormURL = "<?php echo site_url('family/update');?>";
     </script>
   </head>
 

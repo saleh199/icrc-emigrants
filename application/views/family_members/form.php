@@ -6,15 +6,15 @@
             <div class="row">
               <?php echo $familymembersAction; ?>
                 <div class="col-md-12" id="alertHolder"></div>
-                <div class="col-md-6" style="border-left: 1px solid #ccc;">
+                <div class="col-md-7" style="border-left: 1px solid #ccc;">
                   <div class="form-group"><?php echo $firstname;?></div>
                   <div class="form-group"><?php echo $middlename;?></div>
                   <div class="form-group"><?php echo $lastname;?></div>
                   <div class="form-group"><?php echo $mothername;?></div>
                   <div class="form-group"><?php echo $national_number;?></div>
-                  <div class="form-group"><?php echo $birthdate;?></div>
+                  <div class="form-group  col-md-4"> <?php echo $birthdate_day;?> </div> <div class="form-group col-md-4"> <?php echo $birthdate_month;?> </div> <div class="form-group col-md-4"> <?php echo $birthdate_year;?></div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-5">
                   <div class="form-group"><?php echo $gender_dropdown;?></div>
                   <div class="form-group"><?php echo $level_in_family_dropdown;?></div>
                   <div class="form-group"><?php echo $situation_in_family_dropdown;?></div>

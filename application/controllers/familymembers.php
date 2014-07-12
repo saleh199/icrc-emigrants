@@ -65,13 +65,32 @@ class Familymembers extends CI_Controller {
 			"id" => "national_number",
 			"value" => (isset($memberData['national_number'])) ? $memberData['national_number'] : ''
 		));
-		$data["birthdate"] = form_input(array(
+
+		$data["birthdate_year"] = form_input(array(
 			"type" => "text", 
-			"name" => "birthdate", 
+			"name" => "birthdate_year", 
 			"class" => "form-control", 
-			"placeholder" => "تاريخ الميلاد", 
-			"id" => "birthdate",
-			"value" => (isset($memberData['birthdate'])) ? $memberData['birthdate'] : ''
+			"placeholder" => "سنة", 
+			"id" => "birthdate_year",
+			"value" => (isset($memberData['birthdate_year'])) ? $memberData['birthdate_year'] : '',
+		));
+
+		$data["birthdate_month"] = form_input(array(
+			"type" => "text", 
+			"name" => "birthdate_month", 
+			"class" => "form-control", 
+			"placeholder" => "شهر", 
+			"id" => "birthdate_month",
+			"value" => (isset($memberData['birthdate_month'])) ? $memberData['birthdate_month'] : '',
+		));
+
+		$data["birthdate_day"] = form_input(array(
+			"type" => "text", 
+			"name" => "birthdate_day", 
+			"class" => "form-control", 
+			"placeholder" => "يوم", 
+			"id" => "birthdate_day",
+			"value" => (isset($memberData['birthdate_day'])) ? $memberData['birthdate_day'] : '',
 		));
 
 		$gender = $this->property_model->dropdown('gender', "الجنس");
@@ -110,6 +129,13 @@ class Familymembers extends CI_Controller {
 
 		if($result["success"]){
 			$data = $this->input->post(NULL, TRUE);
+			$birthdate_day = $data["birthdate_day"];
+			$birthdate_month = $data["birthdate_month"];
+			$birthdate_year = $data["birthdate_year"];
+			$data["birthdate"] = strtotime($birthdate_year . '-' . $birthdate_month . '-' . $birthdate_day);
+			
+			unset($data["birthdate_day"], $data["birthdate_month"], $data["birthdate_year"]);
+
 			if($inserted = $this->family_model->insert($data)){
 				$json['result'] = 'success';
 				$json["id"] = $inserted;
@@ -136,6 +162,12 @@ class Familymembers extends CI_Controller {
 
 		if($result["success"]){
 			$data = $this->input->post(NULL, TRUE);
+			$birthdate_day = $data["birthdate_day"];
+			$birthdate_month = $data["birthdate_month"];
+			$birthdate_year = $data["birthdate_year"];
+			$data["birthdate"] = strtotime($birthdate_year . '-' . $birthdate_month . '-' . $birthdate_day);
+			unset($data["birthdate_day"], $data["birthdate_month"], $data["birthdate_year"]);
+
 			$form_family_id = $data["form_family_id"];
 
 			if($this->family_model->update($form_family_id, $data)){

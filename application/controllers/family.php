@@ -11,7 +11,7 @@ class Family extends CI_Controller {
 		$filter = array();
 
 		if($this->input->get("id")){
-			$filter["id"] = intval($this->input->get("id"));
+			$filter["id"] = $this->input->get("id", TRUE);
 		}
 
 		if($this->input->get("father_name", TRUE)){
@@ -62,14 +62,17 @@ class Family extends CI_Controller {
 		/************* Add Form *************/
 		$family_status = $this->property_model->dropdown('family_status', 'حالة العائلة');
 		$data["add_family_status_dropdown"] = form_dropdown("family_status", $family_status, '', 'class="form-control" required');
-		$data["add_nmbr_registration"] = form_input(array("name" => "nmbr_registration", "class" => "form-control", "placeholder" => "رقم و مكان القيد"));
+		//$data["add_nmbr_registration"] = form_input(array("name" => "nmbr_registration", "class" => "form-control", "placeholder" => "رقم و مكان القيد"));
 		$document_types = $this->property_model->dropdown('document_type', 'نوع الوثيقة');
 		$data["add_document_type_dropdown"] = form_dropdown("document_type", $document_types, '', 'class="form-control" required');
 		$data["add_document_no"] = form_input(array("name" => "document_no", "class" => "form-control", "required" => TRUE,"placeholder" => "رقم الوثيقة"));
+		$data["add_document_letter"] = form_input(array("name" => "document_letter", "class" => "form-control", "required" => TRUE,"placeholder" => "حرف"));
 		/************* Add Form *************/		
 
 
-		$this->load->view("family/family_list", $data);
+		$this->load->view("family/family_list", $data);if($this->input->post('nmbr_registration', TRUE)){
+			$data["nmbr_registration"] = $this->input->post("nmbr_registration", TRUE);
+		}
 	}
 
 	public function insert(){
@@ -167,9 +170,9 @@ class Family extends CI_Controller {
 			$data["family_status"] = $this->input->post("family_status", TRUE);
 		}
 
-		if($this->input->post('nmbr_registration', TRUE)){
+		/*if($this->input->post('nmbr_registration', TRUE)){
 			$data["nmbr_registration"] = $this->input->post("nmbr_registration", TRUE);
-		}
+		}*/
 
 		if(!isset($json["errors"])){
 			$this->session->set_flashdata("query_data", $data);
