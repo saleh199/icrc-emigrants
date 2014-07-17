@@ -6,6 +6,7 @@ class city_model extends MY_Model{
 	public $primary_key = "city_id"; // Table primary key
 
 	public function dropdown(){
+		$this->_database->order_by('city_name', 'ASC');
 		$list = parent::dropdown($this->primary_key, "city_name");
 
 		//array_unshift($list, "المحافظة");
