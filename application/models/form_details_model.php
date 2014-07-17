@@ -217,7 +217,12 @@ class Form_details_model extends MY_Model{
 
 		$return = array();
 
-		$this->form_validation->set_rules("tmp_ref", "رقم استمارة مؤقت", "trim|required");
+		if($insert){
+			$this->form_validation->set_rules("tmp_ref", "رقم استمارة مؤقت", "trim|is_unique[form_details.tmp_ref]|required");
+		}else{
+			$this->form_validation->set_rules("tmp_ref", "رقم استمارة مؤقت", "trim|required");
+		}
+		
 		$this->form_validation->set_rules("family_status", "وضع العائلة", "trim|required");
 		$this->form_validation->set_rules("document_type", "نوع الوثيقة", "trim|required");
 		$this->form_validation->set_rules("document_no", "رقم الوثيقة", "trim|required");
