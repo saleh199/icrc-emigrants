@@ -69,7 +69,8 @@ $(function(){
 		}else{
 			$('#modal').modal({
 				backdrop : false,
-				remote : appConfig.addressModalURL + '?form_details_id=' + appConfig.form_details_id
+				remote : appConfig.addressModalURL + '?form_details_id=' + appConfig.form_details_id,
+				keyboard : false
 			});
 		}
 	});
@@ -78,7 +79,8 @@ $(function(){
 		id = $(this).attr('data-addressid');
 		$('#modal').modal({
 			backdrop : false,
-			remote : appConfig.addressModalURL + '?form_details_id=' + appConfig.form_details_id + '&form_address_id=' + id
+			remote : appConfig.addressModalURL + '?form_details_id=' + appConfig.form_details_id + '&form_address_id=' + id,
+			keyboard : false
 		});
 	});
 
@@ -108,32 +110,49 @@ $(function(){
 	});
 
 	$('#formSubmitbtn').click(function(){
-		$.ajax({
-			url : $("#familyfrm").attr("action"),
-			data: $("#familyfrm").serialize(),
-			dataType: "JSON",
-			type: 'POST',
-			context: $(this),
-			complete : function(xhr){
-				json = xhr.responseJSON;
-				if(json.success){
-					html = 		  '<div class="alert alert-success" role="alert">';
-					html = html + 'تمت حفظ الاستمارة بنجاح';
-					html = html + '</div>';
-					$('#alertHolder').html(html);
-					appConfig.form_details_id = parseInt(json.id);
-					//$('#formSubmitbtn').attr('disabled', 'disabled');
-					//$('#familyfrm input[name="tmp_ref"]').attr('disabled', 'disabled');
-					$("#familyfrm").attr("action", appConfig.updateFormURL);
-					$("#familyfrm").append('<input type="hidden" name="form_details_id" value="'+appConfig.form_details_id+'" >');
-				}else{
-					html = 		  '<div class="alert alert-danger" role="alert">';
-					html = html + json.errors;
-					html = html + '</div>';
-					$('#alertHolder').html(html);
-				}
+		var err = false;
+		if($('#familyfrm input[name="mobile_1"]').val()){
+			if($('#familyfrm input[name="mobile_1"]').val().length < 8 || $('#familyfrm input[name="mobile_1"]').val().length > 8){
+				err = true;
+				alert('رقم الموبايل الأول غير صحيح');
 			}
-		});
+		}
+
+		if($('#familyfrm input[name="mobile_2"]').val()){
+			if($('#familyfrm input[name="mobile_2"]').val().length < 8 || $('#familyfrm input[name="mobile_2"]').val().length > 8){
+				err = true;
+				alert('رقم الموبايل الثاني غير صحيح');
+			}
+		}
+
+		if(err == false){
+			$.ajax({
+				url : $("#familyfrm").attr("action"),
+				data: $("#familyfrm").serialize(),
+				dataType: "JSON",
+				type: 'POST',
+				context: $(this),
+				complete : function(xhr){
+					json = xhr.responseJSON;
+					if(json.success){
+						html = 		  '<div class="alert alert-success" role="alert">';
+						html = html + 'تمت حفظ الاستمارة بنجاح';
+						html = html + '</div>';
+						$('#alertHolder').html(html);
+						appConfig.form_details_id = parseInt(json.id);
+						//$('#formSubmitbtn').attr('disabled', 'disabled');
+						//$('#familyfrm input[name="tmp_ref"]').attr('disabled', 'disabled');
+						$("#familyfrm").attr("action", appConfig.updateFormURL);
+						$("#familyfrm").append('<input type="hidden" name="form_details_id" value="'+appConfig.form_details_id+'" >');
+					}else{
+						html = 		  '<div class="alert alert-danger" role="alert">';
+						html = html + json.errors;
+						html = html + '</div>';
+						$('#alertHolder').html(html);
+					}
+				}
+			});
+		}
 	});
 
 
@@ -144,7 +163,8 @@ $(function(){
 		}else{
 			$('#modal').modal({
 				backdrop : false,
-				remote : appConfig.familyMembersModalURL + '?form_details_id=' + appConfig.form_details_id
+				remote : appConfig.familyMembersModalURL + '?form_details_id=' + appConfig.form_details_id,
+				keyboard : false
 			});
 		}
 	});
@@ -153,7 +173,8 @@ $(function(){
 		id = $(this).attr('data-familyid');
 		$('#modal').modal({
 			backdrop : false,
-			remote : appConfig.familyMembersModalURL + '?form_details_id=' + appConfig.form_details_id + '&form_family_id=' + id
+			remote : appConfig.familyMembersModalURL + '?form_details_id=' + appConfig.form_details_id + '&form_family_id=' + id,
+			keyboard : false
 		});
 	});
 
