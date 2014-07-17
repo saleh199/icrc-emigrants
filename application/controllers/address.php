@@ -110,7 +110,20 @@ class Address extends CI_Controller {
 
 		if($result["success"]){
 			$data = $this->input->post(NULL, TRUE);
-			if($this->family_address->insert($data)){
+			$form_details_id = $data["form_details_id"];
+
+			if($form_address_id = $this->family_address->insert($data)){
+				if($data["current_address"] == 1){
+					$this->family_address->update_by(
+						array("form_details_id" => $form_details_id),
+						array("current_address" => 0)
+					);
+					
+					$this->family_address->update_by(
+						array("form_address_id" => $form_address_id, "form_details_id" => $form_details_id),
+						array("current_address" => 1)
+					);
+				}
 				$json['result'] = 'success';
 			}else{
 				$json["errors"] = "<li>هناك خطأ أثناء الإدخال الراجء المحاولة مرة أخرى</li>";
