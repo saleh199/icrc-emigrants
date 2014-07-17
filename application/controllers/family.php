@@ -307,7 +307,7 @@ class Family extends CI_Controller {
 			"name" => "breadwinner_name", 
 			"class" => "form-control", 
 			"placeholder" => "اسم معيل الأسرة الثلاثي",
-			"breadwinner_name" => $breadwinner_name
+			"value" => $breadwinner_name
 		));
 
 		if(isset($familyInfo["mobile_1"])){
