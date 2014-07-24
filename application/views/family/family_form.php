@@ -100,6 +100,17 @@
               <div class="col-md-3"><label class="control-label">تاريخ الانتقال</label><?php echo $jump_date;?></div>
             </div>
 
+            
+          </div>
+
+          <div class="row">
+            <h4>الاستحقاق</h4>
+            <div class="col-md-12 form-group">
+              <div class="col-md-6"><?php echo $wfp_worth;?></div>
+            </div>
+            <div class="col-md-12 form-group">
+              <div class="col-md-6"><?php echo $worth_note;?></div>
+            </div>
             <div class="col-md-12 form-group">
               <div class="col-md-6"><button type="button" id="formSubmitbtn" class="btn btn-success">حفظ</button></div>
             </div>

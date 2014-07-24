@@ -38,7 +38,7 @@ class Form_details_model extends MY_Model{
 				WHERE deleted = 0 ";
 
 		if(isset($filter["id"]) && !empty($filter["id"])){
-			$sql .= " AND fd.tmp_ref = " . intval($filter["id"]);
+			$sql .= " AND fd.tmp_ref = " . $this->db->escape($filter["id"]);
 		}
 
 		if(isset($filter["father_name"]) && !empty($filter["father_name"])){

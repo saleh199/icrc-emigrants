@@ -402,6 +402,37 @@ class Family extends CI_Controller {
 			"value" => $jump_date)
 		);
 
+
+		if(isset($familyInfo["wfp_worth"])){
+			$wfp_worth = $familyInfo["wfp_worth"];
+		}else{
+			$wfp_worth = '';
+		}
+		
+		$data["wfp_worth"] = form_input(array(
+			"type" => "test", 
+			"name" => "wfp_worth", 
+			"class" => "form-control",
+			"id" => "wfp_worth",
+			"placeholder" => "درجة الاستحقاق",
+			"value" => $wfp_worth)
+		);
+
+		if(isset($familyInfo["worth_note"])){
+			$worth_note = $familyInfo["worth_note"];
+		}else{
+			$worth_note = '';
+		}
+		
+		$data["worth_note"] = form_textarea(array(
+			"name" => "worth_note", 
+			"class" => "form-control",
+			"id" => "worth_note",
+			"rows" => 3, 
+			"placeholder" => "ملاحظات الاستحقاق",
+			"value" => $worth_note)
+		);
+
 		$data["insertAddressHref"] = site_url("address/addressFrom");
 
 

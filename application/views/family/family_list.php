@@ -65,6 +65,7 @@
               <th>نوع الوثيقة</th>
               <th style="width:130px">رقم الوئيقة</th>
               <th style="width:130px">الهاتف</th>
+              <th style="width:120px">الاستحقاق</th>
               <th style="width:120px">تاريخ التسجيل</th>
               <th></th>
             </tr>
@@ -78,6 +79,7 @@
               <td><?php echo $family_form->document_type_name; ?></td>
               <td><?php echo $family_form->document_no; ?></td>
               <td><?php echo $family_form->phone . ', 09' . $family_form->mobile_1; ?></td>
+              <td><?php echo $family_form->wfp_worth; ?></td>
               <td><?php echo $family_form->registered_date_full; ?></td>
               <td><a class="btn btn-info btn-xs" href="<?php echo $family_form->family_details_href;?>">التفاصيل</a></td>
             </tr>
