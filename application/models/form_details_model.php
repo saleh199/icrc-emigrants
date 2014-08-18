@@ -72,7 +72,7 @@ class Form_details_model extends MY_Model{
 
 		$sql .= " GROUP BY fd.form_details_id";
 
-		$sql .= " ORDER BY tmp_ref DESC";
+		$sql .= " ORDER BY CAST(fd.tmp_ref AS SIGNED) DESC";
 
 		if(isset($filter["limit"]) && (int)$filter["limit"] > 0){
 			$limit = intval($filter["limit"]);

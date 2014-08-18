@@ -23,9 +23,9 @@ class Family extends CI_Controller {
 			$filter["mother_name"] = $this->input->get("mother_name", TRUE);
 		}
 
-		if($this->input->get("document_type", TRUE)){
+		/*if($this->input->get("document_type", TRUE)){
 			$filter["document_type"] = $this->input->get("document_type", TRUE);
-		}
+		}*/
 
 		if($this->input->get("document_no", TRUE)){
 			$filter["document_no"] = $this->input->get("document_no", TRUE);
@@ -388,7 +388,7 @@ class Family extends CI_Controller {
 			"value" => $come_address)
 		);
 
-		if(isset($familyInfo["jump_date"])){
+		/*if(isset($familyInfo["jump_date"])){
 			$jump_date = $familyInfo["jump_date"];
 		}else{
 			$jump_date = '';
@@ -400,7 +400,7 @@ class Family extends CI_Controller {
 			"class" => "form-control",
 			"id" => "jumpdate",
 			"value" => $jump_date)
-		);
+		);*/
 
 
 		if(isset($familyInfo["wfp_worth"])){
@@ -408,15 +408,18 @@ class Family extends CI_Controller {
 		}else{
 			$wfp_worth = '';
 		}
+
+		$wfp_worth_data = array('a' => 'مستحق', 'b' => 'تدقيق ميداني', 'c' => 'غير مستحق', 'e' => 'خارج المدينة');
+		$data['wfp_worth'] = form_dropdown('wfp_worth', $wfp_worth_data, $wfp_worth, 'class="form-control"');
 		
-		$data["wfp_worth"] = form_input(array(
+		/*$data["wfp_worth"] = form_input(array(
 			"type" => "test", 
 			"name" => "wfp_worth", 
 			"class" => "form-control",
 			"id" => "wfp_worth",
 			"placeholder" => "درجة الاستحقاق",
 			"value" => $wfp_worth)
-		);
+		);*/
 
 		if(isset($familyInfo["worth_note"])){
 			$worth_note = $familyInfo["worth_note"];

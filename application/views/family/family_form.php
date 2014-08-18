@@ -96,9 +96,9 @@
             <div class="col-md-12 form-group">
               <div class="col-md-6"><?php echo $come_address;?></div>
             </div>
-            <div class="col-md-12 form-group">
-              <div class="col-md-3"><label class="control-label">تاريخ الانتقال</label><?php echo $jump_date;?></div>
-            </div>
+            <!-- <div class="col-md-12 form-group">
+              <div class="col-md-3"><label class="control-label">تاريخ الانتقال</label><?php //echo $jump_date;?></div>
+            </div> -->
 
             
           </div>

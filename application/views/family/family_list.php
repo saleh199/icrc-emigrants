@@ -22,10 +22,10 @@
                 <?php echo $form_mothername;?>
               </div>
               <br><br>
-              <div class="col-md-4">
+              <!-- <div class="col-md-4">
                 <label class="col-md-5">نوع الوثيقة</label>
-                <?php echo $document_type_dropdown;?>
-              </div>
+                <?php // echo $document_type_dropdown;?>
+              </div> -->
               <div class="col-md-4">
                 <label class="col-md-5">رقم الوثيقة</label>
                 <?php echo $form_documentno;?>
@@ -37,7 +37,7 @@
                   <span class="input-group-addon">016</span>
                 </div>
               </div>
-              <br><br>
+              
               <div class="col-md-4">
                 <label class="col-md-5">رقم الموبايل</label>
                 <div class="input-group">
@@ -45,6 +45,7 @@
                   <span class="input-group-addon">09</span>
                 </div>
               </div>
+              <br><br>
               <div class="col-md-4">
                 <label class="col-md-5">الرقم الوطني</label>
                 <?php echo $form_nationalnumber;?>
