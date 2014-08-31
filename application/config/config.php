@@ -244,12 +244,12 @@ $config['encryption_key'] = '#$%^&*()*765432456789iukhjgfd342%^&*(^%$#@456789iyu
 |
 */
 $config['sess_cookie_name']		= 'ci_session';
-$config['sess_expiration']		= 7200;
+$config['sess_expiration']		= 7200 * 12;
 $config['sess_expire_on_close']	= TRUE;
 $config['sess_encrypt_cookie']	= TRUE;
-$config['sess_use_database']	= FALSE;
+$config['sess_use_database']	= TRUE;
 $config['sess_table_name']		= 'ci_sessions';
-$config['sess_match_ip']		= FALSE;
+$config['sess_match_ip']		= TRUE;
 $config['sess_match_useragent']	= TRUE;
 $config['sess_time_to_update']	= 300;
 
@@ -267,7 +267,7 @@ $config['sess_time_to_update']	= 300;
 $config['cookie_prefix']	= "";
 $config['cookie_domain']	= $_SERVER['HTTP_HOST'];
 $config['cookie_path']		= "/";
-$config['cookie_secure']	= TRUE;
+$config['cookie_secure']	= FALSE;
 
 /*
 |--------------------------------------------------------------------------
