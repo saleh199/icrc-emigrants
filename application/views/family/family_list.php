@@ -7,55 +7,58 @@
 
           <h3 class="sub-header">الوافدين <a href="#" class="btn btn-sm btn-success" role="button" data-toggle="modal" data-target="#familyQueryModal">إضافة استمارة</a></h3>
           <p></p>
+          <div class="row">
           <?php echo $search_form;?>
-            <div class="form-group col-md-12" style="margin-bottom: 20px;">
-              <div class="col-md-4">
-                <label class="col-md-5">رقم الاستمارة</label>
-                <?php echo $form_id;?>
-              </div>
-              <div class="col-md-4">
-                <label class="col-md-5">رب الأسرة</label>
-                <?php echo $form_fathername;?>
-              </div>
-              <div class="col-md-4">
-                <label class="col-md-5">ربة الأسرة</label>
-                <?php echo $form_mothername;?>
-              </div>
-              <br><br>
-              <!-- <div class="col-md-4">
-                <label class="col-md-5">نوع الوثيقة</label>
-                <?php // echo $document_type_dropdown;?>
-              </div> -->
-              <div class="col-md-4">
-                <label class="col-md-5">رقم الوثيقة</label>
-                <?php echo $form_documentno;?>
-              </div>
-              <div class="col-md-4">
-                <label class="col-md-5">رقم الهاتف</label>
-                <div class="input-group">
-                  <?php echo $form_phone;?>
-                  <span class="input-group-addon">016</span>
+          
+            <div class="col-md-12" style="margin-bottom: 20px;">
+              <div class="row" style="margin-bottom: 20px;">
+                <div class="col-md-4">
+                  <label class="col-md-5">رقم الاستمارة</label>
+                  <?php echo $form_id;?>
+                </div>
+                <div class="col-md-4">
+                  <label class="col-md-5">رب الأسرة</label>
+                  <?php echo $form_fathername;?>
+                </div>
+                <div class="col-md-4">
+                  <label class="col-md-5">ربة الأسرة</label>
+                  <?php echo $form_mothername;?>
                 </div>
               </div>
+              <div class="row" style="margin-bottom: 20px;">
+                <div class="col-md-4">
+                  <label class="col-md-5">رقم الوثيقة</label>
+                  <?php echo $form_documentno;?>
+                </div>
+                <div class="col-md-4">
+                  <label class="col-md-5">رقم الهاتف</label>
+                  <div class="input-group">
+                    <?php echo $form_phone;?>
+                    <span class="input-group-addon">016</span>
+                  </div>
+                </div>
               
-              <div class="col-md-4">
-                <label class="col-md-5">رقم الموبايل</label>
-                <div class="input-group">
-                  <?php echo $form_mobile;?>
-                  <span class="input-group-addon">09</span>
+                <div class="col-md-4">
+                  <label class="col-md-5">رقم الموبايل</label>
+                  <div class="input-group ">
+                    <?php echo $form_mobile;?>
+                    <span class="input-group-addon">09</span>
+                  </div>
                 </div>
               </div>
-              <br><br>
-              <div class="col-md-4">
-                <label class="col-md-5">الرقم الوطني</label>
-                <?php echo $form_nationalnumber;?>
-              </div>
-              <div class="col-md-4">
-                <button type="submit" class="btn btn-info">بحث</button>
+              <div class="row" style="margin-bottom: 20px;">
+                <div class="col-md-4">
+                  <label class="col-md-5">الرقم الوطني</label>
+                  <?php echo $form_nationalnumber;?>
+                </div>
+
+                <div class="col-md-4">
+                  <button type="submit" class="btn btn-info">بحث</button>
+                </div>
               </div>
             </div> 
           </form>
-
+          </div>
           <table class="table table-striped" style="margin-top:20px;">
             <tr>
               <!-- <th style="width:100px">ID</th> -->
