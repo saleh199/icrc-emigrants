@@ -53,8 +53,10 @@ class Assessment extends CI_Controller {
 
 		$this->load->model('assessment_question_model', 'assessment_question');
 		$this->load->model("assessment_question_attached_model", "question_attached");
+		$this->load->model("assessment_answer_model", "assessment_answer");
+		$level = 1;
 
-		$json = array();
+		$json = array('form_inputs' => array(), 'level' => $level);
 
 		$answer_id = intval($this->input->get('answer_id'));
 
@@ -82,12 +84,16 @@ class Assessment extends CI_Controller {
 					);
 				}
 
+				$level = $question_data->level;
+
 				$json['form_inputs'][] = array(
 					"label" => $question_data->assessment_question_text,
 					"inputs" => $form_inputs,
-					"level" => $question_data->level
 				);
 			}
+
+			$json['level'] = $level;
+			$json['parent_answer'] = $answer_id;
 		}
 
 		header("Content-Type: text/json");

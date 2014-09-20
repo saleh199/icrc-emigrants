@@ -49,33 +49,77 @@
       </div>
     </div>
     <script type="text/javascript">
-    var html = ' ';
-    $(document).delegate('input[type="radio"]', 'click', function(){
-      html = ' ';
-      appConfig.question_attached = "<?php echo site_url('assessment/checkAttachedQuestion');?>";
-      question_attached_container = $(this).parents('.question_container').children('.question_attached');
+        var html = ' ', beforeClick = 0, answers = {};
+        appConfig.question_attached = "<?php echo site_url('assessment/checkAttachedQuestion');?>";
 
-      $.getJSON(appConfig.question_attached + '?answer_id='+$(this).val(), function(data, response, xhr){
-        json = xhr.responseJSON;
-        
-        if(json){
-          for(g=0;g < json.form_inputs.length; g++){
-            level = json.form_inputs[g].level;
-            html = html + '<div class="form-group col-md-12">';
-            html = html + '<label class="col-md-5 label-control">'+json.form_inputs[g].label+'</label>';
-            html = html + '<div class="col-md-7">';
-            for(i=0;i < json.form_inputs[g].inputs.length;i++){
-              html = html + json.form_inputs[g].inputs[i];
-            }
-            html = html + '</div>';
-            html = html + '</div>';
+        $(document).delegate('input[type="text"], input[type="textarea"]', 'change', function(){
+            question_id = $(this).attr('name');
+            answers[question_id] = $(this).val();
 
-          };
-        }
+            console.log(answers);
+        });
 
-        question_attached_container.html(html).removeClass('hidden');
-      });
-    });
+        $(document).delegate('input[type="radio"]', 'click', function(){
+            html = ' ';
+            questionlevel = 0;
+            
+            answer_id = $(this).val();
+            question_id = $(this).attr('name');
+
+            question_attached_container = $(this).parents('.question_container').children('.question_attached');
+
+            $.getJSON(appConfig.question_attached + '?answer_id='+answer_id, function(data, response, xhr){
+                json = xhr.responseJSON;
+
+                if(json){
+                    if(json.form_inputs.length){
+                        questionlevel = json.level;
+                        parentAnswer = json.parent_answer;
+
+                        for(g=0;g < json.form_inputs.length; g++){
+                            html = html + '<div class="form-group col-md-12">';
+                            html = html + '<label class="col-md-5 label-control">'+json.form_inputs[g].label+'</label>';
+                            html = html + '<div class="col-md-7">';
+
+                            for(i=0;i < json.form_inputs[g].inputs.length;i++){
+                                html = html + json.form_inputs[g].inputs[i];
+                            }
+
+                            html = html + '</div>';
+                            html = html + '</div>';
+                        }
+                    }
+                }
+
+                currentLevelDiv = question_attached_container.find('div[id^="ql_"]');
+                if(currentLevelDiv.length){
+                  currentLevel = parseInt(currentLevelDiv.last().data('level'));
+                }else{
+                  currentLevel = 1;
+                }
+
+                console.log("Current Level : " + currentLevel);
+                console.log("Question Level : " + questionlevel);
+
+                if(html != ' '){
+                  html = '<div class="col-md-12" id="ql_'+questionlevel+'" data-level="'+questionlevel+'" data-parent-answer="'+answer_id+'">' + html + '</div>';
+                }
+
+                if(answers.hasOwnProperty(question_id)){
+                    question_attached_container.find('div[data-parent-answer="'+answers[question_id]+'"]').next().remove()
+                    question_attached_container.find('div[data-parent-answer="'+answers[question_id]+'"]').remove();
+                }
+
+                if(currentLevel == 1 && (currentLevel == questionlevel)){
+                  question_attached_container.html(html).removeClass('hidden');
+                }else{
+                  question_attached_container.append(html);
+                }
+
+                answers[question_id] = answer_id;
+                console.log(answers);
+            });
+        });
     </script>
     <div class="modal fade" id="modal" role="dialog" tabindex="-1" aria-hidden="true" data-backdrop="false">
       <div class="modal-dialog">
