@@ -8,7 +8,7 @@
 <div class="container-fluid">
       <div class="row">
         <?php echo $this->view('layouts/sidebar'); ?>
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+        <div class="col-md-11 col-md-offset-1 main">
 
           <h3 class="sub-header">تسجيل استمارة</h3>
 

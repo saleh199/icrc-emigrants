@@ -3,7 +3,7 @@
 <div class="container-fluid">
       <div class="row">
         <?php echo $this->view('layouts/sidebar'); ?>
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+        <div class="col-md-11 col-md-offset-1 main">
 
           <h3 class="sub-header">الوافدين <a href="#" class="btn btn-sm btn-success" role="button" data-toggle="modal" data-target="#familyQueryModal">إضافة استمارة</a></h3>
           <p></p>
@@ -66,7 +66,6 @@
               <th>رب الأسرة</th>
               <th>ربة الأسرة</th>
               <th style="width:60px">الأفراد</th>
-              <th>نوع الوثيقة</th>
               <th style="width:130px">رقم الوئيقة</th>
               <th style="width:130px">الهاتف</th>
               <th style="width:120px">الاستحقاق</th>
@@ -76,16 +75,17 @@
             <?php foreach($results as $family_form) { ?>
             <tr>
               <!-- <td class="text-center"><?php echo $family_form->form_details_id; ?></td> -->
-              <td class="text-center"><?php echo $family_form->tmp_ref; ?></td>
+              <td class="text-center"><a href="<?php echo $family_form->family_details_href;?>"><?php echo $family_form->tmp_ref; ?></a></td>
               <td><?php echo $family_form->father_name; ?></td>
               <td><?php echo $family_form->mother_name; ?></td>
               <td class="text-center"><?php echo count($family_form->family_members); ?></td>
-              <td><?php echo $family_form->document_type_name; ?></td>
               <td><?php echo $family_form->document_no; ?></td>
               <td><?php echo $family_form->phone . ', 09' . $family_form->mobile_1; ?></td>
               <td><?php echo $family_form->wfp_worth; ?></td>
               <td><?php echo $family_form->registered_date_full; ?></td>
-              <td><a class="btn btn-info btn-xs" href="<?php echo $family_form->family_details_href;?>">التفاصيل</a></td>
+              <td>
+                <a class="btn btn-success btn-xs" href="<?php echo site_url('assessment').'?family_details_id='.$family_form->form_details_id;?>">تقييم</a>
+              </td>
             </tr>
             <?php } ?>
           </table>

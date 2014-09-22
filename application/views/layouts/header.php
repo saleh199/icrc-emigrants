@@ -39,7 +39,7 @@
     <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
       <div class="container-fluid">
         <div class="navbar-header">
-          <a class="navbar-brand" href="#">برنامج تسجيل الوافدين</a>
+          <a class="navbar-brand" href="#">سجل الوافدين</a>
         </div>
       </div>
     </div>
