@@ -9,7 +9,7 @@
     <div class="container-fluid">
       <div class="row">
         <?php echo $this->view('layouts/sidebar'); ?>
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+        <div class="col-md-11 col-md-offset-1 main">
 
           <h3 class="sub-header">معلومات التقييم</h3>
 
@@ -34,7 +34,7 @@
                         <?php echo $form_input;?>
                       <?php } ?>
                     </div>
-                    <div class="form-group col-md-12 question_attached hidden"></div>
+                    <div class="form-group col-md-12 question_attached"></div>
                   </div>
                   <?php } ?>
                 </div>
@@ -98,14 +98,20 @@
                   currentLevel = 1;
                 }
 
-                console.log("Current Level : " + currentLevel);
-                console.log("Question Level : " + questionlevel);
-
                 if(html != ' '){
                   html = '<div class="col-md-12" id="ql_'+questionlevel+'" data-level="'+questionlevel+'" data-parent-answer="'+answer_id+'">' + html + '</div>';
                 }
 
                 if(answers.hasOwnProperty(question_id)){
+                    
+                    question_attached_container.find('div[data-parent-answer="'+answers[question_id]+'"] input, div[data-parent-answer="'+answers[question_id]+'"] textarea').each(function(i, v){
+                      answers[$(v).attr('name')] = 'fa_delete';
+                    });
+
+                    question_attached_container.find('div[data-parent-answer="'+answers[question_id]+'"]').next().find('div[data-parent-answer="'+answers[question_id]+'"] input, div[data-parent-answer="'+answers[question_id]+'"] textarea').each(function(i, v){
+                      answers[$(v).attr('name')] = 'fa_delete';
+                    });
+
                     question_attached_container.find('div[data-parent-answer="'+answers[question_id]+'"]').next().remove()
                     question_attached_container.find('div[data-parent-answer="'+answers[question_id]+'"]').remove();
                 }
@@ -117,7 +123,6 @@
                 }
 
                 answers[question_id] = answer_id;
-                console.log(answers);
             });
         });
     </script>

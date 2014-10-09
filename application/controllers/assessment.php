@@ -100,6 +100,10 @@ class Assessment extends CI_Controller {
 		print json_encode($json);
 	}
 
+	public function saveAnswer(){
+		
+	}
+
 	private function getQuestionInputType(
 		$question_type_code,
 		$question_id, 
