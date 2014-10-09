@@ -202,6 +202,23 @@ $(function(){
 		});
 	});
 
+	$(document).delegate('#familymembersDelBtn', "click", function(){
+		form_family_id = $(this).data('familyid');
+		if(confirm('هل أنت متأكد من حذف هذا الفرد صاحب الرقم ' + form_family_id + ' ?')){
+			$.ajax({
+				url : appConfig.deleteFamilyMembersURL,
+				data : 'form_family_id=' + form_family_id,
+				dataType : 'JSON',
+				type : 'POST',
+				context : $(this),
+				complete : function(xhr){
+					json = xhr.responseJSON;
+					$("#familymemberslist").load(appConfig.familyMembersListURL + '?form_details_id=' + appConfig.form_details_id);
+				}
+			});
+		}
+	});
+
 	$('#modal').on('hidden.bs.modal', function () {
         $(this).removeData('bs.modal');
     });

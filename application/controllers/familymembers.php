@@ -182,6 +182,29 @@ class Familymembers extends CI_Controller {
 		header("Content-Type: text/json");
 		print json_encode($json);
 	}
+
+	public function delete(){
+		if(!$this->input->is_ajax_request()){
+			show_404();
+		}
+
+		$this->load->model('Form_family_model', 'family_model');
+
+		$json = array();
+
+		$form_family_id = intval($this->input->post('form_family_id'));
+
+		$result = $this->family_model->get($form_family_id);
+
+		if($result){
+			$this->family_model->delete($form_family_id);
+		}
+
+		$json['result'] = 'success';
+
+		header("Content-Type: text/json");
+		print json_encode($json);
+	}
 }
 
 /* End of file address.php */
