@@ -65,7 +65,7 @@ class Family extends CI_Controller {
 		//$data["add_nmbr_registration"] = form_input(array("name" => "nmbr_registration", "class" => "form-control", "placeholder" => "رقم و مكان القيد"));
 		$document_types = $this->property_model->dropdown('document_type', 'نوع الوثيقة');
 		$data["add_document_type_dropdown"] = form_dropdown("document_type", $document_types, '', 'class="form-control" required');
-		$data["add_document_no"] = form_input(array("name" => "document_no", "class" => "form-control", "required" => TRUE,"placeholder" => "رقم الوثيقة"));
+		$data["add_document_no"] = form_input(array("name" => "document_no", "class" => "form-control","placeholder" => "رقم الوثيقة"));
 		$data["add_document_letter"] = form_input(array("name" => "document_letter", "class" => "form-control", "required" => TRUE,"placeholder" => "حرف"));
 		/************* Add Form *************/		
 
@@ -158,11 +158,22 @@ class Family extends CI_Controller {
 			$data["document_no"] = $this->input->post("document_no");
 		}
 
-		if(empty($data["document_type"]) || empty($data["document_no"])){
-			$json["errors"]["document"] = "الرجاء تحديد نوع الوثيقة العائلية و رقمها";
+		if(empty($data["document_type"])){
+			$json["errors"]["document"] = "الرجاء تحديد نوع الوثيقة العائلية";
 		}else{
-			if($family = $this->form_details->getByDocument($data["document_type"], $data["document_no"])){
-				$json["errors"]['document'] = "هذه الوثيقة مسجلة تحت الاستمارة " . $family->tmp_ref . " / " . $family->form_details_id;
+			/*
+			c : إخراج قيد عائلي
+			d : لا يوجد
+			e : صك زواج
+			*/
+			if(!in_array($data['document_type'] ,array(c, d, e))) {
+				if(empty($data["document_no"])){
+					$json["errors"]["document"] = "الرجاء تحديد رقم الوثيقة العائلية";
+				}else{
+					if($family = $this->form_details->getByDocument($data["document_type"], $data["document_no"])){
+						$json["errors"]['document'] = "هذه الوثيقة مسجلة تحت الاستمارة " . $family->tmp_ref . " / " . $family->form_details_id;
+					}
+				}
 			}
 		}
 

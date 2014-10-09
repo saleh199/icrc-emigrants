@@ -225,15 +225,25 @@ class Form_details_model extends MY_Model{
 		
 		$this->form_validation->set_rules("family_status", "وضع العائلة", "trim|required");
 		$this->form_validation->set_rules("document_type", "نوع الوثيقة", "trim|required");
-		$this->form_validation->set_rules("document_no", "رقم الوثيقة", "trim|required");
+		/*
+		c : إخراج قيد عائلي
+		d : لا يوجد
+		e : صك زواج
+		*/
+		if(!in_array($this->input->post('document_type') ,array(c, d, e))){
+			$this->form_validation->set_rules("document_no", "رقم الوثيقة", "trim|required");
+		}
+		
 		//$this->form_validation->set_rules("nmbr_registration", "رقم و مكان القيد", "trim|required");
 
 		if($this->form_validation->run() == TRUE){
 			$return["success"] = TRUE;
 			if($insert){
-				if($this->getByDocument($this->input->post("document_type"), $this->input->post("document_no"))){
-					$return["success"] = FALSE;
-					$return["errors"] = "<li>" . "رقم الوثيقة العائلية مسجل مسبقاً" . "</li>";
+				if(!in_array($this->input->post('document_type') ,array(c, d, e))){
+					if($this->getByDocument($this->input->post("document_type"), $this->input->post("document_no"))){
+						$return["success"] = FALSE;
+						$return["errors"] = "<li>" . "رقم الوثيقة العائلية مسجل مسبقاً" . "</li>";
+					}
 				}
 			}
 		}else{
