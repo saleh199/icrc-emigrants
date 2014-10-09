@@ -70,7 +70,7 @@
               <th style="width:130px">الهاتف</th>
               <th style="width:120px">الاستحقاق</th>
               <th style="width:120px">تاريخ التسجيل</th>
-              <th></th>
+              <!-- <th></th> -->
             </tr>
             <?php foreach($results as $family_form) { ?>
             <tr>
@@ -83,9 +83,9 @@
               <td><?php echo $family_form->phone . ', 09' . $family_form->mobile_1; ?></td>
               <td><?php echo $family_form->wfp_worth; ?></td>
               <td><?php echo $family_form->registered_date_full; ?></td>
-              <td>
+              <!-- <td>
                 <a class="btn btn-success btn-xs" href="<?php echo site_url('assessment').'?family_details_id='.$family_form->form_details_id;?>">تقييم</a>
-              </td>
+              </td> -->
             </tr>
             <?php } ?>
           </table>
