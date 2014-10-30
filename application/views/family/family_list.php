@@ -118,8 +118,8 @@
                   <div class="form-group"><?php echo $add_family_status_dropdown;?></div>
                   <!-- <div class="form-group"><?php echo $add_nmbr_registration;?></div> -->
                   <div class="form-group"><?php echo $add_document_type_dropdown;?></div>
+                  <div class="form-group col-md-4 hidden" id="document_letter_container"><?php echo $add_document_letter;?></div>
                   <div class="form-group" id="document_no_container"><?php echo $add_document_no;?></div>
-                  <!-- <div class="form-group col-md-4"><?php echo $add_document_letter;?></div>-->
                 </div>
               </div>
             </form>

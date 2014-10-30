@@ -230,7 +230,7 @@ class Form_details_model extends MY_Model{
 		d : لا يوجد
 		e : صك زواج
 		*/
-		if(!in_array($this->input->post('document_type') ,array(c, d, e))){
+		if(!in_array($this->input->post('document_type') ,array('c', 'd', 'e'))){
 			$this->form_validation->set_rules("document_no", "رقم الوثيقة", "trim|required");
 		}
 		
@@ -239,12 +239,16 @@ class Form_details_model extends MY_Model{
 		if($this->form_validation->run() == TRUE){
 			$return["success"] = TRUE;
 			if($insert){
-				if(!in_array($this->input->post('document_type') ,array(c, d, e))){
+				if(!in_array($this->input->post('document_type') ,array('c', 'd', 'e'))){
 					if($this->getByDocument($this->input->post("document_type"), $this->input->post("document_no"))){
 						$return["success"] = FALSE;
 						$return["errors"] = "<li>" . "رقم الوثيقة العائلية مسجل مسبقاً" . "</li>";
 					}
 				}
+			}
+			if(trim($this->input->post('document_letter')) == ''){
+				$return["errors"] = "<li>" . "الرجاء إدخال الحرف من دفتر العائلة" . "</li>";
+				$return["success"] = FALSE;
 			}
 		}else{
 			$errors = validation_errors('<li>', '</li>');

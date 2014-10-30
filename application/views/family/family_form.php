@@ -38,8 +38,9 @@
               <label class="control-label">نوع الوثيقة</label>
               <?php echo $document_type_dropdown;?>
             </div>
-            <div class="col-md-4">
-              <label class="control-label">رقم الوثيقة</label>
+            <div class="col-md-5">
+              <label class="control-label col-md-12">رقم الوثيقة</label>
+              <?php echo $document_letter;?>
               <?php echo $document_no;?>
             </div>
           </div>
@@ -179,6 +180,19 @@
       if(appConfig.form_details_id > 0){
         $("#familymemberslist").load(appConfig.familyMembersListURL + '?form_details_id=' + appConfig.form_details_id);
         $("#addresseslist").load(appConfig.addressesListURL + '?form_details_id=' + appConfig.form_details_id);
+      }
+
+      $('#familyfrm select[name="document_type"]').change(function(){
+        $('#familyfrm input[name="document_letter"]').val(' ');
+        if($(this).val() == 'b'){
+          $('#familyfrm #document_letter_container').removeClass('hidden');
+        }else{
+          $('#familyfrm #document_letter_container').addClass('hidden');
+        }
+      });
+
+      if($('#familyfrm select[name="document_type"]').val() == 'b'){
+        $('#familyfrm #document_letter_container').removeClass('hidden');
       }
     });
     </script>

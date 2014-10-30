@@ -158,6 +158,10 @@ class Family extends CI_Controller {
 			$data["document_no"] = $this->input->post("document_no");
 		}
 
+		if($this->input->post('document_letter')){
+			$data["document_letter"] = $this->input->post("document_letter");
+		}
+
 		if(empty($data["document_type"])){
 			$json["errors"]["document"] = "الرجاء تحديد نوع الوثيقة العائلية";
 		}else{
@@ -166,12 +170,17 @@ class Family extends CI_Controller {
 			d : لا يوجد
 			e : صك زواج
 			*/
-			if(!in_array($data['document_type'] ,array(c, d, e))) {
+			if(!in_array($data['document_type'] ,array('c', 'd', 'e'))) {
 				if(empty($data["document_no"])){
 					$json["errors"]["document"] = "الرجاء تحديد رقم الوثيقة العائلية";
 				}else{
 					if($family = $this->form_details->getByDocument($data["document_type"], $data["document_no"])){
 						$json["errors"]['document'] = "هذه الوثيقة مسجلة تحت الاستمارة " . $family->tmp_ref . " / " . $family->form_details_id;
+					}
+				}
+				if($data['document_type'] == 'b'){
+					if(trim($data["document_letter"]) == ''){
+						$json['errors']['document_letter'] = 'الرجاء إدخال الحرف من دفتر العائلة';
 					}
 				}
 			}
@@ -274,6 +283,14 @@ class Family extends CI_Controller {
 		}else{
 			$document_type = '';
 		}
+
+		if(isset($familyInfo["document_letter"])){
+			$document_letter = $familyInfo["document_letter"];
+		}elseif($queryData["document_letter"]){
+			$document_letter = $queryData["document_letter"];
+		}else{
+			$document_letter = '';
+		}
 		
 		$document_types = $this->property_model->dropdown('document_type');
 		$data["document_type_dropdown"] = form_dropdown("document_type", $document_types, $document_type, 'class="form-control" required');
@@ -288,11 +305,22 @@ class Family extends CI_Controller {
 
 		$data["document_no"] = form_input(array(
 			"name" => "document_no", 
-			"class" => "form-control", 
+			"class" => "form-control col-md-6", 
 			"required" => TRUE,
 			"placeholder" => "رقم الوثيقة",
 			"value" => $document_no
 		));
+
+		$data["document_letter"] = form_input(array(
+			"name" => "document_letter", 
+			"class" => "form-control", 
+			"style" => "margin-left: 25px;",
+			//"required" => TRUE,
+			"placeholder" => "الحرف",
+			"value" => $document_letter
+		));
+
+		$data["document_letter"] = '<div class="col-md-3 hidden" id="document_letter_container">'.$data["document_letter"]."</div>";
 
 		if(isset($familyInfo["notes"])){
 			$notes = $familyInfo["notes"];

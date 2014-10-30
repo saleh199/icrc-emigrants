@@ -31,18 +31,11 @@ $(function(){
 						$('#document_no_container').addClass('has-error');
 					}
 
-					if(errors.father_nationalnumber){
-						$("#familyQueryfrm input[name=father_nationalnumber]").tooltip({
-							title : errors.father_nationalnumber
+					if(errors.document_letter){
+						$("#familyQueryfrm input[name=document_letter]").tooltip({
+							title : errors.document_letter
 						}).tooltip('show');
-						$('#father_nationalnumber_container').addClass('has-error');
-					}
-
-					if(errors.mother_nationalnumber){
-						$("#familyQueryfrm input[name=mother_nationalnumber]").tooltip({
-							title : errors.mother_nationalnumber
-						}).tooltip('show');
-						$('#mother_nationalnumber_container').addClass('has-error');
+						$('#document_letter_container').addClass('has-error');
 					}
 				}else if(json.status == "success"){
 					location.href = appConfig.successQuery;
@@ -51,14 +44,21 @@ $(function(){
 		});
 		event.preventDefault();
 	});
+	
+	$('#familyQueryfrm select[name="document_type"]').change(function(){
+		if($(this).val() == 'b'){
+			$('#document_letter_container').removeClass('hidden');
+			$('#document_no_container').addClass('col-md-8');
+		}else{
+			$('#document_letter_container').addClass('hidden');
+			$('#document_no_container').removeClass('col-md-8');
+		}
+	});
 
 	$('#familyQuerybtn').click(function(){
 		$("#familyQueryfrm .has-error").removeClass('has-error');
 		$("#familyQueryfrm *").tooltip('destroy');
 
-		if($("#familyQueryfrm input[name=document_type]").val() == 'b'){
-
-		}
 		$("#familyQueryfrm").submit();
 	});
 
