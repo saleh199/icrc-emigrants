@@ -246,10 +246,14 @@ class Form_details_model extends MY_Model{
 					}
 				}
 			}
-			if(trim($this->input->post('document_letter')) == ''){
-				$return["errors"] = "<li>" . "الرجاء إدخال الحرف من دفتر العائلة" . "</li>";
-				$return["success"] = FALSE;
+			
+			if($this->input->post('document_type') == 'b'){
+				if(trim($this->input->post('document_letter')) == ''){
+					$return["errors"] = "<li>" . "الرجاء إدخال الحرف من دفتر العائلة" . "</li>";
+					$return["success"] = FALSE;
+				}
 			}
+			
 		}else{
 			$errors = validation_errors('<li>', '</li>');
 			$return["success"] = FALSE;
