@@ -79,7 +79,7 @@
               <td><?php echo $family_form->father_name; ?></td>
               <td><?php echo $family_form->mother_name; ?></td>
               <td class="text-center"><?php echo count($family_form->family_members); ?></td>
-              <td><?php echo $family_form->document_no; ?></td>
+              <td><?php echo $family_form->document_letter . $family_form->document_no; ?></td>
               <td><?php echo $family_form->phone . ', 09' . $family_form->mobile_1; ?></td>
               <td><?php echo $family_form->wfp_worth; ?></td>
               <td><?php echo $family_form->registered_date_full; ?></td>
