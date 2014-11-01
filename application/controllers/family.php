@@ -178,11 +178,11 @@ class Family extends CI_Controller {
 						$json["errors"]['document'] = "هذه الوثيقة مسجلة تحت الاستمارة " . $family->tmp_ref . " / " . $family->form_details_id;
 					}
 				}
-				if($data['document_type'] == 'b'){
+				/*if($data['document_type'] == 'b'){
 					if(trim($data["document_letter"]) == ''){
 						$json['errors']['document_letter'] = 'الرجاء إدخال الحرف من دفتر العائلة';
 					}
-				}
+				}*/
 			}
 		}
 
