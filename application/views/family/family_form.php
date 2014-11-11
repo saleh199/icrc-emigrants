@@ -16,6 +16,7 @@
             <li class="active"><a href="#mainDetails" data-toggle="tab">معلومات العائلة</a></li>
             <li><a href="#familyAddress" data-toggle="tab">عناوين الإقامة</a></li>
             <li><a href="#familyMembers" data-toggle="tab">أفراد الأسرة</a></li>
+            <li><a href="#familyDist" data-toggle="tab">التوزيع</a></li>
           </ul>
           <div class="tab-content">
           <!-- Main Details -->
@@ -163,6 +164,47 @@
           </div>
 
 
+        </div>
+
+        <div class="tab-pane fade in" id="familyDist">
+          <div class="row">
+            <br>
+            <div class="col-md-12">
+              <form class="form-inline" role="form-inline">
+                <div class="form-group">
+                  <select class="form-control">
+                    <option>الرجاء اختيار الجهة المانحة</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <select class="form-control">
+                    <option>المادة الموزعة</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <input type="text" size="10" class="form-control" placeholder="الكمية">
+                </div>
+                <div class="form-group">
+                  <input type="text" id="datepicker" class="form-control" placeholder="تاريخ التوزيع">
+                </div>
+                <button class="btn btn-success"> حفظ </button>
+              </form>
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-md-10">
+              <table class="table table-bordered table-hover">
+                <tr>
+                  <th>#</th>
+                  <th>المادة الموزعة</th>
+                  <th>العدد</th>
+                  <th>الجهة المانحة</th>
+                  <th>التاريخ</th>
+                </tr>
+              </table>
+            </div>
+          </div>
         </div>
       </div>
     </div>
