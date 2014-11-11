@@ -28,9 +28,9 @@ class donor_model extends MY_Model{
 
 	public function dropdown($blank_text = ''){
 		$list = parent::dropdown("donor_id", "donor_name");
-		$blank = array('' => $blank_text);
+		//$blank = array(0 => $blank_text);
 
-		return array_merge($blank, $list);
+		return $list;//array_merge($blank, $list);
 	}
 
 	public function getDonorName($donor_id){

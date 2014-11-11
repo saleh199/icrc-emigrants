@@ -26,12 +26,12 @@ class material_model extends MY_Model{
 		return $data;
 	}
 
-	public function dropdown($donor_id, $blank_text = ''){
+	public function dropdown($donor_id, $blank_text = ' '){
 		$this->_database->where('donor_id', $donor_id);
 		$list = parent::dropdown("material_id", "material_name");
-		$blank = array('' => $blank_text);
+		//$blank = array(' ' => $blank_text);
 
-		return array_merge($blank, $list);
+		return $list;
 	}
 
 	public function getMaterialName($material_id){

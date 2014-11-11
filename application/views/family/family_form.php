@@ -172,22 +172,20 @@
             <div class="col-md-12">
               <form class="form-inline" role="form-inline">
                 <div class="form-group">
-                  <select class="form-control">
-                    <option>الرجاء اختيار الجهة المانحة</option>
-                  </select>
+                  <?php echo $dist_donors_dropdown;?>
                 </div>
-                <div class="form-group">
+                <div class="form-group material_container">
                   <select class="form-control">
                     <option>المادة الموزعة</option>
                   </select>
                 </div>
                 <div class="form-group">
-                  <input type="text" size="10" class="form-control" placeholder="الكمية">
+                  <?php echo $dist_quantity; ?>
                 </div>
                 <div class="form-group">
-                  <input type="text" id="datepicker" class="form-control" placeholder="تاريخ التوزيع">
+                  <?php echo $dist_date_distribution;?>
                 </div>
-                <button class="btn btn-success"> حفظ </button>
+                <button class="btn btn-success" id="saveDistBtn"> حفظ </button>
               </form>
             </div>
           </div>
@@ -236,6 +234,9 @@
       if($('#familyfrm select[name="document_type"]').val() == 'b'){
         $('#familyfrm #document_letter_container').removeClass('hidden');
       }
+
+
+
     });
     </script>
 <?php $this->view('layouts/footer');?>
