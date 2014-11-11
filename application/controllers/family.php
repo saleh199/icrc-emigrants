@@ -479,31 +479,33 @@ class Family extends CI_Controller {
 
 
 		/*************** Distribution form ***************/
-		$data['formDist'] = form_open(site_url('distribution/insert'));
+		$data['formDist'] = form_open(site_url('distribution/insert'), array("method" => "POST", "class" => "form-inline", "id" => "distFrm"), array("form_details_id" => $data["form_details_id"]));
 
 		$this->load->model('donor_model');
 		$this->load->model('material_model');
 		$donors = $this->donor_model->dropdown('الرجاء اختيار الجهة المانحة');
-		$data["dist_donors_dropdown"] = form_dropdown("donor_id", $donors, '', 'class="form-control"');
+		$data["dist_donors_dropdown"] = form_dropdown("donor_id", $donors, '', 'class="form-control" required');
 
 		$materials = array('المادة الموزعة');
-		$data["dist_material_dropdown"] = form_dropdown("material_id", $materials, '', 'class="form-control"');
+		$data["dist_material_dropdown"] = form_dropdown("material_id", $materials, '', 'class="form-control" required');
 
 
 		$data['dist_quantity'] = form_input(array(
 			"name" => "quantity",
 			"class" => "form-control",
 			"size" => 10,
-			"placeholder" => "الكمية"
+			"placeholder" => "الكمية",
+			"required" => "required"
 		));
 
 		$data['dist_date_distribution'] = form_input(array(
 			"name" => "date_distribution",
 			"id" => "datepicker",
 			"class" => "form-control",
-			"placeholder" => "تاريخ التوزيع"
+			"placeholder" => "تاريخ التوزيع",
+			"value" => date('d-m-Y'),
+			"required" => "required"
 		));
-
 
 		$this->load->view("family/family_form", $data);
 	}

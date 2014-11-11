@@ -25,6 +25,28 @@ class form_distribution_model extends MY_Model{
 
 		return $data;
 	}
+
+	public function validateData(){
+		$data = $this->input->post(NULL, TRUE);
+
+		if(intval($data['donor_id']) == 0){
+			return FALSE;
+		}
+
+		if(intval($data['material_id']) == 0){
+			return FALSE;
+		}
+
+		if(intval($data['quantity']) == 0){
+			return FALSE;
+		}
+
+		if(empty($data['date_distribution'])){
+			return FALSE;
+		}
+
+		return TRUE;
+	}
 }
 
 ?>

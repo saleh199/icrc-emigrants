@@ -170,7 +170,7 @@
           <div class="row">
             <br>
             <div class="col-md-12">
-              <form class="form-inline" role="form-inline">
+              <?php echo $formDist;?>
                 <div class="form-group">
                   <?php echo $dist_donors_dropdown;?>
                 </div>
@@ -184,7 +184,7 @@
                   <?php echo $dist_date_distribution;?>
                 </div>
                 <button class="btn btn-success" id="saveDistBtn"> حفظ </button>
-              </form>
+              <?php form_close(); ?>
             </div>
           </div>
           <hr>
@@ -249,6 +249,24 @@
             $select.append(html);
           }
         });
+      });
+
+      $("#distFrm").submit(function( event ){
+        $.ajax({
+          url : $("#distFrm").attr('action'),
+          dataType : '',
+          data : $("#distFrm").serialize() ,
+          type : 'POST',
+          success : function(data){
+            if(data.result == 'success'){
+              alert('تم إضافة السجل');
+              $("#distFrm").reset();
+            }else{
+              alert("الرجاء التأكد من المعلومات المدخلة");
+            }
+          }
+        });
+        event.preventDefault();
       });
 
     });
