@@ -14,7 +14,7 @@ class Distribution extends CI_Controller {
 		$donor_id = $this->input->get("donor_id");
 		$donor_id = intval($donor_id);
 
-		$json['materials'] = $this->material_model->dropdown($donor_id);
+		$json['materials'] = $this->material_model->dropdown($donor_id, 'المادة الموزعة');
 
 		header("Content-Type: text/json");
 		print json_encode($json);

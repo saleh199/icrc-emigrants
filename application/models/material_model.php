@@ -28,10 +28,11 @@ class material_model extends MY_Model{
 
 	public function dropdown($donor_id, $blank_text = ' '){
 		$this->_database->where('donor_id', $donor_id);
+		$this->_database->order_by('material_name', 'ASC');
 		$list = parent::dropdown("material_id", "material_name");
-		//$blank = array(' ' => $blank_text);
+		$blank = array();//$blank = array(' ' => $blank_text);
 
-		return $list;
+		return $blank + $list;
 	}
 
 	public function getMaterialName($material_id){

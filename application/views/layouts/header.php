@@ -32,6 +32,7 @@
     appConfig.deleteFamilyMembersURL = "<?php echo site_url('familymembers/delete');?>";
     appConfig.addressesListURL = "<?php echo site_url('address/address_list');?>";
     appConfig.updateFormURL = "<?php echo site_url('family/update');?>";
+    appConfig.materials_list = "<?php echo site_url('distribution/materials_list');?>";
     </script>
   </head>
 

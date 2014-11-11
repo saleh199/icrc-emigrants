@@ -175,9 +175,7 @@
                   <?php echo $dist_donors_dropdown;?>
                 </div>
                 <div class="form-group material_container">
-                  <select class="form-control">
-                    <option>المادة الموزعة</option>
-                  </select>
+                  <?php echo $dist_material_dropdown;?>
                 </div>
                 <div class="form-group">
                   <?php echo $dist_quantity; ?>
@@ -191,7 +189,7 @@
           </div>
           <hr>
           <div class="row">
-            <div class="col-md-10">
+            <div class="col-md-10 distribution_list_container">
               <table class="table table-bordered table-hover">
                 <tr>
                   <th>#</th>
@@ -235,7 +233,23 @@
         $('#familyfrm #document_letter_container').removeClass('hidden');
       }
 
-
+      $('#familyDist').find('select[name="donor_id"]').change(function(){
+        donor_id = $(this).val();
+        $select = $('#familyDist').find('select[name="material_id"]');
+        $.ajax({
+          url : appConfig.materials_list + '?donor_id='+donor_id,
+          dataType : 'json',
+          success : function(data){
+            $select.html(' ');
+            var html = '';
+            $.each(data.materials, function(i, item){
+              //console.log(i);
+              html = html + '<option value="'+i+'">'+item+'</option>';
+            });
+            $select.append(html);
+          }
+        });
+      });
 
     });
     </script>
