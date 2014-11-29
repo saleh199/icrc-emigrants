@@ -322,6 +322,22 @@ class Family extends CI_Controller {
 
 		$data["document_letter"] = '<div class="col-md-3 hidden" id="document_letter_container">'.$data["document_letter"]."</div>";
 
+		if(isset($familyInfo["stamppage"])){
+			$stamppage = $familyInfo["stamppage"];
+		}elseif($queryData["stamppage"]){
+			$stamppage = $queryData["stamppage"];
+		}else{
+			$stamppage = '';
+		}
+
+		$data["stamppage"] = form_input(array(
+			"name" => "stamppage", 
+			"class" => "form-control col-md-6", 
+			"required" => TRUE,
+			"placeholder" => "مكان الختم",
+			"value" => $stamppage
+		));
+
 		if(isset($familyInfo["notes"])){
 			$notes = $familyInfo["notes"];
 		}else{
@@ -506,6 +522,8 @@ class Family extends CI_Controller {
 			"value" => date('d-m-Y'),
 			"required" => "required"
 		));
+
+		$data["dist_add_month_action"] = site_url('distribution/month_dist');
 
 		$this->load->view("family/family_form", $data);
 	}

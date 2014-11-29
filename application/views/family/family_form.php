@@ -45,6 +45,11 @@
               <?php echo $document_no;?>
             </div>
           </div>
+          
+          <div class="form-group col-md-7">
+              <label class="control-label col-md-12">مكان الختم</label>
+              <?php echo $stamppage;?>
+          </div>
           <div class="form-group col-md-12">
             <div class="col-md-4">
               <label class="control-label">الجنسية</label>
@@ -170,6 +175,9 @@
           <div class="row">
             <br>
             <div class="col-md-12">
+              <div class="form-group"><button class="btn btn-info" type="button" id="addMonthDist">إضافة توزيعة شهر تشرين الثاني 11-2014</button></div>
+            </div>
+            <div class="col-md-12">
               <?php echo $formDist;?>
                 <div class="form-group">
                   <?php echo $dist_donors_dropdown;?>
@@ -214,6 +222,15 @@
       </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
     <script type="text/javascript">
+          function refresh_list(){
+        $.ajax({
+          url : appConfig.distribution_list + '?form_details_id='+appConfig.form_details_id,
+          dataType : 'JSON',
+          success : function(data){
+            $('.distribution_list_container').html(data.output);
+          }
+        });
+      }
     $(function(){
       if(appConfig.form_details_id > 0){
         $("#familymemberslist").load(appConfig.familyMembersListURL + '?form_details_id=' + appConfig.form_details_id);
@@ -251,6 +268,8 @@
         });
       });
 
+
+
       $("#distFrm").submit(function( event ){
         $.ajax({
           url : $("#distFrm").attr('action'),
@@ -260,7 +279,8 @@
           success : function(data){
             if(data.result == 'success'){
               alert('تم إضافة السجل');
-              $("#distFrm").reset();
+              //$("#distFrm").reset();
+              refresh_list();
             }else{
               alert("الرجاء التأكد من المعلومات المدخلة");
             }
@@ -268,6 +288,28 @@
         });
         event.preventDefault();
       });
+
+      $('#addMonthDist').click(function(){
+        $(this).attr('disabled', 'disabled');
+        $.ajax({
+          url : '<?php echo $dist_add_month_action;?>',
+          dataType : '',
+          data : 'form_details_id='+appConfig.form_details_id ,
+          type : 'POST',
+          success : function(data){
+            if(data.result == 'success'){
+              alert('تم إضافة السجل');
+              //$("#distFrm").reset();
+              refresh_list();
+            }else{
+              alert("الرجاء التأكد من المعلومات المدخلة");
+              $(this).removeAttr('disabled');
+            }
+          }
+        });
+      });
+
+      refresh_list();
 
     });
     </script>

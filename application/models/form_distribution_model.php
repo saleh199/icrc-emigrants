@@ -7,8 +7,13 @@ class form_distribution_model extends MY_Model{
 
 	public $before_create = array( "timestamp" ); // observer before create row
 	public $before_update = array( "timestampUpdate" ); // observer before update row
+	public $after_get = array("afterGetTrigger");
 
 	protected $protected_attributes = array( "form_distribution_id" );
+
+	public $belongs_to = array(
+		"material" => array("model" => "material_model", "primary_key" => "material_id")
+	);
 
 	public function __construct(){
 		parent::__construct();
@@ -47,6 +52,20 @@ class form_distribution_model extends MY_Model{
 
 		return TRUE;
 	}
+
+	function getList($data){
+		$result = $this->with("material")->get_many_by(array("form_details_id" => $data['form_details_id']));
+
+		return $result;
+	}
+
+	function afterGetTrigger($data){
+		$this->load->model("material_model");
+		$data->date_distribution_string = date('d-m-Y', $data->date_distribution);
+
+		return $data;
+	}
+
 }
 
 ?>

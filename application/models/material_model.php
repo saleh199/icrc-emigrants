@@ -7,8 +7,13 @@ class material_model extends MY_Model{
 
 	public $before_create = array( "timestamp" ); // observer before create row
 	public $before_update = array( "timestampUpdate" ); // observer before update row
+	public $after_get = array("afterGetTrigger");
 
 	protected $protected_attributes = array( "material_id" );
+
+	public $belongs_to = array(
+		"donor" => array("model" => "donor_model", "primary_key" => "donor_id")
+	);
 
 	public function __construct(){
 		parent::__construct();
@@ -42,6 +47,14 @@ class material_model extends MY_Model{
 		}else{
 			return '';
 		}
+	}
+
+	public function afterGetTrigger($data){
+		$this->load->model('donor_model');
+		$result = $this->donor_model->get($data->donor_id);
+		$data->donor_name = $result->donor_name;
+		
+		return $data;
 	}
 }
 
