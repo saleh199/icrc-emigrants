@@ -478,6 +478,33 @@ class Family extends CI_Controller {
 		$data["insertAddressHref"] = site_url("address/addressFrom");
 
 
+		/*************** Distribution form ***************/
+		$data['formDist'] = form_open(site_url('distribution/insert'));
+
+		$this->load->model('donor_model');
+		$this->load->model('material_model');
+		$donors = $this->donor_model->dropdown('الرجاء اختيار الجهة المانحة');
+		$data["dist_donors_dropdown"] = form_dropdown("donor_id", $donors, '', 'class="form-control"');
+
+		$materials = array('المادة الموزعة');
+		$data["dist_material_dropdown"] = form_dropdown("material_id", $materials, '', 'class="form-control"');
+
+
+		$data['dist_quantity'] = form_input(array(
+			"name" => "quantity",
+			"class" => "form-control",
+			"size" => 10,
+			"placeholder" => "الكمية"
+		));
+
+		$data['dist_date_distribution'] = form_input(array(
+			"name" => "date_distribution",
+			"id" => "datepicker",
+			"class" => "form-control",
+			"placeholder" => "تاريخ التوزيع"
+		));
+
+
 		$this->load->view("family/family_form", $data);
 	}
 }

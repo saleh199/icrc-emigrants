@@ -246,8 +246,8 @@ class Form_details_model extends MY_Model{
 					}
 				}
 			}
-
-			/*if($this->input->post('document_type') === 'b'){
+			
+			/*if($this->input->post('document_type') == 'b'){
 				if(trim($this->input->post('document_letter')) == ''){
 					$return["errors"] = "<li>" . "الرجاء إدخال الحرف من دفتر العائلة" . "</li>";
 					$return["success"] = FALSE;

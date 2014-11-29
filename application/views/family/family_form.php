@@ -16,6 +16,7 @@
             <li class="active"><a href="#mainDetails" data-toggle="tab">معلومات العائلة</a></li>
             <li><a href="#familyAddress" data-toggle="tab">عناوين الإقامة</a></li>
             <li><a href="#familyMembers" data-toggle="tab">أفراد الأسرة</a></li>
+            <li><a href="#familyDist" data-toggle="tab">التوزيع</a></li>
           </ul>
           <div class="tab-content">
           <!-- Main Details -->
@@ -164,6 +165,43 @@
 
 
         </div>
+
+        <div class="tab-pane fade in" id="familyDist">
+          <div class="row">
+            <br>
+            <div class="col-md-12">
+              <form class="form-inline" role="form-inline">
+                <div class="form-group">
+                  <?php echo $dist_donors_dropdown;?>
+                </div>
+                <div class="form-group material_container">
+                  <?php echo $dist_material_dropdown;?>
+                </div>
+                <div class="form-group">
+                  <?php echo $dist_quantity; ?>
+                </div>
+                <div class="form-group">
+                  <?php echo $dist_date_distribution;?>
+                </div>
+                <button class="btn btn-success" id="saveDistBtn"> حفظ </button>
+              </form>
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-md-10 distribution_list_container">
+              <table class="table table-bordered table-hover">
+                <tr>
+                  <th>#</th>
+                  <th>المادة الموزعة</th>
+                  <th>العدد</th>
+                  <th>الجهة المانحة</th>
+                  <th>التاريخ</th>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <div class="modal fade" id="modal" role="dialog" tabindex="-1" aria-hidden="true" data-backdrop="false">
@@ -194,6 +232,25 @@
       if($('#familyfrm select[name="document_type"]').val() == 'b'){
         $('#familyfrm #document_letter_container').removeClass('hidden');
       }
+
+      $('#familyDist').find('select[name="donor_id"]').change(function(){
+        donor_id = $(this).val();
+        $select = $('#familyDist').find('select[name="material_id"]');
+        $.ajax({
+          url : appConfig.materials_list + '?donor_id='+donor_id,
+          dataType : 'json',
+          success : function(data){
+            $select.html(' ');
+            var html = '';
+            $.each(data.materials, function(i, item){
+              //console.log(i);
+              html = html + '<option value="'+i+'">'+item+'</option>';
+            });
+            $select.append(html);
+          }
+        });
+      });
+
     });
     </script>
 <?php $this->view('layouts/footer');?>

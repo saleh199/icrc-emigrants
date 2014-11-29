@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="<?php echo base_url('assets/css/bootstrap.min.css');?>">
     <link href="<?php echo base_url('assets/css/bootstrap-theme.min.css');?>" rel="stylesheet">
     <link href="<?php echo base_url('assets/css/bootstrap-rtl.min.css')?>" rel="stylesheet">
-    <link href="<?php echo base_url('assets/css/jquery-ui.css');?>" rel="stylesheet">
+    <link href="<?php echo base_url('assets/js/jquery-ui-1.11.2/jquery-ui.min.css')?>" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="<?php echo base_url('assets/css/main.css');?>" rel="stylesheet">
@@ -32,6 +32,7 @@
     appConfig.deleteFamilyMembersURL = "<?php echo site_url('familymembers/delete');?>";
     appConfig.addressesListURL = "<?php echo site_url('address/address_list');?>";
     appConfig.updateFormURL = "<?php echo site_url('family/update');?>";
+    appConfig.materials_list = "<?php echo site_url('distribution/materials_list');?>";
     </script>
   </head>
 

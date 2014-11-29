@@ -222,4 +222,10 @@ $(function(){
 	$('#modal').on('hidden.bs.modal', function () {
         $(this).removeData('bs.modal');
     });
+
+    $( "#datepicker" ).datepicker({
+      changeMonth: true,
+      changeYear: true,
+      dateFormat: 'dd-mm-yy'
+    });
 });
