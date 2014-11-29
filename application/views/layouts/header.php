@@ -33,6 +33,7 @@
     appConfig.addressesListURL = "<?php echo site_url('address/address_list');?>";
     appConfig.updateFormURL = "<?php echo site_url('family/update');?>";
     appConfig.materials_list = "<?php echo site_url('distribution/materials_list');?>";
+    appConfig.distribution_list = "<?php echo site_url('distribution/distribution_list');?>";
     </script>
   </head>
 
