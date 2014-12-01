@@ -13,7 +13,7 @@
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="<?php echo base_url('assets/css/bootstrap.min.css');?>">
-    <link href="<?php echo base_url('assets/css/bootstrap-theme.min.css');?>" rel="stylesheet">
+    <!-- <link href="<?php echo base_url('assets/css/bootstrap-theme.min.css');?>" rel="stylesheet"> -->
     <link href="<?php echo base_url('assets/css/bootstrap-rtl.min.css')?>" rel="stylesheet">
     <link href="<?php echo base_url('assets/js/jquery-ui-1.11.2/jquery-ui.min.css')?>" rel="stylesheet">
 
@@ -39,7 +39,7 @@
 
   <body>
 
-    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
       <div class="container-fluid">
         <div class="navbar-header">
           <a class="navbar-brand" href="#">سجل الوافدين</a>
