@@ -44,5 +44,11 @@
         <div class="navbar-header">
           <a class="navbar-brand" href="#">سجل الوافدين</a>
         </div>
+        <div class="collapse navbar-collapse">
+            <a href="<?php echo site_url('common/logout');?>" class="btn btn-danger navbar-btn navbar-left btn-xs">تسجيل الخروج</a>
+            <p class="navbar-text navbar-left">
+                تم تسجيل الدخول باسم صالح سعيد |
+            </p>
+        </div>
       </div>
     </div>
