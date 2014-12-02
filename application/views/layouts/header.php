@@ -19,6 +19,7 @@
 
     <!-- Custom styles for this template -->
     <link href="<?php echo base_url('assets/css/main.css');?>" rel="stylesheet">
+    <link href="<?php echo base_url('assets/css/font-awesome.min.css');?>" rel="stylesheet">
     <script type="text/javascript">
     var appConfig = {};
     appConfig.form_details_id = 0;
