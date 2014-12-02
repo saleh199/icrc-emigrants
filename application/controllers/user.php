@@ -81,6 +81,11 @@ class User extends CI_Controller {
 				"phone" => $this->input->post('phone'),
 			);
 
+			if ($this->input->post('password'))
+			{
+				$update_data['password'] = $this->input->post('password');
+			}
+
 			$this->ion_auth->remove_from_group('', $id);
 
 			$this->ion_auth->add_to_group($this->input->post("group"), $id);
