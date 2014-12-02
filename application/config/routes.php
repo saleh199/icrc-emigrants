@@ -38,8 +38,13 @@
 |
 */
 
-$route['default_controller'] = "family";
+$route['default_controller'] = "login";
 $route['404_override'] = '';
+
+$route['user/admin'] = 'user/index/user_group/1';
+//$route['user/delete'] = 'user/delete/user_group/1';
+$route['user/admin/insert'] = 'user/insert/user_group/1';
+$route['user/admin/update/(:num)'] = 'user/update/user_group/1/id/$1';
 
 
 /* End of file routes.php */

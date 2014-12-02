@@ -2,6 +2,14 @@
 
 class Address extends CI_Controller {
 
+	public function __construct(){
+		parent::__construct();
+
+		if(!$this->ion_auth->logged_in()){
+			redirect('login');
+		}
+	}
+
 	public function addressFrom(){
 		$this->load->model('Form_address_model', 'family_address');
 		$this->load->model("property_model");

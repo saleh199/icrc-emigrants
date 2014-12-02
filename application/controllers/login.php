@@ -12,37 +12,38 @@ class Login extends CI_Controller {
 		if($this->form_validation->run() == TRUE){
 			$remember = FALSE;
 			if($this->ion_auth->login($this->input->post('username'), $this->input->post('password'), $remember)){
-				redirect('login/dashboard', 'refresh');
+				redirect('family', 'refresh');
 			}else{
-				$this->session->set_userdata('message', $this->ion_auth->errors());
+				$this->session->set_flashdata('message', $this->ion_auth->errors());
+				redirect('login', 'refresh');
 			}
 		}
 
-		$data["message"] = (validation_errors()) ? validation_errors('<li>', '</li>') : $this->session->userdata("message");
+		$data["message"] = (validation_errors()) ? validation_errors('<li>', '</li>') : $this->session->flashdata("message");
 
 		$data["form_open"] = form_open(site_url("login"), array("id" => "login-form", "class" => "form-signin", "role" => "form"));
 
-			$data["username"] = array(
-				"name"	=> "username",
-				"id"	=> "username",
-				"type"	=> "text",
-				"value"	=> $this->form_validation->set_value('username'),
-				"class"	=> "form-control",
-				"placeholder"	=> "اسم المستخدم",
-				"required"	=> TRUE,
-				"autofocus"	=> TRUE
-			);
+		$data["username"] = array(
+			"name"	=> "username",
+			"id"	=> "username",
+			"type"	=> "text",
+			"value"	=> $this->form_validation->set_value('username'),
+			"class"	=> "form-control",
+			"placeholder"	=> "اسم المستخدم",
+			"required"	=> TRUE,
+			"autofocus"	=> TRUE
+		);
 
-			$data["password"] = array(
-				"name"	=> "password",
-				"id"	=> "password",
-				"type"	=> "password",
-				"class" => "form-control",
-				"placeholder"	=> "كلمة المرور",
-				"required"	=> TRUE
-			);
+		$data["password"] = array(
+			"name"	=> "password",
+			"id"	=> "password",
+			"type"	=> "password",
+			"class" => "form-control",
+			"placeholder"	=> "كلمة المرور",
+			"required"	=> TRUE
+		);
 
-			$this->load->view("login", $data);
+		$this->load->view("login", $data);
 		
 	}
 }

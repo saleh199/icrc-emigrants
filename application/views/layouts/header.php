@@ -13,12 +13,13 @@
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="<?php echo base_url('assets/css/bootstrap.min.css');?>">
-    <link href="<?php echo base_url('assets/css/bootstrap-theme.min.css');?>" rel="stylesheet">
+    <!-- <link href="<?php echo base_url('assets/css/bootstrap-theme.min.css');?>" rel="stylesheet"> -->
     <link href="<?php echo base_url('assets/css/bootstrap-rtl.min.css')?>" rel="stylesheet">
     <link href="<?php echo base_url('assets/js/jquery-ui-1.11.2/jquery-ui.min.css')?>" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="<?php echo base_url('assets/css/main.css');?>" rel="stylesheet">
+    <link href="<?php echo base_url('assets/css/font-awesome.min.css');?>" rel="stylesheet">
     <script type="text/javascript">
     var appConfig = {};
     appConfig.form_details_id = 0;
@@ -39,10 +40,16 @@
 
   <body>
 
-    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
       <div class="container-fluid">
         <div class="navbar-header">
           <a class="navbar-brand" href="#">سجل الوافدين</a>
+        </div>
+        <div class="collapse navbar-collapse">
+            <a href="<?php echo site_url('common/logout');?>" class="btn btn-danger navbar-btn navbar-left btn-xs">تسجيل الخروج</a>
+            <p class="navbar-text navbar-left">
+                تم تسجيل الدخول باسم صالح سعيد |
+            </p>
         </div>
       </div>
     </div>
