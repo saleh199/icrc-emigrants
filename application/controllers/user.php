@@ -144,7 +144,7 @@ class User extends CI_Controller {
 
 		}
 
-		$this->load->view('user/form', $data);
+		$this->load->view('user/user_form', $data);
 	}
 
 	public function insert(){
@@ -236,7 +236,7 @@ class User extends CI_Controller {
 
 		}
 
-		$this->load->view('user/form', $data);
+		$this->load->view('user/user_form', $data);
 	}
 
 }
