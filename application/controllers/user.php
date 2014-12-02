@@ -15,13 +15,10 @@ class User extends CI_Controller {
 
 		$this->user_group = $params['user_group'];
 
-		$group_info = $this->ion_auth_model->group($this->user_group)->result();
-		$group_info = $group_info[0];
-
-		$this->list_btn = site_url('user/'.$group_info->name);
-		$this->delete_btn = site_url('user/'.$group_info->name.'/delete');
-		$this->update_btn = site_url('user/'.$group_info->name.'/update/');
-		$this->insert_btn = site_url('user/'.$group_info->name.'/insert');
+		$this->list_btn = site_url('user/admin');
+		$this->delete_btn = site_url('user/admin/delete');
+		$this->update_btn = site_url('user/admin/update/');
+		$this->insert_btn = site_url('user/admin/insert');
 	}
 
 	public function index()
@@ -36,7 +33,7 @@ class User extends CI_Controller {
 
 		$data['message'] = ($this->session->flashdata('message')) ? '' : $this->session->flashdata('message');
 
-		$query = $this->ion_auth_model->order_by('id', 'DESC')->users($this->user_group);
+		$query = $this->ion_auth_model->order_by('id', 'DESC')->users();
 
 		$data["results"] = $query->result();
 
@@ -56,15 +53,18 @@ class User extends CI_Controller {
 		$this->load->model('ion_auth_model');
 		$this->load->library('form_validation');
 
-		$user_info = $this->ion_auth_model->user($id);
-
-		$user_info = $user_info->result()[0];
+		$user_info = $this->ion_auth_model->user($id)->result()[0];
+		$groups = $this->ion_auth->groups()->result_array();
+		$currentGroup = $this->ion_auth->get_users_groups($id)->result_array()[0];
+		//$user_info = $user_info->row();
+		//print "<pre>";var_dump($user_info);die;
 
 		$this->form_validation->set_rules('id', 'رقم المستخدم', 'required|integer');
 		$this->form_validation->set_rules('first_name', 'الاسم الاول', 'trim|required|xss_clean');
 		$this->form_validation->set_rules('last_name', 'الكنية', 'trim|required|xss_clean');
 		$this->form_validation->set_rules('email', 'البريد الإلكتروني', 'trim|required|valid_email');
 		$this->form_validation->set_rules('phone', 'رقم الهاتف', 'trim|required|xss_clean');
+		$this->form_validation->set_rules('group', 'الصلاحية', 'trim|required|xss_clean');
 		
 
 		if($this->input->post('password')){
@@ -80,6 +80,10 @@ class User extends CI_Controller {
 				"email" => $this->input->post('email'),
 				"phone" => $this->input->post('phone'),
 			);
+
+			$this->ion_auth->remove_from_group('', $id);
+
+			$this->ion_auth->add_to_group($this->input->post("group"), $id);
 			
 			//$this->ion_auth_model->protected_attributes = array();
 			if($this->ion_auth_model->update($id, $update_data)){
@@ -142,6 +146,21 @@ class User extends CI_Controller {
 				"placeholder" => "تأكيد كلمة المرور",
 			));
 
+			foreach ($groups as $group) {
+				$attribs = [
+					"name" => "group",
+					"id" => "group",
+					"value" => $group['id'],
+					"style" => 'margin-left: 20px;margin-right: 0;'
+				];
+
+				if($this->form_validation->set_value('group', $currentGroup["id"]) == $group['id']){
+					$attribs['checked'] = "checked";
+				}
+
+				$data["tmp_group"][] = form_radio($attribs) . " $group[description]";
+			}
+
 		}
 
 		$this->load->view('user/user_form', $data);
@@ -154,12 +173,15 @@ class User extends CI_Controller {
 		$this->load->model('ion_auth_model');
 		$this->load->library('form_validation');
 
+		$groups = $this->ion_auth->groups()->result_array();
+
 		$this->form_validation->set_rules('first_name', 'الاسم الاول', 'trim|required|xss_clean');
 		$this->form_validation->set_rules('last_name', 'الكنية', 'trim|required|xss_clean');
 		$this->form_validation->set_rules('email', 'البريد الإلكتروني', 'trim|required|valid_email|is_unique[users.email]');
 		$this->form_validation->set_rules('phone', 'رقم الهاتف', 'trim|required|xss_clean');
 		$this->form_validation->set_rules('password', 'كلمة المرور', 'required|min_length[' . $this->config->item('min_password_length', 'ion_auth') . ']|max_length[' . $this->config->item('max_password_length', 'ion_auth') . ']|matches[password_confirm]');
 		$this->form_validation->set_rules('password_confirm', 'تأكيد كلمة المرور', 'trim|required|xss_clean|matches[password]');
+		$this->form_validation->set_rules('group', 'الصلاحية', 'trim|required|xss_clean');
 
 
 		if ($this->form_validation->run() == TRUE){
@@ -174,7 +196,10 @@ class User extends CI_Controller {
 			);
 			
 			//$this->ion_auth_model->protected_attributes = array();
-			if($this->ion_auth->register($username, $password, $email, $insert_data)){
+			if($id = $this->ion_auth->register($username, $password, $email, $insert_data)){
+				
+				$this->ion_auth->add_to_group($this->input->post("group"), $id);
+
 				redirect($this->list_btn, 'refresh');
 			}
 
@@ -182,6 +207,8 @@ class User extends CI_Controller {
 			$data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
 
 			$data["form_action"] = form_open($this->insert_btn, array("id" => "userfrm"));
+
+			$data['groups'] = $groups;
 
 			$data["input_first_name"] = form_input(array(
 				"id" => "first_name",
@@ -233,6 +260,21 @@ class User extends CI_Controller {
 				"class"	=> "form-control",
 				"placeholder" => "تأكيد كلمة المرور",
 			));
+
+			foreach ($groups as $group) {
+				$attribs = [
+					"name" => "group",
+					"id" => "group",
+					"value" => $group['id'],
+					"style" => 'margin-left: 20px;margin-right: 0;'
+				];
+
+				if($this->form_validation->set_value('group') == $group['id']){
+					$attribs['checked'] = "checked";
+				}
+
+				$data["tmp_group"][] = form_radio($attribs) . " $group[description]";
+			}
 
 		}
 

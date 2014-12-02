@@ -9,7 +9,7 @@
           </div>
           <div class="row">
             <?php if($message){ ?>
-            <div class="col-md-6">
+            <div class="col-md-7">
               <div class="alert alert-warning"><?php echo $message; ?></div>
             </div>
             <?php } ?>
@@ -54,6 +54,13 @@
                 <div class="form-group">
                   <label>تأكيد كلمة المرور</label>
                   <?php echo $input_password_confirm;?>
+                </div>
+
+                <div class="form-group">
+                  <label>الصلاحية</label>
+                  <?php foreach($tmp_group as $group){ ?>
+                  <label class="radio-inline">  <?php echo $group;?>  </label>
+                  <?php } ?>
                 </div>
 
                 <button type="submit" class="btn btn-primary">حفظ</button>
