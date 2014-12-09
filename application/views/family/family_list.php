@@ -17,19 +17,16 @@
                   <?php echo $form_id;?>
                 </div>
                 <div class="col-md-4">
-                  <label class="col-md-5">رب الأسرة</label>
-                  <?php echo $form_fathername;?>
+                  <label class="col-md-5">الاسم</label>
+                  <?php echo $form_membername;?>
                 </div>
-                <div class="col-md-4">
-                  <label class="col-md-5">ربة الأسرة</label>
-                  <?php echo $form_mothername;?>
-                </div>
-              </div>
-              <div class="row" style="margin-bottom: 20px;">
+              
                 <div class="col-md-4">
                   <label class="col-md-5">رقم الوثيقة</label>
                   <?php echo $form_documentno;?>
                 </div>
+              </div>
+              <div class="row" style="margin-bottom: 20px;">
                 <div class="col-md-4">
                   <label class="col-md-5">رقم الهاتف</label>
                   <div class="input-group">
@@ -45,8 +42,6 @@
                     <span class="input-group-addon">09</span>
                   </div>
                 </div>
-              </div>
-              <div class="row" style="margin-bottom: 20px;">
                 <div class="col-md-4">
                   <label class="col-md-5">الرقم الوطني</label>
                   <?php echo $form_nationalnumber;?>
