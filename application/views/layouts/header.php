@@ -48,7 +48,7 @@
         <div class="collapse navbar-collapse">
             <a href="<?php echo site_url('common/logout');?>" class="btn btn-danger navbar-btn navbar-left btn-xs">تسجيل الخروج</a>
             <p class="navbar-text navbar-left">
-                تم تسجيل الدخول باسم صالح سعيد |
+                تم تسجيل الدخول <?php echo $this->ion_auth->user()->row()->first_name . " " . $this->ion_auth->user()->row()->last_name; ?> |
             </p>
         </div>
       </div>
