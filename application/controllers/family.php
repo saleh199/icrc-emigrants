@@ -22,13 +22,9 @@ class Family extends CI_Controller {
 			$filter["id"] = $this->input->get("id", TRUE);
 		}
 
-		if($this->input->get("father_name", TRUE)){
-			$filter["father_name"] = $this->input->get("father_name", TRUE);
+		if($this->input->get("member_name", TRUE)){
+			$filter["member_name"] = $this->input->get("member_name", TRUE);
 			
-		}
-
-		if($this->input->get("mother_name", TRUE)){
-			$filter["mother_name"] = $this->input->get("mother_name", TRUE);
 		}
 
 		/*if($this->input->get("document_type", TRUE)){
@@ -55,9 +51,8 @@ class Family extends CI_Controller {
 
 		/************* Search Form *************/
 		$data["search_form"] = form_open(site_url("family"), array("method" => "get" ,"class" => "form-inline", "role" => "form"));
-		$data["form_id"] = form_input(array("name" => "id", "id" => "form_id", "class" => "form-control"));
-		$data["form_fathername"] = form_input(array("name" => "father_name", "id" => "father_name", "class" => "form-control"));
-		$data["form_mothername"] = form_input(array("name" => "mother_name", "id" => "mother_name", "class" => "form-control"));
+		$data["form_id"] = form_input(array("name" => "id", "id" => "form_id", "class" => "form-control", "autofocus" => TRUE));
+		$data["form_membername"] = form_input(array("name" => "member_name", "id" => "member_name", "class" => "form-control"));
 		$data["form_familymembers"] = form_input(array("name" => "family_members", "id" => "family_members", "class" => "form-control"));
 		$data["form_documentno"] = form_input(array("name" => "document_no", "id" => "document_no", "class" => "form-control"));
 		$data["form_phone"] = form_input(array("name" => "phone", "id" => "phone", "class" => "form-control", "dir" => "ltr"));

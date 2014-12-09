@@ -41,13 +41,9 @@ class Form_details_model extends MY_Model{
 			$sql .= " AND fd.tmp_ref = " . $this->db->escape($filter["id"]);
 		}
 
-		if(isset($filter["father_name"]) && !empty($filter["father_name"])){
-			$sql .= " AND (CONCAT(fm.firstname, ' ', fm.middlename, ' ', fm.lastname) LIKE '%".$this->db->escape_like_str($filter["father_name"])."%' AND fm.level_in_family = 'a')";
+		if(isset($filter["member_name"]) && !empty($filter["member_name"])){
+			$sql .= " AND (CONCAT(fm.firstname, ' ', fm.middlename, ' ', fm.lastname) LIKE '%".$this->db->escape_like_str($filter["member_name"])."%')";
 			
-		}
-
-		if(isset($filter["mother_name"]) && !empty($filter["mother_name"])){
-			$sql .= " AND (CONCAT(fm.firstname, ' ', fm.middlename, ' ', fm.lastname) LIKE '%".$this->db->escape_like_str($filter["mother_name"])."%' AND fm.level_in_family = 'b')";
 		}
 
 		if(isset($filter["document_type"]) && !empty($filter["document_type"])){
