@@ -46,10 +46,14 @@
             </div>
           </div>
           
-          <div class="form-group col-md-7">
+          <div class="form-group col-md-4">
               <label class="control-label col-md-12">مكان الختم</label>
               <?php echo $stamppage;?>
           </div>
+	  <div class="form-group col-md-4">
+	      <label class="control-label col-md-12">أحضر ثبوتيات</label>
+	      <?php echo $confirmed;?>
+	  </div>
           <div class="form-group col-md-12">
             <div class="col-md-4">
               <label class="control-label">الجنسية</label>

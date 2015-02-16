@@ -341,6 +341,21 @@ class Family extends CI_Controller {
 			"value" => $stamppage
 		));
 
+
+		if(isset($familyInfo["confirmed"])){
+                        $confirmed = $familyInfo["confirmed"];
+                }elseif($queryData["confirmed"]){
+                        $confirmed = $queryData["confirmed"];
+                }else{
+                        $confirmed = '';
+                }
+
+		$confirmed_option = array("0" => "لا",
+				          "1" => "نعم");
+
+                $data["confirmed"] = form_dropdown("confirmed", $confirmed_option, $confirmed, 'class="form-control"');
+
+
 		if(isset($familyInfo["notes"])){
 			$notes = $familyInfo["notes"];
 		}else{

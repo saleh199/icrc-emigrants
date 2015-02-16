@@ -98,7 +98,7 @@ class Distribution extends CI_Controller {
 		$this->load->model('form_distribution_model', 'form_distribution');
 
 		$form_details_id = intval($this->input->post('form_details_id'));
-		$date = strtotime(date('d-m-Y'));
+		$date = strtotime(date('d-m-Y H:i:s'));
 
 		$data[0] = array(
 			"form_details_id" => $form_details_id,
