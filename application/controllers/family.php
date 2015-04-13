@@ -565,7 +565,7 @@ class Family extends CI_Controller {
 
 		$result = $this->form_details->getDistributionList($zone_id);
 
-		$delimiter = ",";
+		$delimiter = ";";
 		$newline = "\r\n";
 
 		$data = $this->dbutil->csv_from_result($result, $delimiter, $newline);
