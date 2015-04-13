@@ -572,7 +572,7 @@ class Family extends CI_Controller {
 
 		// Sending headers to force the user to download the file
 		header('Content-Type: text/csv');
-		header('Content-Disposition: attachment;filename="Dist_'.date('dMy').'.xls"');
+		header('Content-Disposition: attachment;filename="Dist_'.date('dMy').'.csv"');
 		header('Cache-Control: max-age=0');
 
 
