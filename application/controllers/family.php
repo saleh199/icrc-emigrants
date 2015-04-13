@@ -576,8 +576,8 @@ class Family extends CI_Controller {
 		// header('Content-Disposition: attachment;filename="Dist_'.date('dMy').'.csv"');
 		// header('Cache-Control: max-age=0');
 
-		header('Content-Encoding: UTF-8');\
-		header('Content-type: application/vnd.ms-excel; charset=UTF-8');
+		header('Content-Encoding: windows-1256');
+		header('Content-type: application/vnd.ms-excel; charset=window-1256');
 		header('Content-Disposition: attachment;filename="Dist_'.date('dMy').'.xls"');
 
 
