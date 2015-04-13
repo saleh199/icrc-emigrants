@@ -571,7 +571,7 @@ class Family extends CI_Controller {
 		$data = $this->dbutil->csv_from_result($result, $delimiter, $newline);
 
 		// Sending headers to force the user to download the file
-		header('Content-Type: text/csv');
+		header('Content-Type: text/csv;charset=UTF-8');
 		header('Content-Disposition: attachment;filename="Dist_'.date('dMy').'.csv"');
 		header('Cache-Control: max-age=0');
 
