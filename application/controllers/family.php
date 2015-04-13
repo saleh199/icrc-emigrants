@@ -565,7 +565,7 @@ class Family extends CI_Controller {
 
 		$result = $this->form_details->getDistributionList($zone_id);
 
-		$delimiter = ";";
+		$delimiter = "\t";
 		$newline = "\r\n";
 
 		$data = $this->dbutil->csv_from_result($result, $delimiter, $newline);
@@ -577,8 +577,8 @@ class Family extends CI_Controller {
 		// header('Cache-Control: max-age=0');
 
 		header('Content-Encoding: UTF-8');\
-		header('Content-type: application/xlsx; charset=UTF-8');
-		header('Content-Disposition: attachment;filename="Dist_'.date('dMy').'.xlsx"');
+		header('Content-type: application/vnd.ms-excel; charset=UTF-8');
+		header('Content-Disposition: attachment;filename="Dist_'.date('dMy').'.xls"');
 
 
 		echo $data;
