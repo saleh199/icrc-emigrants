@@ -4,7 +4,7 @@
   </div>
   <ul class="nav nav-sidebar">
     <li class="<?php echo (strpos($this->uri->uri_string(), 'family') === FALSE)? '' : 'active' ; ?>"><a href="<?php echo site_url('family');?>">الوافدين</a></li>
-    <li class="<?php echo (strpos($this->uri->uri_string(), 'ss') === FALSE)? '' : 'active' ; ?>"><a href="<?php echo site_url('family');?>">سجلات التوزيع</a></li>
+    <li><a href="<?php echo site_url('family/distributionList');?>">سجلات التوزيع</a></li>
     <?php if($this->ion_auth->is_admin()){ ?>
     <li class="<?php echo (strpos($this->uri->uri_string(), 'user/admin') === FALSE)? '' : 'active' ; ?>"><a href="<?php echo site_url('user/admin');?>">الإدارة</a></li>
     <?php } ?>

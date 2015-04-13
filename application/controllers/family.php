@@ -546,11 +546,20 @@ class Family extends CI_Controller {
 		$this->load->view("family/family_form", $data);
 	}
 
+	public function distributionList(){
+		$this->load->model('zone_model');
+
+		$data["export_form"] = form_open(site_url("family/exportDistList"), array("method" => "get", "role" => "form"));
+
+		$zones = $this->zone_model->dropdown();
+		$data["zone_dropdown"] = form_dropdown("zone_id", $zones, 26, 'class="form-control" id="zone_id"');
+
+		$this->load->view("family/dist_list", $data);
+	}
+
 	public function exportDistList(){
 		$this->load->dbutil();
 		$this->load->model("Form_details_model", 'form_details');
-		$this->load->helper('download');
-		$this->load->library('Excel');
 
 		$zone_id = $this->input->get('zone_id');
 
@@ -560,19 +569,6 @@ class Family extends CI_Controller {
 		$newline = "\r\n";
 
 		$data = $this->dbutil->csv_from_result($result, $delimiter, $newline);
-
-		// //-----Create a reader, set some parameters and read in the file-----
-		// $objReader = PHPExcel_IOFactory::createReader('CSV');
-		// $objReader->setDelimiter(';');
-		// $objReader->setLineEnding("\r\n");
-		// $objReader->setSheetIndex(0);
-		//
-		// $objPHPExcel = new PHPExcel();
-		// $objPHPExcel->getProperties()->setTitle("export")->setDescription("none");
-		//
-		// $objPHPExcel->setActiveSheetIndex(0);
-		//
-		// $objWriter = IOFactory::createWriter($objPHPExcel, 'Excel5');
 
 		// Sending headers to force the user to download the file
 		header('Content-Type: application/vnd.ms-excel');
