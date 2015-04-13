@@ -578,7 +578,7 @@ class Family extends CI_Controller {
 
 		header('Content-Encoding: UTF-8');\
 		header('Content-type: text/csv; charset=UTF-8');
-		header('Content-Disposition: attachment;filename="Dist_'.date('dMy').'.csv"');
+		header('Content-Disposition: attachment;filename="Dist_'.date('dMy').'.xlsx"');
 
 
 		echo $data;
