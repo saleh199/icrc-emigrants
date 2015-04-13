@@ -577,7 +577,7 @@ class Family extends CI_Controller {
 		// header('Cache-Control: max-age=0');
 
 		header('Content-Encoding: UTF-8');\
-		header('Content-type: text/csv; charset=UTF-8');
+		header('Content-type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet; charset=UTF-8');
 		header('Content-Disposition: attachment;filename="Dist_'.date('dMy').'.xlsx"');
 
 
