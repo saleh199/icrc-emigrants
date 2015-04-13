@@ -24,7 +24,7 @@ class Family extends CI_Controller {
 
 		if($this->input->get("member_name", TRUE)){
 			$filter["member_name"] = $this->input->get("member_name", TRUE);
-			
+
 		}
 
 		/*if($this->input->get("document_type", TRUE)){
@@ -46,7 +46,7 @@ class Family extends CI_Controller {
 		if($this->input->get("national_number")){
 			$filter["national_number"] = $this->input->get("national_number");
 		}
-		
+
 		$data["results"] = $this->form_details->getFamilies($filter);
 
 		/************* Search Form *************/
@@ -70,7 +70,7 @@ class Family extends CI_Controller {
 		$data["add_document_type_dropdown"] = form_dropdown("document_type", $document_types, '', 'class="form-control" required');
 		$data["add_document_no"] = form_input(array("name" => "document_no", "class" => "form-control","placeholder" => "رقم الوثيقة"));
 		$data["add_document_letter"] = form_input(array("name" => "document_letter", "class" => "form-control", "required" => TRUE,"placeholder" => "حرف"));
-		/************* Add Form *************/		
+		/************* Add Form *************/
 
 
 		$this->load->view("family/family_list", $data);if($this->input->post('nmbr_registration', TRUE)){
@@ -232,7 +232,7 @@ class Family extends CI_Controller {
 		// if($familyInfo){
 		// 	$data["tmp_ref"] = form_input(array(
 		// 		"name" => "tmp_ref",
-		// 		"class" => "form-control", 
+		// 		"class" => "form-control",
 		// 		"placeholder" => "رقم استمارة مؤقت",
 		// 		"value" => (isset($familyInfo["tmp_ref"])) ? $familyInfo["tmp_ref"] : '',
 		// 		"disabled" => TRUE
@@ -240,7 +240,7 @@ class Family extends CI_Controller {
 		// }else{
 			$data["tmp_ref"] = form_input(array(
 				"name" => "tmp_ref",
-				"class" => "form-control", 
+				"class" => "form-control",
 				"placeholder" => "رقم استمارة مؤقت",
 				"value" => (isset($familyInfo["tmp_ref"])) ? $familyInfo["tmp_ref"] : '',
 			));
@@ -253,13 +253,13 @@ class Family extends CI_Controller {
 		}else{
 			$family_status = '';
 		}
-		
+
 		$family_status_data = $this->property_model->dropdown('family_status');
 		$data["family_status_dropdown"] = form_dropdown("family_status", $family_status_data, $family_status, 'class="form-control" required');
-		
+
 		$data["nationality"] = form_input(array(
 			"name" => "nationality",
-			"class" => "form-control", 
+			"class" => "form-control",
 			"placeholder" => "الجنسية",
 			"value" => (isset($familyInfo["nationality"])) ? $familyInfo["nationality"] : 'سوري'
 		));
@@ -271,10 +271,10 @@ class Family extends CI_Controller {
 		}else{
 			$nmbr_registration = '';
 		}
-		
+
 		$data["nmbr_registration"] = form_input(array(
-			"name" => "nmbr_registration", 
-			"class" => "form-control", 
+			"name" => "nmbr_registration",
+			"class" => "form-control",
 			"placeholder" => "رقم و مكان القيد",
 			"value" => $nmbr_registration
 		));
@@ -294,10 +294,10 @@ class Family extends CI_Controller {
 		}else{
 			$document_letter = '';
 		}
-		
+
 		$document_types = $this->property_model->dropdown('document_type');
 		$data["document_type_dropdown"] = form_dropdown("document_type", $document_types, $document_type, 'class="form-control" required');
-		
+
 		if(isset($familyInfo["document_no"])){
 			$document_no = $familyInfo["document_no"];
 		}elseif($queryData["document_no"]){
@@ -307,16 +307,16 @@ class Family extends CI_Controller {
 		}
 
 		$data["document_no"] = form_input(array(
-			"name" => "document_no", 
-			"class" => "form-control col-md-6", 
+			"name" => "document_no",
+			"class" => "form-control col-md-6",
 			"required" => TRUE,
 			"placeholder" => "رقم الوثيقة",
 			"value" => $document_no
 		));
 
 		$data["document_letter"] = form_input(array(
-			"name" => "document_letter", 
-			"class" => "form-control", 
+			"name" => "document_letter",
+			"class" => "form-control",
 			"style" => "margin-left: 25px;",
 			//"required" => TRUE,
 			"placeholder" => "الحرف",
@@ -334,8 +334,8 @@ class Family extends CI_Controller {
 		}
 
 		$data["stamppage"] = form_input(array(
-			"name" => "stamppage", 
-			"class" => "form-control col-md-6", 
+			"name" => "stamppage",
+			"class" => "form-control col-md-6",
 			"required" => TRUE,
 			"placeholder" => "مكان الختم",
 			"value" => $stamppage
@@ -361,11 +361,11 @@ class Family extends CI_Controller {
 		}else{
 			$notes = '';
 		}
-		
+
 		$data["notes"] = form_textarea(array(
-			"name" => "notes", 
-			"class" => "form-control", 
-			"rows" => 4, 
+			"name" => "notes",
+			"class" => "form-control",
+			"rows" => 4,
 			"placeholder" => "ملاحظات",
 			"value" => $notes
 		));
@@ -375,10 +375,10 @@ class Family extends CI_Controller {
 		}else{
 			$breadwinner_name = '';
 		}
-		
+
 		$data["breadwinner_name"] = form_input(array(
-			"name" => "breadwinner_name", 
-			"class" => "form-control", 
+			"name" => "breadwinner_name",
+			"class" => "form-control",
 			"placeholder" => "اسم معيل الأسرة الثلاثي",
 			"value" => $breadwinner_name
 		));
@@ -388,11 +388,11 @@ class Family extends CI_Controller {
 		}else{
 			$mobile_1 = '';
 		}
-		
+
 		$data["mobile_1"] = form_input(array(
-			"name" => "mobile_1", 
-			"class" => "form-control", 
-			"placeholder" => "الموبايل", 
+			"name" => "mobile_1",
+			"class" => "form-control",
+			"placeholder" => "الموبايل",
 			"dir" => "ltr",
 			"value" => $mobile_1
 		));
@@ -402,11 +402,11 @@ class Family extends CI_Controller {
 		}else{
 			$mobile_2 = '';
 		}
-		
+
 		$data["mobile_2"] = form_input(array(
-			"name" => "mobile_2", 
-			"class" => "form-control", 
-			"placeholder" => "الموبايل", 
+			"name" => "mobile_2",
+			"class" => "form-control",
+			"placeholder" => "الموبايل",
 			"dir" => "ltr",
 			"value" => $mobile_2
 		));
@@ -416,11 +416,11 @@ class Family extends CI_Controller {
 		}else{
 			$phone = '';
 		}
-		
+
 		$data["phone"] = form_input(array(
-			"name" => "phone", 
-			"class" => "form-control", 
-			"placeholder" => "الهاتف", 
+			"name" => "phone",
+			"class" => "form-control",
+			"placeholder" => "الهاتف",
 			"dir" => "ltr",
 			"value" => $phone)
 		);
@@ -430,7 +430,7 @@ class Family extends CI_Controller {
 		}else{
 			$come_city_id = '';
 		}
-		
+
 		$cities = $this->city_model->dropdown();
 		$data["city_dropdown"] = form_dropdown("come_city_id", $cities, $come_city_id, 'class="form-control"');
 
@@ -439,10 +439,10 @@ class Family extends CI_Controller {
 		}else{
 			$come_zone = '';
 		}
-		
+
 		$data["come_zone"] = form_input(array(
-			"name" => "come_zone", 
-			"class" => "form-control", 
+			"name" => "come_zone",
+			"class" => "form-control",
 			"placeholder" => "المنطقة",
 			"value" => $come_zone)
 		);
@@ -452,11 +452,11 @@ class Family extends CI_Controller {
 		}else{
 			$come_address = '';
 		}
-		
+
 		$data["come_address"] = form_textarea(array(
-			"name" => "come_address", 
-			"class" => "form-control", 
-			"rows" => 3, 
+			"name" => "come_address",
+			"class" => "form-control",
+			"rows" => 3,
 			"placeholder" => "تفاصيل",
 			"value" => $come_address)
 		);
@@ -466,10 +466,10 @@ class Family extends CI_Controller {
 		}else{
 			$jump_date = '';
 		}
-		
+
 		$data["jump_date"] = form_input(array(
-			"type" => "date", 
-			"name" => "jump_date", 
+			"type" => "date",
+			"name" => "jump_date",
 			"class" => "form-control",
 			"id" => "jumpdate",
 			"value" => $jump_date)
@@ -484,10 +484,10 @@ class Family extends CI_Controller {
 
 		$wfp_worth_data = array('a' => 'مستحق', 'b' => 'تدقيق ميداني', 'c' => 'غير مستحق', 'e' => 'خارج المدينة');
 		$data['wfp_worth'] = form_dropdown('wfp_worth', $wfp_worth_data, $wfp_worth, 'class="form-control"');
-		
+
 		/*$data["wfp_worth"] = form_input(array(
-			"type" => "test", 
-			"name" => "wfp_worth", 
+			"type" => "test",
+			"name" => "wfp_worth",
 			"class" => "form-control",
 			"id" => "wfp_worth",
 			"placeholder" => "درجة الاستحقاق",
@@ -499,12 +499,12 @@ class Family extends CI_Controller {
 		}else{
 			$worth_note = '';
 		}
-		
+
 		$data["worth_note"] = form_textarea(array(
-			"name" => "worth_note", 
+			"name" => "worth_note",
 			"class" => "form-control",
 			"id" => "worth_note",
-			"rows" => 3, 
+			"rows" => 3,
 			"placeholder" => "ملاحظات الاستحقاق",
 			"value" => $worth_note)
 		);
@@ -544,6 +544,43 @@ class Family extends CI_Controller {
 		$data["dist_add_month_action"] = site_url('distribution/month_dist');
 
 		$this->load->view("family/family_form", $data);
+	}
+
+	public function exportDistList(){
+		$this->load->dbutil();
+		$this->load->model("Form_details_model", 'form_details');
+		$this->load->helper('download');
+		$this->load->library('Excel');
+
+		$zone_id = $this->input->get('zone_id');
+
+		$result = $this->form_details->getDistributionList($zone_id);
+
+		$delimiter = ";";
+		$newline = "\r\n";
+
+		$data = $this->dbutil->csv_from_result($result, $delimiter, $newline);
+
+		// //-----Create a reader, set some parameters and read in the file-----
+		// $objReader = PHPExcel_IOFactory::createReader('CSV');
+		// $objReader->setDelimiter(';');
+		// $objReader->setLineEnding("\r\n");
+		// $objReader->setSheetIndex(0);
+		//
+		// $objPHPExcel = new PHPExcel();
+		// $objPHPExcel->getProperties()->setTitle("export")->setDescription("none");
+		//
+		// $objPHPExcel->setActiveSheetIndex(0);
+		//
+		// $objWriter = IOFactory::createWriter($objPHPExcel, 'Excel5');
+
+		// Sending headers to force the user to download the file
+		header('Content-Type: application/vnd.ms-excel');
+		header('Content-Disposition: attachment;filename="Dist_'.date('dMy').'.xls"');
+		header('Cache-Control: max-age=0');
+
+
+		echo $data;
 	}
 }
 

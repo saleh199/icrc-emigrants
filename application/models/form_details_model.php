@@ -32,7 +32,7 @@ class Form_details_model extends MY_Model{
 	}
 
 	public function getFamilies($filter = array()){
-		
+
 		$sql = "SELECT fd.form_details_id FROM " . $this->_table . " AS fd
 				LEFT JOIN form_family AS fm ON fm.form_details_id = fd.form_details_id
 				WHERE deleted = 0 ";
@@ -43,7 +43,7 @@ class Form_details_model extends MY_Model{
 
 		if(isset($filter["member_name"]) && !empty($filter["member_name"])){
 			$sql .= " AND (CONCAT(fm.firstname, ' ', fm.middlename, ' ', fm.lastname) LIKE '%".$this->db->escape_like_str($filter["member_name"])."%')";
-			
+
 		}
 
 		if(isset($filter["document_type"]) && !empty($filter["document_type"])){
@@ -100,7 +100,7 @@ class Form_details_model extends MY_Model{
 	}
 
 	public function getFamiliesCount($filter = array()){
-		
+
 		$sql = "SELECT COUNT(fd.form_details_id) AS count FROM " . $this->_table . " AS fd
 				LEFT JOIN form_family AS fm ON fm.form_details_id = fd.form_details_id
 				WHERE deleted = 0 ";
@@ -111,7 +111,7 @@ class Form_details_model extends MY_Model{
 
 		if(isset($filter["father_name"]) && !empty($filter["father_name"])){
 			$sql .= " AND (CONCAT(fm.firstname, ' ', fm.middlename, ' ', fm.lastname) LIKE '%".$this->db->escape_like_str($filter["father_name"])."%' AND fm.level_in_family = 'a')";
-			
+
 		}
 
 		if(isset($filter["mother_name"]) && !empty($filter["mother_name"])){
@@ -186,7 +186,7 @@ class Form_details_model extends MY_Model{
 
 		$data->father_name = '';
 		$data->mother_name = '';
-		
+
 		if(is_array($data->family_members) && count($data->family_members) > 0){
 			foreach ($data->family_members as $member) {
 				if($member->level_in_family == 'a'){
@@ -218,7 +218,7 @@ class Form_details_model extends MY_Model{
 		}else{
 			$this->form_validation->set_rules("tmp_ref", "رقم استمارة مؤقت", "trim|required");
 		}
-		
+
 		$this->form_validation->set_rules("family_status", "وضع العائلة", "trim|required");
 		$this->form_validation->set_rules("document_type", "نوع الوثيقة", "trim|required");
 		/*
@@ -229,7 +229,7 @@ class Form_details_model extends MY_Model{
 		if(!in_array($this->input->post('document_type') ,array('c', 'd', 'e'))){
 			$this->form_validation->set_rules("document_no", "رقم الوثيقة", "trim|required");
 		}
-		
+
 		//$this->form_validation->set_rules("nmbr_registration", "رقم و مكان القيد", "trim|required");
 
 		if($this->form_validation->run() == TRUE){
@@ -242,14 +242,14 @@ class Form_details_model extends MY_Model{
 					}
 				}
 			}
-			
+
 			/*if($this->input->post('document_type') == 'b'){
 				if(trim($this->input->post('document_letter')) == ''){
 					$return["errors"] = "<li>" . "الرجاء إدخال الحرف من دفتر العائلة" . "</li>";
 					$return["success"] = FALSE;
 				}
 			}*/
-			
+
 		}else{
 			$errors = validation_errors('<li>', '</li>');
 			$return["success"] = FALSE;
@@ -257,6 +257,14 @@ class Form_details_model extends MY_Model{
 		}
 
 		return $return;
+	}
+
+	public function getDistributionList($zone_id){
+		$sql = "CALL getDistributionList(?);";
+		$parameters = array($zone_id);
+		$query = $this->db->query($sql, $parameters);
+
+		return $query;
 	}
 }
 
