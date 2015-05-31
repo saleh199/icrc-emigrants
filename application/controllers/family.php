@@ -583,6 +583,44 @@ class Family extends CI_Controller {
 
 		echo iconv('utf-8', 'windows-1256', $data);
 	}
+
+	public function membersList(){
+		$this->load->model('zone_model');
+
+		$data["export_form"] = form_open(site_url("family/exportMembersList"), array("method" => "get", "role" => "form"));
+
+		$zones = $this->zone_model->dropdown();
+		$data["zone_dropdown"] = form_dropdown("zone_id", $zones, 26, 'class="form-control" id="zone_id"');
+
+		$this->load->view("family/dist_list", $data);
+	}
+
+	public function exportMembersList(){
+		$this->load->dbutil();
+		$this->load->model("Form_family_model", 'form_family');
+
+		$zone_id = $this->input->get('zone_id');
+
+		$result = $this->form_family->getFamilyMemebersByZone($zone_id);
+
+		$delimiter = ";";
+		$newline = "\r\n";
+
+		$data = $this->dbutil->csv_from_result($result, $delimiter, $newline);
+
+		// Sending headers to force the user to download the file
+		// header('Content-Type:application/csv;charset=window-1256');
+		// header('Content-Encoding: window-1256');
+		// header('Content-Disposition: attachment;filename="Dist_'.date('dMy').'.csv"');
+		// header('Cache-Control: max-age=0');
+
+		header('Content-Encoding: windows-1256');
+		header('Content-type: text/csv; charset=window-1256');
+		header('Content-Disposition: attachment;filename="Family_Members_'.date('dMy').'.csv"');
+
+
+		echo iconv('utf-8', 'windows-1256', $data);
+	}
 }
 
 /* End of file family.php */

@@ -85,6 +85,27 @@ class Form_family_model extends MY_Model{
 
 		return $return;
 	}
+
+	public function getFamilyMemebersByZone($zone_id){
+		$sql = "select fd.tmp_ref AS 'ID',
+									 CONCAT(ff.firstname, ' ', ff.middlename, ' ', ff.lastname) AS 'الاسم الكامل',
+		 							 ff.mothername AS 'اسم الأم',
+									 ff.level_in_family AS 'الصفة في العائلة',
+									 ceiling(((to_days(now()) - to_days(('1970-01-01 10:00:00' + interval `ff`.`birthdate` second))) / 365.2425)) AS 'العمر',
+									 IF(ff.gender = 'a', 'ذكر', 'أنثى') AS 'الجنس',
+									 ff.study_status AS 'الحالة الدراسية',
+									 ff.health_status AS 'الحالة الصحية',
+									 ff.with_family AS 'التواجد مع العائلة',
+									 ff.situation_in_family AS 'الوضع العائلي'
+						from `form_family` AS `ff`
+						left join `form_address` `fa` on `fa`.`form_details_id` = `ff`.`form_details_id`
+						left join `form_details` `fd` on `fd`.`form_details_id` = `ff`.`form_details_id`
+						where `fa`.`zone_id` = '$zone_id' and `fa`.`current_address` = 1 and `fd`.`wfp_worth` in ('a','b')";
+
+		$query = $this->db->query($sql);
+
+		return $query;
+	}
 }
 
 ?>
